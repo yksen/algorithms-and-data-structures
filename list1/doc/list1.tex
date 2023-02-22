@@ -1,0 +1,44 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 1}
+\subsection*{Zadanie 1}
+Wyraź w notacji $O$ złożoność następujących procedur:
+\begin{enumerate}[label=(\alph*)]
+    \item Sprawdzenie czy liczba $n$ ma dzielnik większy od $1$ ale mniejszy od $n$.
+          \begin{gather*}
+              O(n)
+          \end{gather*}
+    \item Sprawdzenie czy liczba $n$ ma dzielnik większy od $1$ ale mniejszy lub równy $\sqrt{n}$.
+          \begin{gather*}
+              O(\sqrt{n})
+          \end{gather*}
+    \item Wyznaczenie wszystkich liczb pierwszych z przedziału $1..n$ algorytmem Erastotenesa
+          (podziel wynik przez $n$). Skorzystaj z faktu, że
+          \begin{gather*}
+              \sum_{k=1}^{n} \frac{1}{k} < \ln n + 1 \\
+              n/2 + n/3 + n/4 + \dots + n/n = n \sum_{k=2}^{n} \frac{1}{k} = n \left( \ln n + 1 - 1 \right) = n \ln n \\
+              O(\frac{n\ln n}{n}) \implies O(\ln n)
+          \end{gather*}
+    \item Wyznacz numeryczne proporcje otrzymanych wyników $(a)/(b)$ i $(b)/(c)$ dla $n = 10^6$.
+          \begin{gather*}
+              (a)/(b) = n/\sqrt{n} = 10^6/(10^6)^\frac{1}{2} = 10^6/10^3 = 10^3 = 1000 \\
+              (b)/(c) = n/\ln n = 10^6/\ln(10^6) = 10^6/13.816 \approx 72382.414
+          \end{gather*}
+
+\end{enumerate}
+
+\end{document}

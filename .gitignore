@@ -1,4 +1,9 @@
 *.exe
 *.o
 *.out
+
 target
+
+*/doc/*
+!*/doc/*.pdf
+!*/doc/*.tex

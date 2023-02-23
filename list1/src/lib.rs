@@ -1,4 +1,4 @@
-mod exercise1 {
+pub mod exercise1 {
     pub fn has_divisor_under_n(n: i32) -> bool {
         for i in 2..n {
             if n % i == 0 {
@@ -40,7 +40,7 @@ mod exercise1 {
     }
 }
 
-mod exercise4 {
+pub mod exercise4 {
     pub fn binary_search_root(f: impl Fn(f32) -> f32) -> f32 {
         0.0
     }

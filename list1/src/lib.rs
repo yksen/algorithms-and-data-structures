@@ -9,6 +9,19 @@ mod exercise1 {
     }
 }
 
+mod exercise2 {
+    pub fn has_divisor(n: i32) -> bool {
+        let mut i = 2;
+        while i * i <= n {
+            if n % i == 0 {
+                return true;
+            }
+            i += 1;
+        }
+        false
+    }
+}
+
 mod exercise3 {}
 
 mod exercise4 {
@@ -28,6 +41,9 @@ mod tests {
         assert_eq!(exercise1::has_divisor(3), false);
         assert_eq!(exercise1::has_divisor(4), true);
         assert_eq!(exercise1::has_divisor(5), false);
+
+        assert_eq!(exercise2::has_divisor(3), false);
+        assert_eq!(exercise2::has_divisor(4), true);
     }
 
     #[test]

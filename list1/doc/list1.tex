@@ -35,13 +35,13 @@ Wyraź w notacji $O$ złożoność następujących procedur:
               \sum_{k=1}^{n} \frac{1}{k} < \ln n + 1 \\
               \frac{n}{2}-1 + \frac{n}{3}-1 + \dots + \frac{n}{k}-1 \\
               \frac{n}{2} + \frac{n}{3} + \dots + \frac{n}{k} - k \\
-              n(\frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{k}) - k < n \ln n - k \\
+              n\left(\frac{1}{2} + \frac{1}{3} + \dots + \frac{1}{k}\right) - k < n \ln n - k \\
               f(n)=\frac{n \ln k - k}{n} = \ln k - \frac{k}{n} < \ln n = O(\ln n)
           \end{gather*}
     \item Wyznacz numeryczne proporcje otrzymanych wyników $(a)/(b)$ i $(b)/(c)$ dla $n = 10^6$.
           \begin{gather*}
-              (a)/(b) = n/\sqrt{n} = 10^6/(10^6)^\frac{1}{2} = 10^6/10^3 = 10^3 = 1000 \\
-              (b)/(c) = \sqrt{n}/\ln n = (10^6)^\frac{1}{2}/\ln 10^6 = 10^3/\ln 10^6 = 10^3/13.8 \approx 72.5
+              (a)/(b) = n/\sqrt{n} = 10^6/\left(10^6\right)^\frac{1}{2} = 10^6/10^3 = 10^3 = 1000 \\
+              (b)/(c) = \sqrt{n}/\ln n = \left(10^6\right)^\frac{1}{2}/\ln 10^6 = 10^3/\ln 10^6 = 10^3/13.8 \approx 72.5
           \end{gather*}
 \end{enumerate}
 
@@ -51,9 +51,17 @@ Wyraź w notacji $O$ ile dodawań wykonasz wyznaczając n początkowych liczb Fi
     \item Za pomocą procedury typowej rekurencyjnej.
           \begin{gather*}
               O(Fib(0) + Fib(1) + \dots + Fib(n)) \\
-              O(n) = \left(\frac{1+\sqrt{5}}{2}\right)^n
+              Fib(n) \approx \frac{1}{\sqrt{5}}\left(\frac{1-\sqrt{5}}{2}\right)^n \\
+              O\left(\left(\frac{1+\sqrt{5}}{2}\right)^n\right)
           \end{gather*}
-    \item
+    \item Za pomocą procedury iteracyjnej wywoływanej dla każdej liczby osobno.
+          \begin{gather*}
+              1 + 2 + \dots + n = \frac{n(n+1)}{2} = O(n^2)
+          \end{gather*}
+    \item Za pomocą procedury iteracyjnej wyznaczającej wszystkie liczby w jednej pętli.
+          \begin{gather*}
+              n - 1 = O(n)
+          \end{gather*}
 \end{enumerate}
 
 \end{document}

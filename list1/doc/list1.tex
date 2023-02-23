@@ -43,7 +43,17 @@ Wyraź w notacji $O$ złożoność następujących procedur:
               (a)/(b) = n/\sqrt{n} = 10^6/(10^6)^\frac{1}{2} = 10^6/10^3 = 10^3 = 1000 \\
               (b)/(c) = \sqrt{n}/\ln n = (10^6)^\frac{1}{2}/\ln 10^6 = 10^3/\ln 10^6 = 10^3/13.8 \approx 72.5
           \end{gather*}
+\end{enumerate}
 
+\subsection*{Zadanie 2}
+Wyraź w notacji $O$ ile dodawań wykonasz wyznaczając n początkowych liczb Fibonacciego:
+\begin{enumerate}[label=(\alph*)]
+    \item Za pomocą procedury typowej rekurencyjnej.
+          \begin{gather*}
+              O(Fib(0) + Fib(1) + \dots + Fib(n)) \\
+              O(n) = \left(\frac{1+\sqrt{5}}{2}\right)^n
+          \end{gather*}
+    \item
 \end{enumerate}
 
 \end{document}

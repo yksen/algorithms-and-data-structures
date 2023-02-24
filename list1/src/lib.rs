@@ -40,6 +40,18 @@ pub mod exercise1 {
     }
 }
 
+pub mod exercise3 {
+    pub fn recursive_x_power_n(x: f32, n: u32) -> f32 {
+        if n == 1 {
+            x
+        } else if n % 2 == 0 {
+            recursive_x_power_n(x, n / 2) * recursive_x_power_n(x, n / 2)
+        } else {
+            recursive_x_power_n(x, n / 2) * recursive_x_power_n(x, n / 2) * x
+        }
+    }
+}
+
 pub mod exercise4 {
     pub fn binary_search_root(f: impl Fn(f32) -> f32) -> f32 {
         0.0
@@ -72,6 +84,15 @@ mod tests {
             exercise1::erastotenes_sieve(20),
             vec![2, 3, 5, 7, 11, 13, 17, 19]
         );
+    }
+
+    #[test]
+    fn test_recursive_x_power_n() {
+        assert_eq!(exercise3::recursive_x_power_n(2.0, 1), 2.0);
+        assert_eq!(exercise3::recursive_x_power_n(2.0, 2), 4.0);
+        assert_eq!(exercise3::recursive_x_power_n(2.0, 3), 8.0);
+        assert_eq!(exercise3::recursive_x_power_n(3.0, 1), 3.0);
+        assert_eq!(exercise3::recursive_x_power_n(3.0, 3), 27.0);
     }
 
     #[test]

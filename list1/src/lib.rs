@@ -1,5 +1,5 @@
 pub mod exercise1 {
-    pub fn has_divisor_under_n(n: i32) -> bool {
+    pub fn has_divisor_under_n(n: u32) -> bool {
         for i in 2..n {
             if n % i == 0 {
                 return true;
@@ -8,7 +8,7 @@ pub mod exercise1 {
         false
     }
 
-    pub fn has_divisor_under_square_root_of_n(n: i32) -> bool {
+    pub fn has_divisor_under_square_root_of_n(n: u32) -> bool {
         let mut i = 2;
         while i * i <= n {
             if n % i == 0 {
@@ -41,14 +41,32 @@ pub mod exercise1 {
 }
 
 pub mod exercise3 {
-    pub fn recursive_x_power_n(x: f32, n: u32) -> f32 {
-        if n == 1 {
-            x
-        } else if n % 2 == 0 {
-            recursive_x_power_n(x, n / 2) * recursive_x_power_n(x, n / 2)
+    pub fn recursive_power(base: f32, exponent: u32) -> f32 {
+        if exponent == 1 {
+            base
+        } else if exponent % 2 == 0 {
+            let result = recursive_power(base, exponent / 2);
+            result * result
         } else {
-            recursive_x_power_n(x, n / 2) * recursive_x_power_n(x, n / 2) * x
+            recursive_power(base, exponent - 1) * base
         }
+    }
+
+    pub fn power(base: f32, exponent: u32) -> f32 {
+        let mut x = base;
+        let mut y = 1.0;
+        let mut n = exponent;
+        while n > 1 {
+            if n % 2 == 0 {
+                x *= x;
+                n /= 2;
+            } else {
+                y *= x;
+                x *= x;
+                n = (n - 1) / 2;
+            }
+        }
+        x * y
     }
 }
 
@@ -87,12 +105,27 @@ mod tests {
     }
 
     #[test]
-    fn test_recursive_x_power_n() {
-        assert_eq!(exercise3::recursive_x_power_n(2.0, 1), 2.0);
-        assert_eq!(exercise3::recursive_x_power_n(2.0, 2), 4.0);
-        assert_eq!(exercise3::recursive_x_power_n(2.0, 3), 8.0);
-        assert_eq!(exercise3::recursive_x_power_n(3.0, 1), 3.0);
-        assert_eq!(exercise3::recursive_x_power_n(3.0, 3), 27.0);
+    fn test_recursive_power() {
+        assert_eq!(exercise3::recursive_power(2.0, 1), 2.0);
+        assert_eq!(exercise3::recursive_power(2.0, 2), 4.0);
+        assert_eq!(exercise3::recursive_power(2.0, 3), 8.0);
+        assert_eq!(exercise3::recursive_power(2.0, 4), 16.0);
+        assert_eq!(exercise3::recursive_power(2.0, 5), 32.0);
+        assert_eq!(exercise3::recursive_power(2.0, 15), 32768.0);
+        assert_eq!(exercise3::recursive_power(2.0, 16), 65536.0);
+    }
+
+    #[test]
+    fn test_power() {
+        assert_eq!(exercise3::power(2.0, 1), 2.0);
+        assert_eq!(exercise3::power(2.0, 2), 4.0);
+        assert_eq!(exercise3::power(2.0, 3), 8.0);
+        assert_eq!(exercise3::power(2.0, 4), 16.0);
+        assert_eq!(exercise3::power(2.0, 5), 32.0);
+        assert_eq!(exercise3::power(2.0, 7), 128.0);
+        assert_eq!(exercise3::power(2.0, 8), 256.0);
+        assert_eq!(exercise3::power(2.0, 15), 32768.0);
+        assert_eq!(exercise3::power(2.0, 16), 65536.0);
     }
 
     #[test]

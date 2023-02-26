@@ -72,7 +72,18 @@ pub mod exercise3 {
 
 pub mod exercise4 {
     pub fn binary_search_root(f: impl Fn(f32) -> f32) -> f32 {
-        0.0
+        let mut left = 0.0;
+        let mut right = 1.0;
+        let mut middle = (left + right) / 2.0;
+        while middle != left && middle != right {
+            if f(middle) > 0.0 {
+                right = middle;
+            } else {
+                left = middle;
+            }
+            middle = (left + right) / 2.0;
+        }
+        middle
     }
 }
 
@@ -130,6 +141,8 @@ mod tests {
 
     #[test]
     fn test_binary_search_root() {
-        // assert_eq!(exercise4::binary_search_root(|x: f32| x - 0.5), 0.5);
+        assert_eq!(exercise4::binary_search_root(|x| x - 0.5), 0.5);
+        assert_eq!(exercise4::binary_search_root(|x| x * x - 0.25), 0.5);
+        assert_eq!(exercise4::binary_search_root(f32::sin), 0.0);
     }
 }

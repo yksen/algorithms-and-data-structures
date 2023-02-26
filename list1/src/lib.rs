@@ -1,4 +1,4 @@
-pub mod exercise1 {
+pub mod ex1 {
     pub fn has_divisor_under_n(n: u32) -> bool {
         for i in 2..n {
             if n % i == 0 {
@@ -40,7 +40,7 @@ pub mod exercise1 {
     }
 }
 
-pub mod exercise3 {
+pub mod ex3 {
     pub fn recursive_power(base: f32, exponent: u32) -> f32 {
         if exponent == 1 {
             base
@@ -70,7 +70,7 @@ pub mod exercise3 {
     }
 }
 
-pub mod exercise4 {
+pub mod ex4 {
     pub fn binary_search_root(f: impl Fn(f32) -> f32) -> f32 {
         let mut left = 0.0;
         let mut right = 1.0;
@@ -87,62 +87,91 @@ pub mod exercise4 {
     }
 }
 
+pub mod ex6 {
+    pub struct Node {
+        pub value: i32,
+        pub next: Option<Box<Node>>,
+    }
+
+    impl Node {
+        pub fn new(value: i32) -> Self {
+            Self { value, next: None }
+        }
+
+        pub fn print(&self) {
+            print!("{} ", self.value);
+            if let Some(next) = &self.next {
+                next.print();
+            }
+        }
+
+        pub fn sum(&self) -> i32 {
+            self.value + self.next.as_ref().map_or(0, |x| x.sum())
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
 
     #[test]
     fn test_has_divisor_under_n() {
-        assert_eq!(exercise1::has_divisor_under_n(1), false);
-        assert_eq!(exercise1::has_divisor_under_n(2), false);
-        assert_eq!(exercise1::has_divisor_under_n(3), false);
-        assert_eq!(exercise1::has_divisor_under_n(4), true);
-        assert_eq!(exercise1::has_divisor_under_n(5), false);
+        assert_eq!(ex1::has_divisor_under_n(1), false);
+        assert_eq!(ex1::has_divisor_under_n(2), false);
+        assert_eq!(ex1::has_divisor_under_n(3), false);
+        assert_eq!(ex1::has_divisor_under_n(4), true);
+        assert_eq!(ex1::has_divisor_under_n(5), false);
     }
 
     #[test]
     fn test_has_divisor_under_square_root_of_n() {
-        assert_eq!(exercise1::has_divisor_under_square_root_of_n(3), false);
-        assert_eq!(exercise1::has_divisor_under_square_root_of_n(4), true);
+        assert_eq!(ex1::has_divisor_under_square_root_of_n(3), false);
+        assert_eq!(ex1::has_divisor_under_square_root_of_n(4), true);
     }
 
     #[test]
     fn test_erastotenes_sieve() {
-        assert_eq!(exercise1::erastotenes_sieve(10), vec![2, 3, 5, 7]);
-        assert_eq!(
-            exercise1::erastotenes_sieve(20),
-            vec![2, 3, 5, 7, 11, 13, 17, 19]
-        );
+        assert_eq!(ex1::erastotenes_sieve(10), vec![2, 3, 5, 7]);
+        assert_eq!(ex1::erastotenes_sieve(20), vec![2, 3, 5, 7, 11, 13, 17, 19]);
     }
 
     #[test]
     fn test_recursive_power() {
-        assert_eq!(exercise3::recursive_power(2.0, 1), 2.0);
-        assert_eq!(exercise3::recursive_power(2.0, 2), 4.0);
-        assert_eq!(exercise3::recursive_power(2.0, 3), 8.0);
-        assert_eq!(exercise3::recursive_power(2.0, 4), 16.0);
-        assert_eq!(exercise3::recursive_power(2.0, 5), 32.0);
-        assert_eq!(exercise3::recursive_power(2.0, 15), 32768.0);
-        assert_eq!(exercise3::recursive_power(2.0, 16), 65536.0);
+        assert_eq!(ex3::recursive_power(2.0, 1), 2.0);
+        assert_eq!(ex3::recursive_power(2.0, 2), 4.0);
+        assert_eq!(ex3::recursive_power(2.0, 3), 8.0);
+        assert_eq!(ex3::recursive_power(2.0, 4), 16.0);
+        assert_eq!(ex3::recursive_power(2.0, 5), 32.0);
+        assert_eq!(ex3::recursive_power(2.0, 15), 32768.0);
+        assert_eq!(ex3::recursive_power(2.0, 16), 65536.0);
     }
 
     #[test]
     fn test_power() {
-        assert_eq!(exercise3::power(2.0, 1), 2.0);
-        assert_eq!(exercise3::power(2.0, 2), 4.0);
-        assert_eq!(exercise3::power(2.0, 3), 8.0);
-        assert_eq!(exercise3::power(2.0, 4), 16.0);
-        assert_eq!(exercise3::power(2.0, 5), 32.0);
-        assert_eq!(exercise3::power(2.0, 7), 128.0);
-        assert_eq!(exercise3::power(2.0, 8), 256.0);
-        assert_eq!(exercise3::power(2.0, 15), 32768.0);
-        assert_eq!(exercise3::power(2.0, 16), 65536.0);
+        assert_eq!(ex3::power(2.0, 1), 2.0);
+        assert_eq!(ex3::power(2.0, 2), 4.0);
+        assert_eq!(ex3::power(2.0, 3), 8.0);
+        assert_eq!(ex3::power(2.0, 4), 16.0);
+        assert_eq!(ex3::power(2.0, 5), 32.0);
+        assert_eq!(ex3::power(2.0, 7), 128.0);
+        assert_eq!(ex3::power(2.0, 8), 256.0);
+        assert_eq!(ex3::power(2.0, 15), 32768.0);
+        assert_eq!(ex3::power(2.0, 16), 65536.0);
     }
 
     #[test]
     fn test_binary_search_root() {
-        assert_eq!(exercise4::binary_search_root(|x| x - 0.5), 0.5);
-        assert_eq!(exercise4::binary_search_root(|x| x * x - 0.25), 0.5);
-        assert_eq!(exercise4::binary_search_root(f32::sin), 0.0);
+        assert_eq!(ex4::binary_search_root(|x| x - 0.5), 0.5);
+        assert_eq!(ex4::binary_search_root(|x| x * x - 0.25), 0.5);
+        assert_eq!(ex4::binary_search_root(f32::sin), 0.0);
+    }
+
+    #[test]
+    fn test_node_sum() {
+        let mut node = ex6::Node::new(1);
+        node.next = Some(Box::new(ex6::Node::new(2)));
+        node.next.as_mut().unwrap().next = Some(Box::new(ex6::Node::new(3)));
+        assert_eq!(node.sum(), 6);
     }
 }

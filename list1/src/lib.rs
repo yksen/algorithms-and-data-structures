@@ -93,6 +93,18 @@ pub mod ex6 {
         pub next: Option<Box<Node>>,
     }
 
+    impl From<Vec<i32>> for Node {
+        fn from(values: Vec<i32>) -> Self {
+            let mut head = Node::new(values[0]);
+            let mut current = &mut head;
+            for value in values[1..].iter() {
+                current.next = Some(Box::new(Node::new(*value)));
+                current = current.next.as_mut().unwrap();
+            }
+            head
+        }
+    }
+
     impl Node {
         pub fn new(value: i32) -> Self {
             Self { value, next: None }
@@ -169,9 +181,7 @@ mod tests {
 
     #[test]
     fn test_node_sum() {
-        let mut node = ex6::Node::new(1);
-        node.next = Some(Box::new(ex6::Node::new(2)));
-        node.next.as_mut().unwrap().next = Some(Box::new(ex6::Node::new(3)));
-        assert_eq!(node.sum(), 6);
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        assert_eq!(head.sum(), 15);
     }
 }

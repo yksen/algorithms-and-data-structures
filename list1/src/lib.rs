@@ -180,10 +180,26 @@ pub mod ex6 {
             self.next = None;
         }
     }
+
+    pub fn filter(
+        mut head: Option<Box<Node>>,
+        predicate: impl Fn(i32) -> bool,
+    ) -> Option<Box<Node>> {
+        if let Some(node) = &mut head {
+            if predicate(node.value) {
+                node.next = filter(node.next.take(), predicate);
+            } else {
+                head = filter(node.next.take(), predicate);
+            }
+        }
+        head
+    }
 }
 
 #[cfg(test)]
 mod tests {
+    use crate::ex6::filter;
+
     use super::*;
 
     #[test]
@@ -298,6 +314,23 @@ mod tests {
         let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         head.remove(3);
         assert_eq!(head.sum(), 12);
+    }
+
+    #[test]
+    fn test_node_filter() {
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        assert_eq!(
+            filter(Some(Box::new(head)), |x| { x % 2 == 0 })
+                .unwrap()
+                .sum(),
+            6
+        );
+
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        assert_eq!(
+            filter(Some(Box::new(head)), |x| { x > 3 }).unwrap().sum(),
+            9
+        );
     }
 
     #[test]

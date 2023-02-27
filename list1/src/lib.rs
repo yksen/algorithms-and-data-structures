@@ -137,6 +137,14 @@ pub mod ex6 {
                 self.next.as_ref().and_then(|x| x.nth(n - 1))
             }
         }
+
+        pub fn insert(&mut self, value: i32) {
+            if let Some(next) = &mut self.next {
+                next.insert(value);
+            } else {
+                self.next = Some(Box::new(Node::new(value)));
+            }
+        }
     }
 }
 
@@ -230,5 +238,16 @@ mod tests {
         assert_eq!(head.nth(2), Some(3));
         assert_eq!(head.nth(3), Some(4));
         assert_eq!(head.nth(4), Some(5));
+        
+    }
+
+    #[test]
+    fn test_node_insert() {
+        let mut head = ex6::Node::new(1);
+        head.insert(2);
+        head.insert(3);
+        head.insert(4);
+        head.insert(5);
+        assert_eq!(head.sum(), 15);
     }
 }

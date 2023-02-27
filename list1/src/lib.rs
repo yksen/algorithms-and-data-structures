@@ -145,6 +145,16 @@ pub mod ex6 {
                 self.next = Some(Box::new(Node::new(value)));
             }
         }
+
+        pub fn remove(&mut self, value: i32) {
+            if let Some(next) = &mut self.next {
+                if next.value == value {
+                    self.next = next.next.take();
+                } else {
+                    next.remove(value);
+                }
+            }
+        }
     }
 }
 
@@ -249,5 +259,12 @@ mod tests {
         head.insert(4);
         head.insert(5);
         assert_eq!(head.sum(), 15);
+    }
+
+    #[test]
+    fn test_node_remove() {
+        let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        head.remove(3);
+        assert_eq!(head.sum(), 12);
     }
 }

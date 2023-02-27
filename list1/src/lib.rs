@@ -129,6 +129,14 @@ pub mod ex6 {
         pub fn sum(&self) -> i32 {
             self.value + self.next.as_ref().map_or(0, |x| x.sum())
         }
+
+        pub fn nth(&self, n: usize) -> Option<i32> {
+            if n == 0 {
+                Some(self.value)
+            } else {
+                self.next.as_ref().and_then(|x| x.nth(n - 1))
+            }
+        }
     }
 }
 
@@ -185,7 +193,10 @@ mod tests {
     fn test_binary_search_root() {
         assert_eq!(ex4::binary_search_root(|x| x - 0.5), 0.5);
         assert_eq!(ex4::binary_search_root(|x| x * x - 0.25), 0.5);
-        assert_eq!(ex4::binary_search_root(|x| x * x + x - 1.0), 0.61803399085998);
+        assert_eq!(
+            ex4::binary_search_root(|x| x * x + x - 1.0),
+            0.61803399085998
+        );
         assert_eq!(ex4::binary_search_root(f32::sin), 0.0);
     }
 
@@ -201,7 +212,23 @@ mod tests {
 
     #[test]
     fn test_node_sum() {
-        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        let mut head = ex6::Node::new(1);
+        assert_eq!(head.sum(), 1);
+
+        head.next = Some(Box::new(ex6::Node::new(7)));
+        assert_eq!(head.sum(), 8);
+
+        head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         assert_eq!(head.sum(), 15);
+    }
+
+    #[test]
+    fn test_node_nth() {
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        assert_eq!(head.nth(0), Some(1));
+        assert_eq!(head.nth(1), Some(2));
+        assert_eq!(head.nth(2), Some(3));
+        assert_eq!(head.nth(3), Some(4));
+        assert_eq!(head.nth(4), Some(5));
     }
 }

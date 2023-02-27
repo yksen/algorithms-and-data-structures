@@ -171,6 +171,14 @@ pub mod ex6 {
                 }
             }
         }
+
+        pub fn destroy(&mut self) {
+            if let Some(next) = &mut self.next {
+                next.destroy();
+            }
+            self.value = 0;
+            self.next = None;
+        }
     }
 }
 
@@ -290,5 +298,12 @@ mod tests {
         let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         head.remove(3);
         assert_eq!(head.sum(), 12);
+    }
+
+    #[test]
+    fn test_node_destroy() {
+        let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        head.destroy();
+        assert_eq!(head.sum(), 0);
     }
 }

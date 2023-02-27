@@ -57,14 +57,11 @@ pub mod ex3 {
         let mut y = 1.0;
         let mut n = exponent;
         while n > 1 {
-            if n % 2 == 0 {
-                x *= x;
-                n /= 2;
-            } else {
+            if n % 2 == 1 {
                 y *= x;
-                x *= x;
-                n = (n - 1) / 2;
             }
+            n /= 2;
+            x *= x;
         }
         x * y
     }
@@ -76,7 +73,9 @@ pub mod ex4 {
         let mut right = 1.0;
         let mut middle = (left + right) / 2.0;
         while middle != left && middle != right {
-            if f(middle) > 0.0 {
+            if f(middle) == 0.0 {
+                return middle;
+            } else if f(middle) > 0.0 {
                 right = middle;
             } else {
                 left = middle;
@@ -84,6 +83,16 @@ pub mod ex4 {
             middle = (left + right) / 2.0;
         }
         middle
+    }
+}
+
+pub mod ex5 {
+    pub fn calculate_horner(a: Vec<f32>, x: f32) -> f32 {
+        let mut product = 0.0;
+        for a in a.iter().rev() {
+            product = a + x * product;
+        }
+        product
     }
 }
 
@@ -176,7 +185,18 @@ mod tests {
     fn test_binary_search_root() {
         assert_eq!(ex4::binary_search_root(|x| x - 0.5), 0.5);
         assert_eq!(ex4::binary_search_root(|x| x * x - 0.25), 0.5);
+        assert_eq!(ex4::binary_search_root(|x| x * x + x - 1.0), 0.61803399085998);
         assert_eq!(ex4::binary_search_root(f32::sin), 0.0);
+    }
+
+    #[test]
+    fn test_calculate_horner() {
+        assert_eq!(ex5::calculate_horner(vec![1.0, 2.0, 3.0], 10.0), 321.0);
+        assert_eq!(ex5::calculate_horner(vec![1.0, 2.0, 3.0], 0.0), 1.0);
+        assert_eq!(
+            ex5::calculate_horner(vec![4.0, 5.0, 3.0, 0.0, 0.0, 18.0], 10.0),
+            1800354.0
+        );
     }
 
     #[test]

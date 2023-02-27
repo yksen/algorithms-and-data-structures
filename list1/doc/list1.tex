@@ -15,6 +15,7 @@
 \maketitle
 
 \section*{Lista zadań 1}
+
 \subsection*{Zadanie 1}
 Wyraź w notacji $O$ złożoność następujących procedur:
 \begin{enumerate}[label=(\alph*)]
@@ -63,5 +64,20 @@ Wyraź w notacji $O$ ile dodawań wykonasz wyznaczając n początkowych liczb Fi
               n - 1 = O(n)
           \end{gather*}
 \end{enumerate}
+
+\subsection*{Zadanie 5}
+Schemat Hoernera: Przed odpowiednie wyłączenia $x$ przed nawias, pokaż, że wystarczy
+dokładnie n mnożeń, aby wyliczyć wartość wielomianu stopnia $n$?
+\begin{gather*}
+    W(x) = a_0 + a_1x + a_2x^2 + \dots + a_nx^n
+\end{gather*}
+Wskazówka: zadanie wykonaj kolejno dla $n = 0, 1, 2, 3, 4$ a potem uogólnij pisząc odpowiedni algorytm
+\begin{align*}
+    W(x) & = a_0                                                    \\
+    W(x) & = a_0 + x(a_1)                                           \\
+    W(x) & = a_0 + x(a_1 + x(a_2))                                  \\
+    W(x) & = a_0 + x(a_1 + x(a_2 + x(a_3)))                         \\
+    W(x) & = a_0 + x(a_1 + x(a_2 + \dots + x(a_{n-1} + xa_n)))
+\end{align*}
 
 \end{document}

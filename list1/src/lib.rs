@@ -97,6 +97,7 @@ pub mod ex5 {
 }
 
 pub mod ex6 {
+    #[derive(Clone)]
     pub struct Node {
         pub value: i32,
         pub next: Option<Box<Node>>,
@@ -141,6 +142,21 @@ pub mod ex6 {
         pub fn insert(&mut self, value: i32) {
             if let Some(next) = &mut self.next {
                 next.insert(value);
+            } else {
+                self.next = Some(Box::new(Node::new(value)));
+            }
+        }
+
+        pub fn insert_after_smaller(&mut self, value: i32) {
+            if let Some(next) = &mut self.next {
+                if next.value > value {
+                    self.next = Some(Box::new(Node {
+                        value,
+                        next: Some(next.clone()),
+                    }));
+                } else {
+                    next.insert_after_smaller(value);
+                }
             } else {
                 self.next = Some(Box::new(Node::new(value)));
             }
@@ -248,7 +264,7 @@ mod tests {
         assert_eq!(head.nth(2), Some(3));
         assert_eq!(head.nth(3), Some(4));
         assert_eq!(head.nth(4), Some(5));
-        
+        assert_eq!(head.nth(5), None);
     }
 
     #[test]
@@ -259,6 +275,14 @@ mod tests {
         head.insert(4);
         head.insert(5);
         assert_eq!(head.sum(), 15);
+    }
+
+    #[test]
+    fn test_node_insert_after_smaller() {
+        let mut head = ex6::Node::from(vec![1, 2, 3, 5, 6]);
+        head.insert_after_smaller(4);
+        assert_eq!(head.sum(), 21);
+        head.print();
     }
 
     #[test]

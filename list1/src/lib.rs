@@ -105,13 +105,18 @@ pub mod ex6 {
 
     impl From<Vec<i32>> for Node {
         fn from(values: Vec<i32>) -> Self {
-            let mut head = Node::new(values[0]);
-            let mut current = &mut head;
-            for value in values[1..].iter() {
-                current.next = Some(Box::new(Node::new(*value)));
-                current = current.next.as_mut().unwrap();
+            if values.is_empty() {
+                Node {
+                    value: 0,
+                    next: None,
+                }
+            } else {
+                let mut head = Node::new(values[0]);
+                for value in values.iter().skip(1) {
+                    head.insert(*value);
+                }
+                head
             }
-            head
         }
     }
 
@@ -120,11 +125,13 @@ pub mod ex6 {
             Self { value, next: None }
         }
 
-        pub fn print(&self) {
+        pub fn print(&self) -> usize {
+            let mut count = 1;
             print!("{} ", self.value);
             if let Some(next) = &self.next {
-                next.print();
+                count += next.print();
             }
+            count
         }
 
         pub fn sum(&self) -> i32 {
@@ -149,13 +156,12 @@ pub mod ex6 {
 
         pub fn insert_after_smaller(&mut self, value: i32) {
             if let Some(next) = &mut self.next {
-                if next.value > value {
-                    self.next = Some(Box::new(Node {
-                        value,
-                        next: Some(next.clone()),
-                    }));
-                } else {
+                if next.value < value {
                     next.insert_after_smaller(value);
+                } else {
+                    let mut new_node = Node::new(value);
+                    new_node.next = self.next.take();
+                    self.next = Some(Box::new(new_node));
                 }
             } else {
                 self.next = Some(Box::new(Node::new(value)));
@@ -163,43 +169,44 @@ pub mod ex6 {
         }
 
         pub fn remove(&mut self, value: i32) {
+            if self.value == value {
+                self.value = self.next.as_ref().map_or(0, |x| x.value);
+                self.next = self.next.as_mut().and_then(|x| x.next.take());
+            }
             if let Some(next) = &mut self.next {
                 if next.value == value {
                     self.next = next.next.take();
+                    self.remove(value);
                 } else {
                     next.remove(value);
                 }
             }
         }
 
-        pub fn destroy(&mut self) {
-            if let Some(next) = &mut self.next {
-                next.destroy();
+        pub fn filter(&mut self, predicate: impl Fn(i32) -> bool) {
+            if !predicate(self.value) {
+                self.value = self.next.as_ref().map_or(0, |x| x.value);
+                self.next = self.next.as_mut().and_then(|x| x.next.take());
             }
+            if let Some(next) = &mut self.next {
+                if !predicate(next.value) {
+                    self.next = next.next.take();
+                    self.filter(predicate);
+                } else {
+                    next.filter(predicate);
+                }
+            }
+        }
+
+        pub fn destroy(&mut self) {
             self.value = 0;
             self.next = None;
         }
-    }
-
-    pub fn filter(
-        mut head: Option<Box<Node>>,
-        predicate: impl Fn(i32) -> bool,
-    ) -> Option<Box<Node>> {
-        if let Some(node) = &mut head {
-            if predicate(node.value) {
-                node.next = filter(node.next.take(), predicate);
-            } else {
-                head = filter(node.next.take(), predicate);
-            }
-        }
-        head
     }
 }
 
 #[cfg(test)]
 mod tests {
-    use crate::ex6::filter;
-
     use super::*;
 
     #[test]
@@ -269,15 +276,27 @@ mod tests {
     }
 
     #[test]
+    fn test_node_print() {
+        let head = ex6::Node::from(vec![]);
+        assert_eq!(head.print(), 1);
+
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        assert_eq!(head.print(), 5);
+    }
+
+    #[test]
     fn test_node_sum() {
-        let mut head = ex6::Node::new(1);
+        let head = ex6::Node::new(1);
         assert_eq!(head.sum(), 1);
 
-        head.next = Some(Box::new(ex6::Node::new(7)));
-        assert_eq!(head.sum(), 8);
+        let head = ex6::Node::from(vec![]);
+        assert_eq!(head.sum(), 0);
 
-        head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         assert_eq!(head.sum(), 15);
+
+        let head = ex6::Node::from(vec![1, 2, 3, 4, 5, 6]);
+        assert_eq!(head.sum(), 21);
     }
 
     #[test]
@@ -306,37 +325,53 @@ mod tests {
         let mut head = ex6::Node::from(vec![1, 2, 3, 5, 6]);
         head.insert_after_smaller(4);
         assert_eq!(head.sum(), 21);
-        head.print();
+        assert_eq!(head.print(), 6);
+
+        head = ex6::Node::from(vec![1, 3]);
+        head.insert_after_smaller(2);
+        assert_eq!(head.print(), 3);
+        assert_eq!(head.nth(1), Some(2));
+
+        head = ex6::Node::from(vec![1]);
+        head.insert_after_smaller(2);
+        assert_eq!(head.print(), 2);
+        assert_eq!(head.nth(1), Some(2));
     }
 
     #[test]
     fn test_node_remove() {
         let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         head.remove(3);
+        assert_eq!(head.print(), 4);
         assert_eq!(head.sum(), 12);
+
+        head = ex6::Node::from(vec![3, 2, 3, 1, 8, 3]);
+        head.remove(3);
+        assert_eq!(head.print(), 3);
+        assert_eq!(head.sum(), 11);
+
+        head = ex6::Node::new(1);
+        head.remove(1);
+        assert_eq!(head.value, 0);
     }
 
     #[test]
     fn test_node_filter() {
-        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
-        assert_eq!(
-            filter(Some(Box::new(head)), |x| { x % 2 == 0 })
-                .unwrap()
-                .sum(),
-            6
-        );
+        let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        head.filter(|x| x % 2 == 0);
+        assert_eq!(head.print(), 2);
+        assert_eq!(head.sum(), 6);
 
-        let head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
-        assert_eq!(
-            filter(Some(Box::new(head)), |x| { x > 3 }).unwrap().sum(),
-            9
-        );
+        head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        head.filter(|x| x % 2 == 1);
+        assert_eq!(head.print(), 3);
+        assert_eq!(head.sum(), 9);
     }
 
     #[test]
     fn test_node_destroy() {
         let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         head.destroy();
-        assert_eq!(head.sum(), 0);
+        assert_eq!(head.print(), 1);
     }
 }

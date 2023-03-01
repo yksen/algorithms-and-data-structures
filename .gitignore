@@ -2,6 +2,7 @@
 *.o
 *.out
 
+build
 target
 
 */doc/*

@@ -202,6 +202,14 @@ pub mod ex6 {
             self.value = 0;
             self.next = None;
         }
+
+        pub fn reverse(&mut self) {
+            unimplemented!();
+        }
+
+        pub fn merge(&mut self, other: &mut Node) {
+            unimplemented!();
+        }
     }
 }
 
@@ -345,6 +353,11 @@ mod tests {
         assert_eq!(head.print(), 4);
         assert_eq!(head.sum(), 12);
 
+        head = ex6::Node::from(vec![7, 7, 7]);
+        head.remove(7);
+        assert_eq!(head.print(), 1);
+        assert_eq!(head.sum(), 0);
+
         head = ex6::Node::from(vec![3, 2, 3, 1, 8, 3]);
         head.remove(3);
         assert_eq!(head.print(), 3);
@@ -373,5 +386,17 @@ mod tests {
         let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
         head.destroy();
         assert_eq!(head.print(), 1);
+    }
+
+    #[test]
+    fn test_node_reverse() {
+        let mut head = ex6::Node::from(vec![1, 2, 3, 4, 5]);
+        head.reverse();
+        assert_eq!(head.print(), 5);
+        assert_eq!(head.nth(0), Some(5));
+        assert_eq!(head.nth(1), Some(4));
+        assert_eq!(head.nth(2), Some(3));
+        assert_eq!(head.nth(3), Some(2));
+        assert_eq!(head.nth(4), Some(1));
     }
 }

@@ -57,7 +57,7 @@ Wyraź w notacji $O$ ile dodawań wykonasz wyznaczając n początkowych liczb Fi
           \end{gather*}
     \item Za pomocą procedury iteracyjnej wywoływanej dla każdej liczby osobno.
           \begin{gather*}
-              1 + 2 + \dots + n = \frac{n(n+1)}{2} = O(n^2)
+              1 + 2 + \dots + n = \sum_{k=1}^{n}k = \frac{(a_1+a_n)n-1}{2} = \frac{(1+n-1)(n-1)}{2} = \frac{n^2-n}{2} = O(n^2)
           \end{gather*}
     \item Za pomocą procedury iteracyjnej wyznaczającej wszystkie liczby w jednej pętli.
           \begin{gather*}

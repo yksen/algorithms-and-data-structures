@@ -1,3 +1,11 @@
 *.exe
 *.o
 *.out
+
+.vscode
+build
+target
+
+*/doc/*
+!*/doc/*.pdf
+!*/doc/*.tex

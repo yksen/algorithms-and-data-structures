@@ -63,9 +63,7 @@ namespace ex4
         double middle = (left + right) / 2;
         while (middle != left && middle != right)
         {
-            if (f(middle) == 0.0)
-                return middle;
-            else if (f(middle) > 0.0)
+            if (f(middle) > 0.0)
                 right = middle;
             else
                 left = middle;

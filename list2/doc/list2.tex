@@ -19,12 +19,40 @@
 \section*{Lista zadań 2}
 
 \subsection*{Zadanie 1}
-Ile trzeba porównań, by znaleźć element $x$ w nieuporządkowanej tablicy \lstinline{t} o rozmiarze
+Ile trzeba porównań, by znaleźć element $x$ w nieuporządkowanej tablicy \verb|t| o rozmiarze
 $n$. Oblicz wartość średnią i wariancję zakładając, że element $x$ może znajdować się z
 jednakowym prawdopodobieństwem, pod dowolnym indeksem tablicy.
 \begin{gather*}
     E(X) = \sum_{i=1}^{n} x_ip_i = \sum_{i=1}^{n} i \cdot \frac{1}{n} = \frac{\left(\frac{1}{n}+\frac{n}{n}\right)n}{2} = \frac{n+1}{2} \\
-    Var(X) = E(X^2) - E(X)^2 = \frac{n^2+1}{2} - \left(\frac{n+1}{2}\right)^2 = \frac{2n^2+2}{4} - \frac{n^2+2n+1}{4} = \frac{n^2-2n+1}{4}
+    Var(X) = E(X^2) - E(X)^2 = \frac{n^2+1}{2} - \left(\frac{n+1}{2}\right)^2 = \frac{2n^2+2}{4} - \frac{n^2+2n+1}{4} = \frac{(n-1)^2}{4}
 \end{gather*}
+
+\subsection*{Zadanie 2}
+Bisekcja. Ile trzeba porównań, by znaleźć element $x$ w posortowanej tablicy \verb|t| o rozmiarze
+$n$. Podaj minimalną wartość gwarantującą sukces i strategię, jak to zrobić. Postaraj się
+podać wzór ogólny, który pozwoli wyliczyć dokładną wartość dla dowolnego $n$. Sprawdź go dla $n = 1, \dots, 20$.
+\begin{enumerate}
+    \item Oblicz środek przedziału.
+    \item Jeżeli wartość w środku przedziału jest równa $x$, to zakończ działanie algorytmu.
+    \item Jeżeli wartość w środku przedziału jest większa od $x$, to środek staje się lewym końcem przedziału,
+          w przeciwnym wypadku prawym.
+\end{enumerate}
+\begin{gather*}
+    n=2 \implies 3 \\
+    n=4 \implies 5 \\
+    n=8 \implies 7 \\
+    n=16 \implies 9 \\
+    n=20 \implies 9 \\
+    2 \lfloor \log_2(n) \rfloor + 1
+\end{gather*}
+
+\subsection*{Zadanie 3}
+Rozważ trzy wersje znajdowania maksimum w tablicy \verb|int maks(int t[], int n)|.
+\begin{enumerate}[label=(\alph*)]
+    \item iteracyjna: \verb|{int x = a[--n]; while(n--) if(t[n] < x) x = t[n]; return x;}|
+    \item rekurencyjnie oblicza maksimum $n-1$ elementów i porównuje z ostatnim elementem
+    \item dzieli tablicę na dwie części, rekurencyjnie znajduje ich maksima i wybiera większe
+          z nich.
+\end{enumerate}
 
 \end{document}

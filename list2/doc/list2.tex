@@ -1,0 +1,30 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 2}
+
+\subsection*{Zadanie 1}
+Ile trzeba porównań, by znaleźć element $x$ w nieuporządkowanej tablicy \lstinline{t} o rozmiarze
+$n$. Oblicz wartość średnią i wariancję zakładając, że element $x$ może znajdować się z
+jednakowym prawdopodobieństwem, pod dowolnym indeksem tablicy.
+\begin{gather*}
+    E(X) = \sum_{i=1}^{n} x_ip_i = \sum_{i=1}^{n} i \cdot \frac{1}{n} = \frac{\left(\frac{1}{n}+\frac{n}{n}\right)n}{2} = \frac{n+1}{2} \\
+    Var(X) = E(X^2) - E(X)^2 = \frac{n^2+1}{2} - \left(\frac{n+1}{2}\right)^2 = \frac{2n^2+2}{4} - \frac{n^2+2n+1}{4} = \frac{n^2-2n+1}{4}
+\end{gather*}
+
+\end{document}

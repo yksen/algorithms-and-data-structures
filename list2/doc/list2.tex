@@ -73,8 +73,8 @@ Jakie drzewo powstanie po wstawieniu do pustego drzewa BST liczb od 1 do $n$ w k
 Jaka potem będzie głębokość drzewa? Ile porównań kluczy wykonano w
 trakcie tworzenia tego drzewa? Jaka jest złożoność w tego procesu w notacji $O$?
 \smallskip \\
-Uwaga: Element wstawiamy na pierwsze napotkane puste miejsce zaczynając od korze-
-nia. Jeśli miejsce jest zajęte, to gdy element jest mniejszy od klucza w węźle, idziemy
+Uwaga: Element wstawiamy na pierwsze napotkane puste miejsce zaczynając od korzenia.
+Jeśli miejsce jest zajęte, to gdy element jest mniejszy od klucza w węźle, idziemy
 do lewego poddrzewa, a gdy większy lub równy -- do prawego poddrzewa.
 
 \begin{center}
@@ -96,9 +96,32 @@ do lewego poddrzewa, a gdy większy lub równy -- do prawego poddrzewa.
     \end{forest}
 \end{center}
 \begin{align*}
-    \text{Głębokość drzewa: } & n                                                         \\
+    \text{Głębokość drzewa: } & n                                                       \\
     \text{Ilość porównań: }   & \sum_{i=1}^{n} i-1 = \frac{n(n-1)}{2} = \frac{n^2-n}{2} \\
     \text{Złożoność: }        & \frac{n^2-n}{2} = O(n^2)
 \end{align*}
+
+\subsection*{Zadanie 5}
+Implementacja usuwania węzła X z drzewa binarnego działa wg następującego schematu:
+\begin{enumerate}[label=(\alph*)]
+    \item jeśli X nie ma dzieci, to go usuwamy a wskaźnik na X zmieniamy na \verb|NULL|.
+    \item jeśli X ma jedno dziecko Y, to usuwamy X, a wskaźnik na X zastępujemy wskaźnikiem na Y.
+    \item jeśli X ma dwoje dzieci, to znajdujemy najmniejszy element Y w jego prawym poddrzewie, dane i klucz z węzła Y kopiujemy do X i usuwamy Y.
+\end{enumerate}
+Uzasadnij, dlaczego postępowanie wg punktu (c) nie psuje prawidłowego rosnącego
+porządku kluczy wypisywanych w porządku inorder i dlaczego Y ma co najwyżej jedno
+dziecko, więc do jego usunięcia można zastosować punkt (a) lub (b).
+\medskip \\
+Zastąpienie węzła X mającego dwoje dzieci polegające na znalezieniu najmniejszego elementu w prawym poddrzewie X
+nie psuje porządku \verb|inorder|, ponieważ najmniejszy element prawego poddrzewa jest idealnym kandydatem na jego miejsce,
+dzięki temu że jest większy od wszystkich elementów w lewym poddrzewie X, a mniejszy od wszystkich elementów w prawym poddrzewie X.
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [2[1][4[3][5]]]
+    \end{forest}
+\end{center}
+Do usunięcia węzła Y możemy zastosować punkt (a) lub (b), ponieważ Y ma co najwyżej jedno dziecko, ponieważ
+jeśli Y ma dwoje dzieci, to jego lewe dziecko było by mniejsze od Y, co oznacza że Y nie jest najmniejszym elementem.
 
 \end{document}

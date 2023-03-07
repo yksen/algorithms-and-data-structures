@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(list2)
 
 set(CMAKE_CXX_STANDARD 14)
-add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+add_compile_options(-Wall -Wextra -Wpedantic)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -18,6 +18,10 @@ enable_testing()
 add_executable(
     list2
     src/list2.cpp
+)
+add_executable(
+    list2-ref
+    src/tree-2023-recursive.cc
 )
 target_link_libraries(
     list2

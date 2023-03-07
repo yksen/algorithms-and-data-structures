@@ -68,4 +68,37 @@ jest więc najlepsza?
           \end{center}
 \end{enumerate}
 
+\subsection*{Zadanie 4}
+Jakie drzewo powstanie po wstawieniu do pustego drzewa BST liczb od 1 do $n$ w kolejności rosnącej?
+Jaka potem będzie głębokość drzewa? Ile porównań kluczy wykonano w
+trakcie tworzenia tego drzewa? Jaka jest złożoność w tego procesu w notacji $O$?
+\smallskip \\
+Uwaga: Element wstawiamy na pierwsze napotkane puste miejsce zaczynając od korze-
+nia. Jeśli miejsce jest zajęte, to gdy element jest mniejszy od klucza w węźle, idziemy
+do lewego poddrzewa, a gdy większy lub równy -- do prawego poddrzewa.
+
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1 [, no edge, draw=none][2]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1 [, no edge, draw=none][2 [, no edge, draw=none][3]]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1 [, no edge, draw=none][2 [, no edge, draw=none][3 [, no edge, draw=none][4]]]]
+    \end{forest}
+\end{center}
+\begin{align*}
+    \text{Głębokość drzewa: } & n                                                         \\
+    \text{Ilość porównań: }   & \sum_{i=1}^{n} i-1 = \frac{n(n-1)}{2} = \frac{n^2-n}{2} \\
+    \text{Złożoność: }        & \frac{n^2-n}{2} = O(n^2)
+\end{align*}
+
 \end{document}

@@ -124,4 +124,15 @@ dzięki temu że jest większy od wszystkich elementów w lewym poddrzewie X, a 
 Do usunięcia węzła Y możemy zastosować punkt (a) lub (b), ponieważ Y ma co najwyżej jedno dziecko, ponieważ
 jeśli Y ma dwoje dzieci, to jego lewe dziecko było by mniejsze od Y, co oznacza że Y nie jest najmniejszym elementem.
 
+\subsection*{Zadanie 7}
+Ile maksymalnie węzłów może mieć drzewo BST o głębokości $h$? Wylicz dokładną wartość,
+przyjmując, że głębokość oznacza ilość poziomów, na których występują węzły (sam
+korzeń: $h = 1$, korzeń i dzieci: $h = 2$ \dots ). Skorzystaj z wzoru na sumę ciągu geometrycznego.
+Wywnioskuj, jaka jest najmniejsza, a jaka największa głębokość drzewa binarnego o $n$ węzłach?
+\begin{align*}
+    \text{Maksymalna ilość węzłów: } & \frac{a_1(1-q^n)}{1-q} = \frac{1(1-2^h)}{1-2} = 2^h-1 \\
+    \text{Najmniejsza głębokość: }   & 1 + \lfloor \log_2(n) \rfloor                         \\
+    \text{Największa głębokość: }    & n
+\end{align*}
+
 \end{document}

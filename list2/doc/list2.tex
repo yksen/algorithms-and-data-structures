@@ -46,13 +46,26 @@ podać wzór ogólny, który pozwoli wyliczyć dokładną wartość dla dowolneg
     2 \lfloor \log_2(n) \rfloor + 1
 \end{gather*}
 
+\pagebreak
 \subsection*{Zadanie 3}
 Rozważ trzy wersje znajdowania maksimum w tablicy \verb|int maks(int t[], int n)|.
+Ile porównań między elementami tablicy n-elementowej wykonuje każda z wersji? Ile
+pamięci wymaga każda z tych wersji? Uwzględnij fakt, że głębokość rekurencji ma wpływ
+na zużycie pamięci, ponieważ powstaje wiele kopii zmiennych lokalnych. Która wersja
+jest więc najlepsza?
 \begin{enumerate}[label=(\alph*)]
-    \item iteracyjna: \verb|{int x = a[--n]; while(n--) if(t[n] < x) x = t[n]; return x;}|
+    \item iteracyjna: \verb|{int x = a[--n]; while(n--) if(t[n] > x) x = t[n]; return x;}|
+          \begin{center}
+              $n-1$ porównań i 3 zmienne lokalne
+          \end{center}
     \item rekurencyjnie oblicza maksimum $n-1$ elementów i porównuje z ostatnim elementem
-    \item dzieli tablicę na dwie części, rekurencyjnie znajduje ich maksima i wybiera większe
-          z nich.
+          \begin{center}
+              $n-1$ porównań i $2n$ zmiennych lokalnych
+          \end{center}
+    \item dzieli tablicę na dwie części, rekurencyjnie znajduje ich maksima i wybiera większe z nich.
+          \begin{center}
+              $2(n-1)+1 = n-1$ porównań i $2(n-1) + 2 = 2n$ zmiennych lokalnych
+          \end{center}
 \end{enumerate}
 
 \end{document}

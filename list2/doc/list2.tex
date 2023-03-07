@@ -124,6 +124,22 @@ dzięki temu że jest większy od wszystkich elementów w lewym poddrzewie X, a 
 Do usunięcia węzła Y możemy zastosować punkt (a) lub (b), ponieważ Y ma co najwyżej jedno dziecko, ponieważ
 jeśli Y ma dwoje dzieci, to jego lewe dziecko było by mniejsze od Y, co oznacza że Y nie jest najmniejszym elementem.
 
+\subsection*{Zadanie 6}
+Uzasadnij, że w każdym drzewie BST zawsze ponad połowa wskaźników (pól \verb|left| i \verb|right|) jest równa \verb|NULL|.
+\medskip \\
+Na każdy węzeł drzewa BST przypadają dwa wskaźniki, \verb|left| i \verb|right|, które wskazują na lewe i prawe poddrzewo.
+Drzewo składające się z samego korzenia ma $2$ wskaźniki równe \verb|NULL|.
+Każde dodanie węzła zwiększy łączną liczbę węzłów o $2$ i zmniejszy liczbę węzłów równych \verb|NULL| o $1$.
+\begin{align*}
+    \text{Liczba węzłów: }                  & n   \\
+    \text{Liczba wskaźników: }              & 2n  \\
+    \text{Liczba wskaźników równych NULL: } & n+1
+\end{align*}
+\begin{align*}
+    n+1 & > \frac{2n}{2} \\
+    n+1 & > n
+\end{align*}
+
 \subsection*{Zadanie 7}
 Ile maksymalnie węzłów może mieć drzewo BST o głębokości $h$? Wylicz dokładną wartość,
 przyjmując, że głębokość oznacza ilość poziomów, na których występują węzły (sam

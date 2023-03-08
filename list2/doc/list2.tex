@@ -166,4 +166,30 @@ Jak ich pesymistyczna złożoność czasowa $T(h)$ zależy od głębokości drze
     \text{remove: } T(h) & = O(h)
 \end{align*}
 
+\subsection*{Zadanie 9}
+W pliku \verb|tree-2023-recursive.cc| znajdziesz funkcję \verb|int height(node *t)|, która
+wyliczy głębokość (ilość poziomów na jakich występują węzły) drzewa BST. Jak zależy czas
+wykonania tej funkcji od ilości $n$ węzłów drzewa i/lub jego głębokości $h$? To samo zadanie
+wykonaj też dla funkcji \verb|int count(node *t)|.
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [2[1][4[3][5]]]
+    \end{forest}
+\end{center}
+\begin{minipage}{0.45\textwidth}
+    \begin{gather*}
+        \text{height} \\
+        T(n) = \\
+        T(h) =
+    \end{gather*}
+\end{minipage}\hfill
+\begin{minipage}{0.45\textwidth}
+    \begin{gather*}
+        \text{count} \\
+        T(n) = \\
+        T(h) =
+    \end{gather*}
+\end{minipage}
+
 \end{document}

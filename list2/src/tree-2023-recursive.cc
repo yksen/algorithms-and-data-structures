@@ -2,6 +2,8 @@
 #include <cassert>
 #include <cstring>
 #include <sstream>
+#include <fcntl.h>
+#include <io.h>
 using namespace std;
 
 // Operacje na drzewie BST
@@ -52,7 +54,7 @@ void insert(node *&t, int x) // wstawianie (nierekurencyjne)
 		else
 			a = &(**a).right; // przejdź do wskaźnika na prawe poddrzewa
 
-	*a = new node(x); // znalazłeś właściwego nulla więc podczep tam x
+	*a = new node(x); // znalazłeś właściwego nulla więc podczep tam x
 }
 
 void insert_recursive(node *&t, int x) // wstawianie (rekurencyjnie)
@@ -283,26 +285,25 @@ void prettyLine2(node *t, int &n, string c1, string c2, int level = 0)
 	{
 		int k = n;
 		prettyLine2(t->left, n, " " + c1, "-" + c1, level - 1);
-		stringstream s;
+		wstringstream s;
 		s << ' ' << t->key << ' ';
 		int l = s.str().length();
 		n += l;
 		if (level == 0)
-			cout << "" << s.str() << "";
+			wcout << "" << s.str() << "";
 		else if (level == -1)
 		{
 			for (int i = 0; i < (l) / 2; i++)
-				cout << (c1[0] == ' ' ? " " : "─");
+				wcout << (c1[0] == ' ' ? L" " : L"─");
 
-			cout << (c1[0] == ' ' ? "┌" : "┐");
+			wcout << (c1[0] == ' ' ? L"┌" : L"┐");
 
 			for (int i = (l) / 2 + 1; i < l; i++)
-				cout << (c2[0] == ' ' ? " " : "─");
+				wcout << (c2[0] == ' ' ? L" " : L"─");
 		}
 		else
 			for (int i = 0; i < l; i++)
-				cout << (level >= 0 ? " " : c2[-level - 1] == '-' ? "─"
-																  : " ");
+				wcout << (level >= 0 ? L" " : c2[-level - 1] == '-' ? L"─" : L" ");
 		prettyLine2(t->right, n, "-" + c2, " " + c2, level - 1);
 	}
 }
@@ -317,13 +318,15 @@ void pretty2(node *t)
 					  1     4   6 7       9    11
 	*/
 
+    _setmode(_fileno(stdout), _O_U16TEXT);
+
 	int h = H(t);
 	char c = ' ';
 	for (int i = 0; i < h; i++)
 	{
 		int n = 0;
 		prettyLine2(t, n, "", "", i); // wyświetl i-tą linię rysunku
-		cout << endl;
+		wcout << endl;
 	}
 }
 

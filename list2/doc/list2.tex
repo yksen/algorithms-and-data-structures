@@ -33,18 +33,18 @@ $n$. Podaj minimalną wartość gwarantującą sukces i strategię, jak to zrobi
 podać wzór ogólny, który pozwoli wyliczyć dokładną wartość dla dowolnego $n$. Sprawdź go dla $n = 1, \dots, 20$.
 \begin{enumerate}
     \item Oblicz środek przedziału.
-    \item Jeżeli wartość w środku przedziału jest równa $x$, to zakończ działanie algorytmu.
-    \item Jeżeli wartość w środku przedziału jest większa od $x$, to środek staje się lewym końcem przedziału,
-          w przeciwnym wypadku prawym.
+    \item Jeżeli wartość w środku przedziału jest większa od $x$, to środek staje się lewym końcem przedziału.
+    \item W przeciwnym wypadku środek staje się prawym końcen przedziału.
 \end{enumerate}
-\begin{gather*}
-    n=2 \implies 3 \\
-    n=4 \implies 5 \\
-    n=8 \implies 7 \\
-    n=16 \implies 9 \\
-    n=20 \implies 9 \\
-    2 \lfloor \log_2(n) \rfloor + 1
-\end{gather*}
+\begin{align*}
+    n=1 \implies  & 1 \\
+    n=2 \implies  & 2 \\
+    n=4 \implies  & 3 \\
+    n=8 \implies  & 4 \\
+    n=16 \implies & 5 \\
+    n=20 \implies & 5 \\
+    \lfloor \log_2(n) \rfloor + 1
+\end{align*}
 
 \pagebreak
 \subsection*{Zadanie 3}
@@ -161,7 +161,9 @@ Jak ich pesymistyczna złożoność czasowa $T(h)$ zależy od głębokości drze
     \end{forest}
 \end{center}
 \begin{align*}
-    \text{find: } T(h) & = O(h) & \text{insert: } T(h) & = O(h) & \text{remove: } T(h) & = O(h)
+    \text{find: } T(h)   & = O(h) \\
+    \text{insert: } T(h) & = O(h) \\
+    \text{remove: } T(h) & = O(h)
 \end{align*}
 
 \end{document}

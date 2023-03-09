@@ -24,7 +24,8 @@ $n$. Oblicz wartość średnią i wariancję zakładając, że element $x$ może
 jednakowym prawdopodobieństwem, pod dowolnym indeksem tablicy.
 \begin{gather*}
     E(X) = \sum_{i=1}^{n} x_ip_i = \sum_{i=1}^{n} i \cdot \frac{1}{n} = \frac{\left(\frac{1}{n}+\frac{n}{n}\right)n}{2} = \frac{n+1}{2} \\
-    Var(X) = E(X^2) - E(X)^2 = \frac{n^2+1}{2} - \left(\frac{n+1}{2}\right)^2 = \frac{2n^2+2}{4} - \frac{n^2+2n+1}{4} = \frac{(n-1)^2}{4}
+    Var(X) = E(X^2) - E(X)^2 = \sum_{i=1}^{n} i^2 \frac{1}{n} - \left(\frac{n+1}{2}\right)^2 =    \frac{2n^2+3n+1}{6} - \frac{n^2+2n+1}{4} \\
+    = \frac{4n^2+6n+2}{12} - \frac{3n^2+6n+3}{12} = \frac{n^2-1}{12}
 \end{gather*}
 
 \subsection*{Zadanie 2}
@@ -36,15 +37,15 @@ podać wzór ogólny, który pozwoli wyliczyć dokładną wartość dla dowolneg
     \item Jeżeli wartość w środku przedziału jest większa od $x$, to środek staje się lewym końcem przedziału.
     \item W przeciwnym wypadku środek staje się prawym końcen przedziału.
 \end{enumerate}
-\begin{align*}
-    n=1 \implies  & 1 \\
-    n=2 \implies  & 2 \\
-    n=4 \implies  & 3 \\
-    n=8 \implies  & 4 \\
-    n=16 \implies & 5 \\
-    n=20 \implies & 5 \\
-    \lfloor \log_2(n) \rfloor + 1
-\end{align*}
+\begin{gather*}
+    n=1 \implies  1 \\
+    n=2 \implies  2 \\
+    n=4 \implies  3 \\
+    n=8 \implies  4 \\
+    n=16 \implies 5 \\
+    n=20 \implies 6 \\
+    \lceil \log_2(n) \rceil + 1
+\end{gather*}
 
 \pagebreak
 \subsection*{Zadanie 3}

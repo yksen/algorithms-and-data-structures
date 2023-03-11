@@ -8,7 +8,6 @@ struct Node
     Node *right;
     Node *parent;
 
-    Node(int32_t key) : key(key), left(nullptr), right(nullptr), parent(nullptr) {}
     Node(int32_t key, Node *parent) : key(key), left(nullptr), right(nullptr), parent(parent) {}
 };
 
@@ -39,7 +38,7 @@ namespace ex1
 
         if (*current_root == nullptr)
             return;
-        
+
         if ((**current_root).left && (**current_root).right)
         {
             Node **min = &(**current_root).right;
@@ -116,5 +115,30 @@ namespace ex1
         EXPECT_EQ(root->right->right, nullptr);
         EXPECT_EQ(root->parent, nullptr);
         EXPECT_EQ(root->right->parent, root);
+    }
+}
+
+namespace ex2
+{
+    void inorderDo(Node *root, void (*f)(Node *))
+    {
+        if (root == nullptr)
+            return;
+
+        inorderDo(root->left, f);
+        f(root);
+        inorderDo(root->right, f);
+    }
+
+    TEST(Exercise2, inorderDo)
+    {
+        Node *root = nullptr;
+        ex1::insert(root, 5);
+        ex1::insert(root, 3);
+        ex1::insert(root, 7);
+        ex1::insert(root, 2);
+        ex1::insert(root, 4);
+
+        inorderDo(root, [](Node *node) { std::cout << node->key << " "; });
     }
 }

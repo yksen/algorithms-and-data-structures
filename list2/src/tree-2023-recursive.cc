@@ -3,7 +3,11 @@
 #include <cstring>
 #include <sstream>
 #include <fcntl.h>
+
+#ifdef _WIN32
 #include <io.h>
+#endif
+
 using namespace std;
 
 // Operacje na drzewie BST
@@ -303,22 +307,24 @@ void prettyLine2(node *t, int &n, string c1, string c2, int level = 0)
 		}
 		else
 			for (int i = 0; i < l; i++)
-				wcout << (level >= 0 ? L" " : c2[-level - 1] == '-' ? L"─" : L" ");
+				wcout << (level >= 0 ? L" " : c2[-level - 1] == '-' ? L"─"
+																	: L" ");
 		prettyLine2(t->right, n, "-" + c2, " " + c2, level - 1);
 	}
 }
 
 void pretty2(node *t)
 {
-	/*
-		Pokazuje drzewo w terminalu w taki sposób:
-							┌──────7────┐
-						┌───4─┐     ┌───9───┐
-					  ┌─3   ┌─5─┐ ┌─8     ┌─10─┐
-					  1     4   6 7       9    11
-	*/
-
-    _setmode(_fileno(stdout), _O_U16TEXT);
+/*
+	Pokazuje drzewo w terminalu w taki sposób:
+						┌──────7────┐
+					┌───4─┐     ┌───9───┐
+				  ┌─3   ┌─5─┐ ┌─8     ┌─10─┐
+				  1     4   6 7       9    11
+*/
+#ifdef _WIN32
+	_setmode(_fileno(stdout), _O_U16TEXT);
+#endif
 
 	int h = H(t);
 	char c = ' ';

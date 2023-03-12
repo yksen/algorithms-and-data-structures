@@ -1,5 +1,6 @@
 #include <gtest/gtest.h>
 #include <iostream>
+#include <stack>
 
 struct Node
 {
@@ -139,6 +140,61 @@ namespace ex2
         ex1::insert(root, 2);
         ex1::insert(root, 4);
 
-        inorderDo(root, [](Node *node) { std::cout << node->key << " "; });
+        inorderDo(root, [](Node *node)
+                  { std::cout << node->key << " "; });
+        inorderDo(root, [](Node *node)
+                  { node->key = 0; });
+
+        EXPECT_EQ(root->key, 0);
+        EXPECT_EQ(root->left->key, 0);
+        EXPECT_EQ(root->right->key, 0);
+        EXPECT_EQ(root->left->left->key, 0);
+        EXPECT_EQ(root->left->right->key, 0);
+    }
+}
+
+namespace ex3
+{
+    void inorderDo(Node *root, void (*f)(Node *))
+    {
+        std::stack<Node *> stack;
+        Node *current = root;
+
+        while (current != nullptr || !stack.empty())
+        {
+            while (current != nullptr)
+            {
+                stack.push(current);
+                current = current->left;
+            }
+
+            current = stack.top();
+            stack.pop();
+
+            f(current);
+
+            current = current->right;
+        }
+    }
+
+    TEST(Exercise3, inorderDo)
+    {
+        Node *root = nullptr;
+        ex1::insert(root, 3);
+        ex1::insert(root, 2);
+        ex1::insert(root, 1);
+        ex1::insert(root, 4);
+        ex1::insert(root, 5);
+
+        inorderDo(root, [](Node *node)
+                  { std::cout << node->key << " "; });
+        inorderDo(root, [](Node *node)
+                  { node->key++; });
+
+        EXPECT_EQ(root->key, 4);
+        EXPECT_EQ(root->left->key, 3);
+        EXPECT_EQ(root->right->key, 5);
+        EXPECT_EQ(root->left->left->key, 2);
+        EXPECT_EQ(root->right->right->key, 6);
     }
 }

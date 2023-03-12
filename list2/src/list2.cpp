@@ -222,7 +222,6 @@ namespace ex4
             iterator(Node *current) : current(current) {}
 
             int32_t &operator*() { return current->key; }
-
             iterator &operator++()
             {
                 if (current->right)
@@ -243,7 +242,6 @@ namespace ex4
                 }
                 return *this;
             }
-
             bool operator!=(const iterator &other) { return current != other.current; }
 
         private:
@@ -293,6 +291,7 @@ namespace ex4
             std::cout << *it << " ";
             EXPECT_EQ(*it, count++);
         }
+        EXPECT_EQ(count, 6);
 
         count = 1;
         for (auto x : *root)
@@ -300,102 +299,109 @@ namespace ex4
             std::cout << x << " ";
             EXPECT_EQ(x, count++);
         }
+        EXPECT_EQ(count, 6);
     }
 }
 
 namespace ex5
 {
+    template <typename T>
     struct Node
     {
-        int32_t key;
-        Node *left;
-        Node *right;
-        Node *parent;
+        T key;
+        Node<T> *left;
+        Node<T> *right;
 
-        Node(int32_t key, Node *parent) : key(key), left(nullptr), right(nullptr), parent(parent) {}
+        Node<T>(T key) : key(key), left(nullptr), right(nullptr) {}
 
         struct iterator
         {
-            iterator(Node *current) : current(current) {}
+            iterator(Node<T> *root) : current(root)
+            {
+                while (current)
+                {
+                    stack.push(current);
+                    current = current->left;
+                }
+                if (!stack.empty())
+                {
+                    current = stack.top();
+                    stack.pop();
+                }
+            }
 
-            int32_t &operator*() { return current->key; }
-
+            T &operator*() { return current->key; }
             iterator &operator++()
             {
                 if (current->right)
                 {
                     current = current->right;
-                    while (current->left)
+                    while (current)
+                    {
+                        stack.push(current);
                         current = current->left;
+                    }
+                }
+                if (!stack.empty())
+                {
+                    current = stack.top();
+                    stack.pop();
                 }
                 else
-                {
-                    Node *parent = current->parent;
-                    while (parent && current == parent->right)
-                    {
-                        current = parent;
-                        parent = parent->parent;
-                    }
-                    current = parent;
-                }
+                    current = nullptr;
+
                 return *this;
             }
-
             bool operator!=(const iterator &other) { return current != other.current; }
 
         private:
-            Node *current;
+            Node<T> *current;
+            std::stack<Node<T> *> stack;
         };
 
-        iterator begin()
-        {
-            Node *current = this;
-            while (current->left)
-                current = current->left;
-            return iterator(current);
-        }
-
+        iterator begin() { return iterator(this); }
         iterator end() { return iterator(nullptr); }
     };
 
-    void insert(Node *&root, int32_t key)
+    template <typename T>
+    void insert(Node<T> *&root, T key)
     {
-        Node **current_root = &root;
-        Node *last_root = nullptr;
+        Node<T> **current_root = &root;
 
         while (*current_root != nullptr)
         {
-            last_root = *current_root;
             if (key < (*current_root)->key)
                 current_root = &(*current_root)->left;
             else
                 current_root = &(*current_root)->right;
         }
 
-        *current_root = new Node(key, last_root);
+        *current_root = new Node<T>(key);
     }
 
     TEST(Exercise5, BSTiterator)
     {
-        Node *root = nullptr;
-        insert(root, 3);
-        insert(root, 5);
-        insert(root, 1);
-        insert(root, 2);
-        insert(root, 4);
+        Node<double> *root = nullptr;
+        insert(root, 3.5);
+        insert(root, 5.5);
+        insert(root, 1.5);
+        insert(root, 2.5);
+        insert(root, 4.5);
 
-        int32_t count = 1;
-        for (Node::iterator it = root->begin(); it != root->end(); ++it)
+        double count = 1.5;
+        for (Node<double>::iterator it = root->begin(); it != root->end(); ++it)
         {
             std::cout << *it << " ";
-            EXPECT_EQ(*it, count++);
+            EXPECT_DOUBLE_EQ(*it, count++);
         }
+        EXPECT_DOUBLE_EQ(count, 6.5);
 
-        count = 1;
+        count = 1.5;
         for (auto x : *root)
         {
             std::cout << x << " ";
-            EXPECT_EQ(x, count++);
+            EXPECT_DOUBLE_EQ(x, count++);
         }
+        EXPECT_DOUBLE_EQ(count, 6.5);
     }
 }

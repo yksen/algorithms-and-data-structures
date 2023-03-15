@@ -158,28 +158,32 @@ namespace ex3
     void inorderDo(Node *root, void (*f)(Node *))
     {
         Node *current = root;
-        while (current->left)
-            current = current->left;
+        Node *predecessor = nullptr;
 
         while (current)
         {
-            if (current->right)
+            if (current->left == nullptr)
             {
+                f(current);
                 current = current->right;
-                while (current->left)
-                    current = current->left;
             }
             else
             {
-                Node *parent = current->parent;
-                while (parent && current == parent->right)
+                predecessor = current->left;
+                while (predecessor->right && predecessor->right != current)
+                    predecessor = predecessor->right;
+
+                if (predecessor->right == nullptr)
                 {
-                    f(current);
-                    current = parent;
-                    parent = current->parent;
+                    predecessor->right = current;
+                    current = current->left;
                 }
-                f(current);
-                current = parent;
+                else
+                {
+                    predecessor->right = nullptr;
+                    f(current);
+                    current = current->right;
+                }
             }
         }
     }

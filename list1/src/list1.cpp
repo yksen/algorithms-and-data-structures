@@ -173,6 +173,14 @@ namespace ex6
             insert_after_smaller(head->next, value);
     }
 
+    void insert_after_smaller_iterative(Node *&head, int32_t value)
+    {
+        Node **current = &head;
+        while (*current && (**current).value < value)
+            current = &(**current).next;
+        *current = new Node(value, *current);
+    }
+
     void remove(Node *&head, int32_t value)
     {
         if (head == nullptr)
@@ -280,6 +288,14 @@ namespace ex6
     {
         Node *head = new Node({1, 2, 4});
         insert_after_smaller(head, 3);
+        EXPECT_EQ(nth(head, 2), 3);
+        EXPECT_EQ(print(head), 4);
+    }
+
+    TEST(Exercise6, test_insert_after_smaller_iterative)
+    {
+        Node *head = new Node({1, 2, 4});
+        insert_after_smaller_iterative(head, 3);
         EXPECT_EQ(nth(head, 2), 3);
         EXPECT_EQ(print(head), 4);
     }

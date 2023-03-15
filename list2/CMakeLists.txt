@@ -1,8 +1,8 @@
 cmake_minimum_required(VERSION 3.14)
-project(list1)
+project(list2)
 
 set(CMAKE_CXX_STANDARD 14)
-add_compile_options(-Wall -Wextra -Wpedantic -Werror)
+add_compile_options(-Wall -Wextra -Wpedantic)
 
 include(FetchContent)
 FetchContent_Declare(
@@ -16,13 +16,17 @@ FetchContent_MakeAvailable(googletest)
 enable_testing()
 
 add_executable(
-    list1
-    src/list1.cpp
+    list2
+    src/list2.cpp
+)
+add_executable(
+    list2-ref
+    src/tree-2023-recursive.cc
 )
 target_link_libraries(
-    list1
+    list2
     GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(list1)
+gtest_discover_tests(list2)

@@ -65,7 +65,7 @@ jest więc najlepsza?
           \end{center}
     \item dzieli tablicę na dwie części, rekurencyjnie znajduje ich maksima i wybiera większe z nich.
           \begin{center}
-              $2(n/2-1)+1 = n-1$ porównań i $2(3n/2) + 2 = 3n + 2$ zmiennych lokalnych
+              $f(n) = 2(f(n/2)) + 1 = n-1$ porównań i $f(n) = f(\lceil n/2 \rceil) = O(\log_2 n)$ złożoność pamięciowa
           \end{center}
 \end{enumerate}
 
@@ -168,9 +168,9 @@ wykonania tej funkcji od ilości $n$ węzłów drzewa i/lub jego głębokości $
 wykonaj też dla funkcji \verb|int count(node *t)|.
 \begin{center}
     \begin{tabular}{c|c|c|c}
-               & worst      & average         & best              \\
+               & worst      & average                   & best              \\
         \hline
-        $T(n)$ & $O(n)$     & $\Theta(n)$     & $\Omega(n)$       \\
+        $T(n)$ & $O(n)$     & $\Theta(n)$               & $\Omega(n)$       \\
         $T(h)$ & $O(2^h-1)$ & $\Theta(2^h-1 - 2^{h-2})$ & $\Omega(2^{h-1})$ \\
     \end{tabular}
 \end{center}

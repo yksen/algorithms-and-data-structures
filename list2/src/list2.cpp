@@ -157,34 +157,37 @@ namespace ex3
 {
     void inorderDo(Node *root, void (*f)(Node *))
     {
-        Node *current = root;
-        Node *predecessor = nullptr;
+        if (root == nullptr)
+            return;
 
-        while (current)
+        Node *current = root;
+        while (current->left)
+            current = current->left;
+
+        f(current);
+
+        Node *next = current;
+        while (next)
         {
-            if (current->left == nullptr)
+            if (current->right)
             {
-                f(current);
-                current = current->right;
+                next = current->right;
+                while (next->left)
+                    next = next->left;
             }
             else
             {
-                predecessor = current->left;
-                while (predecessor->right && predecessor->right != current)
-                    predecessor = predecessor->right;
-
-                if (predecessor->right == nullptr)
+                next = current->parent;
+                while (next && next->right == current)
                 {
-                    predecessor->right = current;
-                    current = current->left;
-                }
-                else
-                {
-                    predecessor->right = nullptr;
-                    f(current);
-                    current = current->right;
+                    current = next;
+                    next = next->parent;
                 }
             }
+
+            if (next)
+                f(next);
+            current = next;
         }
     }
 
@@ -207,6 +210,20 @@ namespace ex3
         EXPECT_EQ(root->right->key, 5);
         EXPECT_EQ(root->left->left->key, 2);
         EXPECT_EQ(root->right->right->key, 6);
+
+        root = nullptr;
+        ex1::insert(root, 2);
+        ex1::insert(root, 4);
+        ex1::insert(root, 3);
+
+        inorderDo(root, [](Node *node)
+                  { std::cout << node->key << " "; });
+        inorderDo(root, [](Node *node)
+                  { node->key++; });
+
+        EXPECT_EQ(root->key, 3);
+        EXPECT_EQ(root->right->key, 5);
+        EXPECT_EQ(root->right->left->key, 4);
     }
 }
 

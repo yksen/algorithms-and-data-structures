@@ -57,7 +57,7 @@ namespace ex1
         *current_root = child;
     }
 
-    TEST(Exercise1, insert)
+    TEST(List2_Exercise1, insert)
     {
         Node *root = nullptr;
         insert(root, 5);
@@ -79,7 +79,7 @@ namespace ex1
         EXPECT_EQ(root->left->right->parent->key, 3);
     }
 
-    TEST(Exercise1, remove)
+    TEST(List2_Exercise1, remove)
     {
         Node *root = nullptr;
         insert(root, 5);
@@ -131,7 +131,7 @@ namespace ex2
         inorderDo(root->right, f);
     }
 
-    TEST(Exercise2, inorderDo)
+    TEST(List2_Exercise2, inorderDo)
     {
         Node *root = nullptr;
         ex1::insert(root, 5);
@@ -188,7 +188,7 @@ namespace ex3
         }
     }
 
-    TEST(Exercise3, inorderDo)
+    TEST(List2_Exercise3, inorderDo)
     {
         Node *root = nullptr;
         ex1::insert(root, 3);
@@ -280,7 +280,7 @@ namespace ex4
         *current_root = new Node(key, last_root);
     }
 
-    TEST(Exercise4, BSTiterator)
+    TEST(List2_Exercise4, BSTiterator)
     {
         Node *root = nullptr;
         insert(root, 3);
@@ -383,7 +383,7 @@ namespace ex5
         *current_root = new Node<T>(key);
     }
 
-    TEST(Exercise5, BSTiterator)
+    TEST(List2_Exercise5, BSTiterator)
     {
         Node<double> *root = nullptr;
         insert(root, 3.5);

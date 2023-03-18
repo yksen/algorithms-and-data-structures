@@ -29,7 +29,7 @@ namespace ex3
         return result;
     }
 
-    TEST(Exercise3, test_recursive_power)
+    TEST(List1_Exercise3, recursive_power)
     {
         EXPECT_EQ(recursive_power(2, 0), 1);
         EXPECT_EQ(recursive_power(2, 1), 2);
@@ -41,7 +41,7 @@ namespace ex3
         EXPECT_EQ(recursive_power(2, 16), 65536);
     }
 
-    TEST(Exercise3, test_iterative_power)
+    TEST(List1_Exercise3, iterative_power)
     {
         EXPECT_EQ(iterative_power(2, 0), 1);
         EXPECT_EQ(iterative_power(2, 1), 2);
@@ -72,7 +72,7 @@ namespace ex4
         return middle;
     }
 
-    TEST(Exercise4, test_binary_search_root)
+    TEST(List1_Exercise4, binary_search_root)
     {
         EXPECT_DOUBLE_EQ(binary_search_root([](double x)
                                             { return x - 0.5; }),
@@ -96,7 +96,7 @@ namespace ex5
         return result;
     }
 
-    TEST(Exercise5, test_calculate_horner)
+    TEST(List1_Exercise5, calculate_horner)
     {
         EXPECT_EQ(calculate_horner({1, 2, 3}, 0), 1);
         EXPECT_EQ(calculate_horner({1, 2, 3}, 1), 6);
@@ -252,19 +252,19 @@ namespace ex6
         }
     }
 
-    TEST(Exercise6, test_print)
+    TEST(List1_Exercise6, print)
     {
         Node *head = new Node({1, 2, 3, 4, 5});
         EXPECT_EQ(print(head), 5);
     }
 
-    TEST(Exercise6, test_sum)
+    TEST(List1_Exercise6, sum)
     {
         Node *head = new Node({1, 2, 3});
         EXPECT_EQ(sum(head), 6);
     }
 
-    TEST(Exercise6, test_nth)
+    TEST(List1_Exercise6, nth)
     {
         Node *head = new Node({1, 2, 3});
         EXPECT_EQ(nth(head, 0), 1);
@@ -273,7 +273,7 @@ namespace ex6
         EXPECT_EQ(nth(head, 3), 0);
     }
 
-    TEST(Exercise6, test_insert)
+    TEST(List1_Exercise6, insert)
     {
         Node *head = new Node({1, 2, 3});
         insert(head, 0);
@@ -284,7 +284,7 @@ namespace ex6
         EXPECT_EQ(nth(head, 4), 0);
     }
 
-    TEST(Exercise6, test_insert_after_smaller)
+    TEST(List1_Exercise6, insert_after_smaller)
     {
         Node *head = new Node({1, 2, 4});
         insert_after_smaller(head, 3);
@@ -292,7 +292,7 @@ namespace ex6
         EXPECT_EQ(print(head), 4);
     }
 
-    TEST(Exercise6, test_insert_after_smaller_iterative)
+    TEST(List1_Exercise6, insert_after_smaller_iterative)
     {
         Node *head = new Node({1, 2, 4});
         insert_after_smaller_iterative(head, 3);
@@ -300,7 +300,7 @@ namespace ex6
         EXPECT_EQ(print(head), 4);
     }
 
-    TEST(Exercise6, test_remove)
+    TEST(List1_Exercise6, remove)
     {
         Node *head = new Node({1, 2, 3, 4, 5});
         remove(head, 3);
@@ -315,7 +315,7 @@ namespace ex6
         EXPECT_EQ(print(head), 1);
     }
 
-    TEST(Exercise6, test_filter)
+    TEST(List1_Exercise6, filter)
     {
         Node *head = new Node({1, 2, 3, 4, 5});
         filter(head, [](int32_t x)
@@ -338,14 +338,14 @@ namespace ex6
         EXPECT_EQ(print(head), 0);
     }
 
-    TEST(Exercise6, test_destroy)
+    TEST(List1_Exercise6, destroy)
     {
         Node *head = new Node({1, 2, 3, 4, 5});
         destroy(head);
         EXPECT_EQ(head, nullptr);
     }
 
-    TEST(Exercise6, test_reverse)
+    TEST(List1_Exercise6, reverse)
     {
         Node *head = new Node({1, 2, 3});
         reverse(head);
@@ -355,7 +355,7 @@ namespace ex6
         EXPECT_EQ(print(head), 3);
     }
 
-    TEST(Exercise6, test_merge)
+    TEST(List1_Exercise6, merge)
     {
         Node *first = new Node({1, 3, 5});
         Node *second = new Node({2, 4, 6});

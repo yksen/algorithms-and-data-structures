@@ -77,22 +77,77 @@ namespace ex2
         }
     };
 
+    void reverse(Node *&head)
+    {
+        Node *previous = nullptr;
+        while (head)
+        {
+            Node *next = head->next;
+            head->next = previous;
+            previous = head;
+            head = next;
+        }
+        head = previous;
+    }
+
     void insertionSort(Node *&head)
     {
-        
+        Node *sortedHead = nullptr;
+        Node *current = head;
+
+        while (current)
+        {
+            Node **sorted = &sortedHead;
+            while (*sorted && (*sorted)->value > current->value)
+                sorted = &(*sorted)->next;
+
+            Node *next = current->next;
+            if (*sorted)
+            {
+                Node *sortedNext = *sorted;
+                *sorted = current;
+                (*sorted)->next = sortedNext;
+            }
+            else
+            {
+                *sorted = current;
+                (*sorted)->next = nullptr;
+            }
+            current = next;
+        }
+
+        reverse(sortedHead);
+        head = sortedHead;
     }
 
     TEST(List3_Exercise2, insertionSort)
     {
-        Node *head = new Node({3, 5, 1, 2, 4});
+        Node *head = new Node(1);
         insertionSort(head);
+        EXPECT_EQ(head->value, 1);
 
+        head = new Node({5, 4, 3, 2, 1});
+        insertionSort(head);
         for (int32_t i = 1; i <= 5; ++i)
         {
             EXPECT_EQ(head->value, i);
             head = head->next;
         }
 
-        
+        head = new Node({3, 5, 1, 2, 4});
+        insertionSort(head);
+        for (int32_t i = 1; i <= 5; ++i)
+        {
+            EXPECT_EQ(head->value, i);
+            head = head->next;
+        }
+
+        head = new Node({1, 2, 3, 4, 5});
+        insertionSort(head);
+        for (int32_t i = 1; i <= 5; ++i)
+        {
+            EXPECT_EQ(head->value, i);
+            head = head->next;
+        }
     }
 }

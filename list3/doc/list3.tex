@@ -1,0 +1,36 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 3}
+
+\subsection*{Zadanie 1}
+Ile (dokładnie) porównań wykona algorytm \verb|insertion_sort| w wersji z wartownikiem \\
+(liczbą zapisaną pod adresem \verb|t[-1]|), jeśli dane $(a_1, \dots, a_n)$ o rozmiarze $n$ zawierają
+$k$ inwersji. Liczba inwersji to liczba takich par $(i, j)$, że $i < j$ i $a_i > a_j$. Jaka jest
+maksymalna możliwa liczba inwersji dla danych rozmiaru $n$? Wylicz “średnią” złożoność algorytmu,
+jaka średnią z maksymalnej i minimalnej ilości porównań jaką wykona. \\
+Uwaga: Prawdziwą średnią złożoność oblicza się, jako średnią po wszystkich możliwych
+permutacjach danych wejściowych.
+\begin{align*}
+    \text{Dokładna ilość porównań: }   & n-1 + k                                                        \\
+    \text{Minimalna ilość porównań: }  & n-1 + 0 = n-1                                                  \\
+    \text{Maksymalna ilość porównań: } & n-1 + \frac{n(n-1)}{2} = \frac{n^2 + n - 2}{2}                 \\
+    \text{Średnia ilość porównań: }    & \frac{n-1 + \frac{n^2 + n - 2}{2}}{2} = \frac{n^2 + 3n - 4}{4}
+\end{align*}
+
+\end{document}

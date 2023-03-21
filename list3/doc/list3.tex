@@ -73,4 +73,17 @@ połączenia dwóch ostatnich list w jedną.
               \sum_{i=1}^{k} \frac{2^k}{2^i}(2^i-1) = k2^k - 2^k + 1 = kn - 2^k + 1
           \end{gather*}
 \end{enumerate}
+
+\subsection*{Zadanie 5}
+Korzystając z twierdzenia o rekurencji uniwersalnej rozwiąż następujące zależności:
+\begin{enumerate}[label=(\alph*)]
+    \item $T(N) = 5T(n/3) + n = \Theta(n^{log_3 5})$, $n = O(n^{log_3 5-\epsilon})$ dla $\epsilon < 0,46 $
+    \item $T(N) = 4T(n/2) + n^2 = \Theta(n^2logn)$, $n^2 = \Theta(n^{log_2 4})$
+    \item $T(N) = 9T(n/3) + n^2 = \Theta(n^2logn)$, $n^2 = \Theta(n^{log_3 9})$
+    \item $T(N) = 6T(n/3) + n^2 = \Theta(n^2)$, $n^2 = \Omega(n^{log_3 6})$
+    \item $T(N) = 3T(n/3) + n = \Theta(nlogn)$, $n = \Theta(n^{log_3 3})$
+    \item $T(N) = 5T(n/2) + n^2 = \Theta(n^{log_2 5})$, $n^2 = O(n^{log_2 5-\epsilon})$ dla $\epsilon < 0,32$
+    \item $T(N) = T(n/2) + 1 = \Theta(logn)$, $1 = \Theta(n^{log_2 1})$
+\end{enumerate}
+
 \end{document}

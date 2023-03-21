@@ -54,4 +54,23 @@ permutacjach danych wejściowych.
           \end{gather*}
 \end{enumerate}
 
+\subsection*{Zadanie 4}
+Iteracyjna wersja procedury mergesort polega na scalaniu posortowanych list. Zaczyna
+łączenia pojedynczych elementów w posortowane pary, potem par w czwórki itd. aż do
+połączenia dwóch ostatnich list w jedną.
+\begin{enumerate}[label=(\alph*)]
+    \item Zakładając, że rozmiar tablicy jest potęgą dwójki $n = 2^k$ oraz, że procedura merge
+          wykonuje dokładnie tyle porównań, ile jest elementów po scaleniu, oblicz ile dokładnie
+          porównań wykona cały algorytm.
+          \begin{gather*}
+              \sum_{i=1}^{k} 2^k = k 2^k = kn
+          \end{gather*}
+    \item Ile razy jest wywołana procedura merge w trakcie działania całego algorytmu? Jak
+          zmieni się wynik punktu (a), jeśli założymy, że merge zawsze, wykonuje o jedno
+          porównanie mniej, niż zakładaliśmy w punkcie (a)?
+          \begin{gather*}
+              \text{Ilość wywołań: } n - 1 \\
+              \sum_{i=1}^{k} \frac{2^k}{2^i}(2^i-1) = k2^k - 2^k + 1 = kn - 2^k + 1
+          \end{gather*}
+\end{enumerate}
 \end{document}

@@ -33,4 +33,25 @@ permutacjach danych wejściowych.
     \text{Średnia ilość porównań: }    & \frac{n-1 + \frac{n^2 + n - 2}{2}}{2} = \frac{n^2 + 3n - 4}{4}
 \end{align*}
 
+\subsection*{Zadanie 3}
+\begin{enumerate}[label=(\alph*)]
+    \item Ile co najwyżej porównań wykona procedura \verb|insertion_sort| działająca na ostatnim
+          etapie \verb|bucket_sort| zakładając, że \verb|bucket_sort| korzysta z \verb|k| pomocniczych kolejek,
+          i że do każdej z nich wpadła taka sama ilość elementów? Zakładamy wersję z wartownikiem
+          na pozycji \verb|t[-1]|.
+          \begin{gather*}
+              n-1 + k \frac{\frac{n}{k}(\frac{n}{k}-1)}{2}
+          \end{gather*}
+    \item Podaj uproszczony wynik dla $k = n/2$, $k = n/4$, $k = n/10$ oraz $k = \sqrt{n}$.
+          Następnie każdy z tych wyników zapisz też w notacji asymptotycznej $O(f(n))$.
+          \begin{align*}
+              3n/2 - 1  & = O(n) & 5n/2 - 1              & = O(n)       \\
+              11n/2 - 1 & = O(n) & \frac{n^{3/2}+n-2}{2} & = O(n^{3/2})
+          \end{align*}
+    \item Jaki będzie wynik, gdy wszystkie klucze wpadną do tego samego kubełka?
+          \begin{gather*}
+              n-1 + \frac{n(n-1)}{2}
+          \end{gather*}
+\end{enumerate}
+
 \end{document}

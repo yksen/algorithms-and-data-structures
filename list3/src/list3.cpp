@@ -151,3 +151,46 @@ namespace ex2
         }
     }
 }
+
+namespace ex6
+{
+    struct Node
+    {
+        int32_t value;
+        size_t leftCount;
+        Node *left;
+        Node *right;
+
+        Node(int32_t value, size_t leftCount = 0, Node *left = nullptr, Node *right = nullptr)
+            : value(value), leftCount(leftCount), left(left), right(right) {}
+    };
+
+    Node *nth(Node *root, size_t i)
+    {
+
+        return nullptr;
+    }
+
+    TEST(List3_Exercise6, nth)
+    {
+        Node *root = new Node{4, 3};
+        EXPECT_EQ(nth(root, 0)->value, 1);
+
+        root->left = new Node{2, 1};
+        root->left->left = new Node{1, 0};
+        root->left->right = new Node{3, 0};
+        root->right = new Node{5, 0};
+        root->right->right = new Node{7, 1};
+        root->right->right->left = new Node{6, 0};
+
+        EXPECT_EQ(nth(root, -1), nullptr);
+        EXPECT_EQ(nth(root, 0)->value, 1);
+        EXPECT_EQ(nth(root, 1)->value, 2);
+        EXPECT_EQ(nth(root, 2)->value, 3);
+        EXPECT_EQ(nth(root, 3)->value, 4);
+        EXPECT_EQ(nth(root, 4)->value, 5);
+        EXPECT_EQ(nth(root, 5)->value, 6);
+        EXPECT_EQ(nth(root, 6)->value, 7);
+        EXPECT_EQ(nth(root, 7), nullptr);
+    }
+}

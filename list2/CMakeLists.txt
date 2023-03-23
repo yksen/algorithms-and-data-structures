@@ -1,11 +1,11 @@
 add_executable(
-    list1
-    src/list1.cpp
+    list2
+    src/list2.cpp
 )
 target_link_libraries(
-    list1
+    list2
     GTest::gtest_main
 )
 
 include(GoogleTest)
-gtest_discover_tests(list1)
+gtest_discover_tests(list2)

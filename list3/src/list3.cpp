@@ -157,27 +157,29 @@ namespace ex6
     struct Node
     {
         int32_t value;
-        size_t leftCount;
+        int32_t leftCount;
         Node *left;
         Node *right;
 
-        Node(int32_t value, size_t leftCount = 0, Node *left = nullptr, Node *right = nullptr)
+        Node(int32_t value, int32_t leftCount = 0, Node *left = nullptr, Node *right = nullptr)
             : value(value), leftCount(leftCount), left(left), right(right) {}
     };
 
-    Node *nth(Node *root, int32_t i)
+    Node *nth(Node *node, int32_t i)
     {
-        while (root)
+        if (i < 0)
+            return nullptr;
+
+        while (node)
         {
-            int32_t leftSize = root->left ? root->left->leftCount + 1 : 0;
-            if (i == leftSize)
-                return root;
-            else if (i < leftSize)
-                root = root->left;
+            if (node->leftCount == i)
+                return node;
+            else if (node->leftCount > i)
+                node = node->left;
             else
             {
-                i -= leftSize + 1;
-                root = root->right;
+                i -= node->leftCount + 1;
+                node = node->right;
             }
         }
 

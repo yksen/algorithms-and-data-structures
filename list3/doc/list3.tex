@@ -1,0 +1,89 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 3}
+
+\subsection*{Zadanie 1}
+Ile (dokładnie) porównań wykona algorytm \verb|insertion_sort| w wersji z wartownikiem \\
+(liczbą zapisaną pod adresem \verb|t[-1]|), jeśli dane $(a_1, \dots, a_n)$ o rozmiarze $n$ zawierają
+$k$ inwersji. Liczba inwersji to liczba takich par $(i, j)$, że $i < j$ i $a_i > a_j$. Jaka jest
+maksymalna możliwa liczba inwersji dla danych rozmiaru $n$? Wylicz “średnią” złożoność algorytmu,
+jaka średnią z maksymalnej i minimalnej ilości porównań jaką wykona. \\
+Uwaga: Prawdziwą średnią złożoność oblicza się, jako średnią po wszystkich możliwych
+permutacjach danych wejściowych.
+\begin{align*}
+    \text{Dokładna ilość porównań: }   & n-1 + k                                                        \\
+    \text{Minimalna ilość porównań: }  & n-1 + 0 = n-1                                                  \\
+    \text{Maksymalna ilość porównań: } & n-1 + \frac{n(n-1)}{2} = \frac{n^2 + n - 2}{2}                 \\
+    \text{Średnia ilość porównań: }    & \frac{n-1 + \frac{n^2 + n - 2}{2}}{2} = \frac{n^2 + 3n - 4}{4}
+\end{align*}
+
+\subsection*{Zadanie 3}
+\begin{enumerate}[label=(\alph*)]
+    \item Ile co najwyżej porównań wykona procedura \verb|insertion_sort| działająca na ostatnim
+          etapie \verb|bucket_sort| zakładając, że \verb|bucket_sort| korzysta z \verb|k| pomocniczych kolejek,
+          i że do każdej z nich wpadła taka sama ilość elementów? Zakładamy wersję z wartownikiem
+          na pozycji \verb|t[-1]|.
+          \begin{gather*}
+              n-1 + k \frac{\frac{n}{k}(\frac{n}{k}-1)}{2}
+          \end{gather*}
+    \item Podaj uproszczony wynik dla $k = n/2$, $k = n/4$, $k = n/10$ oraz $k = \sqrt{n}$.
+          Następnie każdy z tych wyników zapisz też w notacji asymptotycznej $O(f(n))$.
+          \begin{align*}
+              3n/2 - 1  & = O(n) & 5n/2 - 1              & = O(n)       \\
+              11n/2 - 1 & = O(n) & \frac{n^{3/2}+n-2}{2} & = O(n^{3/2})
+          \end{align*}
+    \item Jaki będzie wynik, gdy wszystkie klucze wpadną do tego samego kubełka?
+          \begin{gather*}
+              n-1 + \frac{n(n-1)}{2}
+          \end{gather*}
+\end{enumerate}
+
+\subsection*{Zadanie 4}
+Iteracyjna wersja procedury mergesort polega na scalaniu posortowanych list. Zaczyna
+łączenia pojedynczych elementów w posortowane pary, potem par w czwórki itd. aż do
+połączenia dwóch ostatnich list w jedną.
+\begin{enumerate}[label=(\alph*)]
+    \item Zakładając, że rozmiar tablicy jest potęgą dwójki $n = 2^k$ oraz, że procedura merge
+          wykonuje dokładnie tyle porównań, ile jest elementów po scaleniu, oblicz ile dokładnie
+          porównań wykona cały algorytm.
+          \begin{gather*}
+              \sum_{i=1}^{k} 2^k = k 2^k = kn
+          \end{gather*}
+    \item Ile razy jest wywołana procedura merge w trakcie działania całego algorytmu? Jak
+          zmieni się wynik punktu (a), jeśli założymy, że merge zawsze, wykonuje o jedno
+          porównanie mniej, niż zakładaliśmy w punkcie (a)?
+          \begin{gather*}
+              \text{Ilość wywołań: } n - 1 \\
+              \sum_{i=1}^{k} \frac{2^k}{2^i}(2^i-1) = k2^k - 2^k + 1 = kn - 2^k + 1
+          \end{gather*}
+\end{enumerate}
+
+\subsection*{Zadanie 5}
+Korzystając z twierdzenia o rekurencji uniwersalnej rozwiąż następujące zależności:
+\begin{enumerate}[label=(\alph*)]
+    \item $T(N) = 5T(n/3) + n = \Theta(n^{log_3 5})$, $n = O(n^{log_3 5-\epsilon})$ dla $\epsilon < 0,46 $
+    \item $T(N) = 4T(n/2) + n^2 = \Theta(n^2logn)$, $n^2 = \Theta(n^{log_2 4})$
+    \item $T(N) = 9T(n/3) + n^2 = \Theta(n^2logn)$, $n^2 = \Theta(n^{log_3 9})$
+    \item $T(N) = 6T(n/3) + n^2 = \Theta(n^2)$, $n^2 = \Omega(n^{log_3 6})$
+    \item $T(N) = 3T(n/3) + n = \Theta(nlogn)$, $n = \Theta(n^{log_3 3})$
+    \item $T(N) = 5T(n/2) + n^2 = \Theta(n^{log_2 5})$, $n^2 = O(n^{log_2 5-\epsilon})$ dla $\epsilon < 0,32$
+    \item $T(N) = T(n/2) + 1 = \Theta(logn)$, $1 = \Theta(n^{log_2 1})$
+\end{enumerate}
+
+\end{document}

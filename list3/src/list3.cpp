@@ -3,6 +3,17 @@
 #include <numeric>
 #include <vector>
 
+struct Node
+{
+    int32_t value;
+    int32_t leftCount;
+    Node *left;
+    Node *right;
+
+    Node(int32_t value, int32_t leftCount = 0, Node *left = nullptr, Node *right = nullptr)
+        : value(value), leftCount(leftCount), left(left), right(right) {}
+};
+
 namespace ex1
 {
     void insertionSort(int32_t t[], size_t n)
@@ -154,17 +165,6 @@ namespace ex2
 
 namespace ex6
 {
-    struct Node
-    {
-        int32_t value;
-        int32_t leftCount;
-        Node *left;
-        Node *right;
-
-        Node(int32_t value, int32_t leftCount = 0, Node *left = nullptr, Node *right = nullptr)
-            : value(value), leftCount(leftCount), left(left), right(right) {}
-    };
-
     Node *nth(Node *node, int32_t i)
     {
         if (i < 0)
@@ -209,3 +209,53 @@ namespace ex6
         EXPECT_EQ(nth(root, 8), nullptr);
     }
 }
+
+namespace ex7
+{
+    void insert(Node *&node, int32_t value)
+    {
+        if (!node)
+            node = new Node{value, 0};
+        else
+        {
+            if (value < node->value)
+            {
+                ++node->leftCount;
+                insert(node->left, value);
+            }
+            else
+                insert(node->right, value);
+        }
+    }
+
+    TEST(List3_Exercise7, insert)
+    {
+        Node *root = nullptr;
+        insert(root, 4);
+        insert(root, 1);
+        insert(root, 0);
+        insert(root, 3);
+        insert(root, 2);
+        insert(root, 5);
+        insert(root, 7);
+        insert(root, 6);
+
+        EXPECT_EQ(root->value, 4);
+        EXPECT_EQ(root->leftCount, 4);
+        EXPECT_EQ(root->left->value, 1);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->left->left->value, 0);
+        EXPECT_EQ(root->left->left->leftCount, 0);
+        EXPECT_EQ(root->left->right->value, 3);
+        EXPECT_EQ(root->left->right->leftCount, 1);
+        EXPECT_EQ(root->left->right->left->value, 2);
+        EXPECT_EQ(root->left->right->left->leftCount, 0);
+        EXPECT_EQ(root->right->value, 5);
+        EXPECT_EQ(root->right->leftCount, 0);
+        EXPECT_EQ(root->right->right->value, 7);
+        EXPECT_EQ(root->right->right->leftCount, 1);
+        EXPECT_EQ(root->right->right->left->value, 6);
+        EXPECT_EQ(root->right->right->left->leftCount, 0);
+    }
+}
+

@@ -6,33 +6,43 @@
 
 namespace ex10
 {
-    int64_t generateRandomData(const std::string &filePath, int64_t n)
+    uint32_t generateRandomData(const std::string &filePath, uint32_t n)
     {
         std::mt19937 generator(std::random_device{}());
 
-        std::vector<int64_t> data(n);
+        std::vector<uint32_t> data(n);
         std::iota(data.begin(), data.end(), 1);
         std::shuffle(data.begin(), data.end(), generator);
 
-        int64_t randomElement = data[std::uniform_int_distribution<int64_t>(0, n - 1)(generator)];
-        std::remove(data.begin(), data.end(), randomElement);
+        uint32_t randomElement = data[std::uniform_int_distribution<uint32_t>(0, n - 1)(generator)];
+        data.erase(std::remove(data.begin(), data.end(), randomElement));
 
-        std::ofstream file(filePath);
-        for (auto &element : data)
+        std::ofstream file(filePath, std::ios::trunc);
+        for (auto element : data)
             file << element << std::endl;
+
         return randomElement;
     }
 
-    int64_t findMissingNumber(const std::string &filePath)
+    uint32_t findMissingNumber(const std::string &filePath)
     {
-        return 0;
+        std::ifstream file(filePath);
+        uint32_t element;
+        uint32_t sum = 0;
+        uint32_t n = 0;
+        while (file >> element)
+        {
+            sum += element;
+            n++;
+        }
+
+        return (n + 1) * (n + 2) / 2 - sum;
     }
 
     TEST(List4_Exercise10, findMissingNumber)
     {
-        const std::string filePath = "randomData.txt";
-        EXPECT_EQ(generateRandomData(filePath, 10), findMissingNumber(filePath));
-        EXPECT_EQ(generateRandomData(filePath, 1e3), findMissingNumber(filePath));
-        EXPECT_EQ(generateRandomData(filePath, 1e6), findMissingNumber(filePath));
+        EXPECT_EQ(findMissingNumber("random10.txt"), generateRandomData("random10.txt", 10));
+        EXPECT_EQ(findMissingNumber("random1000.txt"), generateRandomData("random1000.txt", 1000));
+        EXPECT_EQ(findMissingNumber("random1000000.txt"), generateRandomData("random1000000.txt", 1000000));
     }
 }

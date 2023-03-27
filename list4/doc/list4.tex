@@ -29,7 +29,7 @@ oszacowania dla następujących rekurencji:
               T(n) = 2T\left(n^\frac{1}{2}\right) + 1 \\
               m = \log n \text{, } U(m) = T\left(e^m\right) = T\left(e^{\log n}\right) = T(n) \\
               U(m) = 2T\left(e^{\log n^\frac{1}{2}}\right) + 1 = 2T\left(e^{\frac{1}{2}\log n}\right) + 1 = 2U\left(\frac{m}{2}\right) + 1 \\
-              U(m) = \Theta(m) \text{, } 1 = O\left(m^{log_2 2-\epsilon}\right) \text{ dla } \epsilon \leq 1 \\
+              1 = O\left(m^{log_2 2-\epsilon}\right) \text{ dla } \epsilon \leq 1 \implies U(m) = \Theta(m) \\
               T(n) = U(m) = U(\log n) = \Theta(m) = \Theta(\log n)
           \end{gather*}
 \end{enumerate}
@@ -38,7 +38,19 @@ oszacowania dla następujących rekurencji:
 Czas działania algorytmu $A$ opisany jest przez rekurencję $T(n) = 7T(n/2) + n^2$.
 Algorytm konkurencyjny $A'$ ma czas działania $T '(n) = aT'(n/4) + n^2$. Jaka jest największa
 liczba całkowita $a$, przy której $A'$ jest asymptotycznie szybszy niż $A$?
-
-
+\begin{gather*}
+    n^2 = O\left(n^{log_2 7-\epsilon}\right) \text{ dla } \epsilon \leq 0.80 \implies T(n) = 7T(n/2) + n^2 = \Theta\left(n^{log_2 7}\right) \\
+    n^2 = O\left(n^{log_4 a-\epsilon}\right) \implies T'(n) = aT'(n/4) + n^2 = \Theta\left(n^{log_4 a}\right) \\
+    n^{log_4a} < n^{log_2 7} \\
+    n^{\frac{1}{2}log_2a} < n^{log_2 7}
+\end{gather*}
+\begin{equation*}
+    T'(n) = \begin{cases}
+        \Theta\left(n^2\right)                                           & \text{ dla } a \in \langle 1, 15 \rangle  \\
+        \Theta\left(n^2logn\right)                                       & \text{ dla } a = 16                       \\
+        \Theta\left(n^{log_4 a}\right)                                   & \text{ dla } a \in \langle 17, 48 \rangle \\
+        \Theta\left(n^{log_4 49}\right) = \Theta\left(n^{log_2 7}\right) & \text{ dla } a = 49
+    \end{cases}
+\end{equation*}
 
 \end{document}

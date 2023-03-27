@@ -22,10 +22,23 @@
 Skorzystaj z metody rekurencji uniwersalnej i podaj dokładne asymptotyczne
 oszacowania dla następujących rekurencji:
 \begin{enumerate}[label=(\alph*)]
-    \item $T(n) = 2T(n/4) + \sqrt{n} = $, $n^0.5 = $
-    \item $T(n) = 3T(n/4) + n = $, $n = $
-    \item $T(n) = 8T(n/4) + n\sqrt{n} = $, $n^{3/2} = $
-    \item $T(n) = 2T(\sqrt{n}) + 1 = $, $1 = $
+    \item $T(n) = 2T(n/4) + \sqrt{n} = \Theta(n^{1/2}logn)$, $n^{1/2} = \Theta(n^{log_4 2})$
+    \item $T(n) = 3T(n/4) + n = \Theta(n)$, $n = \Omega(n^{log_4 3})$
+    \item $T(n) = 8T(n/4) + n\sqrt{n} = \Theta(n^{3/2}logn)$, $n^{3/2} = \Theta(n^{log_4 8})$
+    \item \begin{gather*}
+              T(n) = 2T\left(n^\frac{1}{2}\right) + 1 \\
+              m = \log n \text{, } U(m) = T\left(e^m\right) = T\left(e^{\log n}\right) = T(n) \\
+              U(m) = 2T\left(e^{\log n^\frac{1}{2}}\right) + 1 = 2T\left(e^{\frac{1}{2}\log n}\right) + 1 = 2U\left(\frac{m}{2}\right) + 1 \\
+              U(m) = \Theta(m) \text{, } 1 = O\left(m^{log_2 2-\epsilon}\right) \text{ dla } \epsilon \leq 1 \\
+              T(n) = U(m) = U(\log n) = \Theta(m) = \Theta(\log n)
+          \end{gather*}
 \end{enumerate}
+
+\subsection*{Zadanie 2}
+Czas działania algorytmu $A$ opisany jest przez rekurencję $T(n) = 7T(n/2) + n^2$.
+Algorytm konkurencyjny $A'$ ma czas działania $T '(n) = aT'(n/4) + n^2$. Jaka jest największa
+liczba całkowita $a$, przy której $A'$ jest asymptotycznie szybszy niż $A$?
+
+
 
 \end{document}

@@ -22,9 +22,9 @@
 Skorzystaj z metody rekurencji uniwersalnej i podaj dokładne asymptotyczne
 oszacowania dla następujących rekurencji:
 \begin{enumerate}[label=(\alph*)]
-    \item $T(n) = 2T(n/4) + \sqrt{n} = \Theta(n^{1/2}logn)$, $n^{1/2} = \Theta(n^{log_4 2})$
-    \item $T(n) = 3T(n/4) + n = \Theta(n)$, $n = \Omega(n^{log_4 3})$
-    \item $T(n) = 8T(n/4) + n\sqrt{n} = \Theta(n^{3/2}logn)$, $n^{3/2} = \Theta(n^{log_4 8})$
+    \item $n^{1/2} = \Theta(n^{log_4 2}) \implies T(n) = 2T(n/4) + \sqrt{n} = \Theta(n^{1/2}logn)$
+    \item $n = \Omega(n^{log_4 3+\epsilon}) \text{ dla } \epsilon < 0.2 \implies T(n) = 3T(n/4) + n = \Theta(n)$
+    \item $n^{3/2} = \Theta(n^{log_4 8}) \implies T(n) = 8T(n/4) + n\sqrt{n} = \Theta(n^{3/2}logn)$
     \item \begin{gather*}
               T(n) = 2T\left(n^\frac{1}{2}\right) + 1 \\
               m = \log n \text{, } U(m) = T\left(e^m\right) = T\left(e^{\log n}\right) = T(n) \\
@@ -46,11 +46,26 @@ liczba całkowita $a$, przy której $A'$ jest asymptotycznie szybszy niż $A$?
 \end{gather*}
 \begin{equation*}
     T'(n) = \begin{cases}
-        \Theta\left(n^2\right)                                           & \text{ dla } a \in \langle 1, 15 \rangle  \\
-        \Theta\left(n^2logn\right)                                       & \text{ dla } a = 16                       \\
-        \Theta\left(n^{log_4 a}\right)                                   & \text{ dla } a \in \langle 17, 48 \rangle \\
+        \Theta\left(n^2\right)                                           & \text{ dla } a \in [1, 15]      \\
+        \Theta\left(n^2logn\right)                                       & \text{ dla } a = 16             \\
+        \Theta\left(n^{log_4 a}\right)                                   & \text{ dla } a \in [17, \infty) \\
         \Theta\left(n^{log_4 49}\right) = \Theta\left(n^{log_2 7}\right) & \text{ dla } a = 49
     \end{cases}
 \end{equation*}
+
+\subsection*{Zadanie 4}
+Zasymuluj działanie polifazowego mergesorta dla tablicy:
+\begin{center}
+    \verb|{9,22,6,19,21,14,10,17,3,5,60,30,29,1,8,7,6,15,12}|.
+\end{center}
+W sortowaniu polifazowym na każdym etapie sortowania scala się sąsiadujące podciągi rosnące, to znaczy:
+w pierwszym przebiegu \verb|{9,22}| z \verb|{6,19,21}|, \verb|{14}| z \verb|{10,17}| itd..
+\begin{center}
+    \verb+{9,22|6,19,21|14|10,17|3,5,60|30|29|1,8|7|6,15|12}+ \\
+    \verb+{6,9,19,21,22|10,14,17|3,5,30,60|1,8,29|6,7,15|12}+ \\
+    \verb+{6,9,10,14,17,19,21,22|1,3,5,8,29,30,60|6,7,12,15}+ \\
+    \verb+{1,3,5,6,8,9,10,14,17,19,21,22,29,30,60|6,7,12,15}+ \\
+    \verb+{1,3,5,6,6,7,8,9,10,12,14,15,17,19,21,22,29,30,60}+
+\end{center}
 
 \end{document}

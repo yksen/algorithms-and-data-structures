@@ -442,5 +442,25 @@ namespace ex8
         EXPECT_EQ(root->left->leftCount, 1);
         EXPECT_EQ(root->right->value, 5);
         EXPECT_EQ(root->right->leftCount, 0);
+
+        root = nullptr;
+        insert(root, 5);
+        insert(root, 3);
+        insert(root, 7);
+        insert(root, 2);
+        insert(root, 4);
+        insert(root, 6);
+        insert(root, 8);
+
+        removeNth(root, 5);
+        EXPECT_EQ(root->leftCount, 3);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->right->leftCount, 1);
+        EXPECT_EQ(root->right->left->leftCount, 0);
+
+        removeNth(root, 5);
+        EXPECT_EQ(root->leftCount, 3);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->right->leftCount, 0);
     }
 }

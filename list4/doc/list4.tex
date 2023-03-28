@@ -8,6 +8,7 @@
 \usepackage[margin=1.5in]{geometry}
 \usepackage[edges]{forest}
 \usepackage{listings}
+\usepackage{multicol}
 
 \begin{document}
 
@@ -53,6 +54,17 @@ liczba całkowita $a$, przy której $A'$ jest asymptotycznie szybszy niż $A$?
     \end{cases}
 \end{equation*}
 
+\subsection*{Zadanie 3}
+Rozważmy warunek regularności $af(n/b) \leq cf(n)$ dla pewnej stałej $c \leq 1$, który jest
+częścią przypadku 3 twierdzenia o rekurencji uniwersalnej. Podaj przykład prostej funkcji
+$f(n)$, które spełnia wszystkie warunki twierdzenia o rekurencji uniwersalnej z wyjątkiem
+warunku regularności.
+\begin{gather*}
+    af(n/b) \leq cf(n), a \geq 1, b > 1, c \leq 1 \\
+    T(n) = T(n/2) + nsin(n - \pi/2) + 2 \\
+    (n/2)sin(n/2 - \pi/2) + 2 \leq nsin(n - \pi/2) + 2
+\end{gather*}
+
 \subsection*{Zadanie 4}
 Zasymuluj działanie polifazowego mergesorta dla tablicy:
 \begin{center}
@@ -67,5 +79,83 @@ w pierwszym przebiegu \verb|{9,22}| z \verb|{6,19,21}|, \verb|{14}| z \verb|{10,
     \verb+{1,3,5,6,8,9,10,14,17,19,21,22,29,30,60|6,7,12,15}+ \\
     \verb+{1,3,5,6,6,7,8,9,10,12,14,15,17,19,21,22,29,30,60}+
 \end{center}
+
+\subsection*{Zadanie 5}
+\begin{enumerate}[label=(\alph*)]
+    \item Czy tablica posortowana malejąco jest kopcem?
+          \begin{center}
+              \begin{forest}
+                  for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=green!50}
+                  [7[6[4][3]][5[2][1]]]
+              \end{forest}
+          \end{center}
+    \item Czy ciąg \verb+{23,17,14,6,13,10,1,5,7,12}+ jest kopcem?
+          \begin{center}
+              \begin{forest}
+                  for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=green!50}
+                  [23[17[6[5][7, fill=red!50]][13[12][, no edge, draw=none, fill=none]]][14[10[, no edge, draw=none, fill=none][, no edge, draw=none, fill=none]][1[, no edge, draw=none, fill=none][, no edge, draw=none, fill=none]]]]
+              \end{forest}
+          \end{center}
+\end{enumerate}
+
+\pagebreak
+\subsection*{Zadanie 6}
+Zilustruj działanie procedury buildheap dla ciągu \verb+{5,3,17,10,84,19,6,22,9,14,3}+.
+Narysuj na kartce wygląd tablicy i kopca po każdym wywołaniu procedury przesiej.
+\begin{multicols*}{2}
+    \begin{center}
+        \verb+{5,3,17,10,84,19,6,22,9,14,3}+ \\[12ex]
+        \verb+{5,3,17,22,84,19,6,10,9,14,3}+ \\
+        \verb+{5,3,17,22,84,19,6,10,9,14,3}+ \\[9ex]
+        \verb+{5,3,19,22,84,17,6,10,9,14,3}+ \\
+        \verb+{5,3,19,22,84,17,6,10,9,14,3}+ \\[9ex]
+        \verb+{5,84,19,22,3,17,6,10,9,14,3}+ \\
+        \verb+{5,84,19,22,14,17,6,10,9,3,3}+ \\
+        \verb+{5,84,19,22,14,17,6,10,9,3,3}+ \\[16ex]
+        \verb+{84,5,19,22,14,17,6,10,9,3,3}+ \\
+        \verb+{84,22,19,5,14,17,6,10,9,3,3}+ \\
+        \verb+{84,22,19,10,14,17,6,5,9,3,3}+ \\
+        \verb+{84,22,19,10,14,17,6,5,9,3,3}+
+    \end{center}
+    \columnbreak
+    \begin{center}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[3[10[22][9]][84[14][3]]][17[19][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[3[22[10][9]][84[14][3]]][17[19][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[3[22[10][9]][84[14][3]]][19[17][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[84[22[10][9]][3[14][3]]][19[17][6]]]
+        \end{forest}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[84[22[10][9]][14[3][3]]][19[17][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [84[5[22[10][9]][14[3][3]]][19[17][6]]]
+        \end{forest}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [84[22[5[10][9]][14[3][3]]][19[17][6]]]
+        \end{forest}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [84[22[10[5][9]][14[3][3]]][19[17][6]]]
+        \end{forest}
+    \end{center}
+\end{multicols*}
 
 \end{document}

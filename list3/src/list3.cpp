@@ -1,7 +1,6 @@
 #include <gtest/gtest.h>
 #include <iostream>
 #include <numeric>
-#include <stack>
 #include <vector>
 
 struct Node
@@ -267,13 +266,12 @@ namespace ex8
     void remove(Node *&root, int32_t value)
     {
         Node **currentRoot = &root;
-        std::stack<Node *> stack;
         while (*currentRoot && (*currentRoot)->value != value)
             if (value > (*currentRoot)->value)
                 currentRoot = &(*currentRoot)->right;
             else
             {
-                stack.push(*currentRoot);
+                --(*currentRoot)->leftCount;
                 currentRoot = &(*currentRoot)->left;
             }
 
@@ -285,18 +283,12 @@ namespace ex8
             Node **min = &(*currentRoot)->right;
             while ((*min)->left)
             {
-                stack.push(*min);
+                --(*min)->leftCount;
                 min = &(*min)->left;
             }
 
             (*currentRoot)->value = (*min)->value;
             currentRoot = min;
-        }
-
-        while (!stack.empty())
-        {
-            --stack.top()->leftCount;
-            stack.pop();
         }
 
         Node *child = (*currentRoot)->left ? (*currentRoot)->left : (*currentRoot)->right;
@@ -307,7 +299,6 @@ namespace ex8
     void removeNth(Node *&root, int32_t value)
     {
         Node **currentRoot = &root;
-        std::stack<Node *> stack;
         while (*currentRoot && (*currentRoot)->leftCount != value)
             if (value > (*currentRoot)->leftCount)
             {
@@ -316,7 +307,7 @@ namespace ex8
             }
             else
             {
-                stack.push(*currentRoot);
+                --(*currentRoot)->leftCount;
                 currentRoot = &(*currentRoot)->left;
             }
 
@@ -328,18 +319,12 @@ namespace ex8
             Node **min = &(*currentRoot)->right;
             while ((*min)->left)
             {
-                stack.push(*min);
+                --(*min)->leftCount;
                 min = &(*min)->left;
             }
 
             (*currentRoot)->value = (*min)->value;
             currentRoot = min;
-        }
-
-        while (!stack.empty())
-        {
-            --stack.top()->leftCount;
-            stack.pop();
         }
 
         Node *child = (*currentRoot)->left ? (*currentRoot)->left : (*currentRoot)->right;

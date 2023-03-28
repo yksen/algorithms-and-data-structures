@@ -29,7 +29,7 @@ oszacowania dla następujących rekurencji:
     \item \begin{gather*}
               T(n) = 2T\left(n^\frac{1}{2}\right) + 1 \\
               m = \log n \text{, } U(m) = T\left(e^m\right) = T\left(e^{\log n}\right) = T(n) \\
-              U(m) = 2T\left(e^{\log n^\frac{1}{2}}\right) + 1 = 2T\left(e^{\frac{1}{2}\log n}\right) + 1 = 2U\left(\frac{m}{2}\right) + 1 \\
+              U(m) = 2T\left(e^{\log n^\frac{1}{2}}\right) + 1 = 2T\left(e^{\frac{1}{2}\log n}\right) + 1 = 2T\left(e^{\frac{m}{2}}\right) + 1 = 2U\left(\frac{m}{2}\right) + 1 \\
               1 = O\left(m^{log_2 2-\epsilon}\right) \text{ dla } \epsilon \leq 1 \implies U(m) = \Theta(m) \\
               T(n) = U(m) = U(\log n) = \Theta(m) = \Theta(\log n)
           \end{gather*}
@@ -60,9 +60,10 @@ częścią przypadku 3 twierdzenia o rekurencji uniwersalnej. Podaj przykład pr
 $f(n)$, które spełnia wszystkie warunki twierdzenia o rekurencji uniwersalnej z wyjątkiem
 warunku regularności.
 \begin{gather*}
-    af(n/b) \leq cf(n), a \geq 1, b > 1, c \leq 1 \\
-    T(n) = T(n/2) + nsin(n - \pi/2) + 2 \\
-    (n/2)sin(n/2 - \pi/2) + 2 \leq nsin(n - \pi/2) + 2
+    af(n/b) \leq cf(n) \text{, } a \geq 1 \text{, } b > 1 \text{, } c \leq 1 \\
+    T(n) = T(n/2) + \sin n \\
+    \sin\left(\frac{n}{2}\right) \leq \sin n \\
+    \text{dla } n = \frac{7\pi}{2} \text{, } \sin\left(\frac{7\pi}{4}\right) \leq \sin \frac{7\pi}{2} \implies  \leq -1
 \end{gather*}
 
 \subsection*{Zadanie 4}

@@ -1,6 +1,7 @@
 \documentclass{article}
 
 \usepackage{amsmath}
+\usepackage{amssymb}
 \usepackage{enumitem}
 \usepackage[polish]{babel}
 \usepackage[T1]{fontenc}
@@ -63,7 +64,7 @@ warunku regularności.
     af(n/b) \leq cf(n) \text{, } a \geq 1 \text{, } b > 1 \text{, } c \leq 1 \\
     T(n) = T(n/2) + \sin n \\
     \sin\left(\frac{n}{2}\right) \leq \sin n \\
-    \text{dla } n = \frac{7\pi}{2} \text{, } \sin\left(\frac{7\pi}{4}\right) \leq \sin \frac{7\pi}{2} \implies  \leq -1
+    \text{dla } n = \frac{7\pi}{2} \text{, } \sin\left(\frac{7\pi}{4}\right) \leq \sin \left(\frac{7\pi}{2}\right) \implies -0.7071 \nleq -1
 \end{gather*}
 
 \subsection*{Zadanie 4}
@@ -170,6 +171,9 @@ Niech $F_n$ oznacza ilość różnych kształtów drzew binarnych o $n$ węzłac
 łatwo sprawdzić, że $F_0 = 1, F_1 = 1, F_2 = 2, F_3 = 5$, itd. Nie korzystając z internetu:
 \begin{enumerate}[label=(\alph*)]
     \item Znajdź wzór wyrażający $F_n$ przez $F_0, F_1, F_2, \dots, F_{n-1}$ dla $n = 2, 3, 4$ a potem ogólnie.
+    \begin{gather*}
+        ?
+    \end{gather*}
     \item Zaprojektuj (na kartce) procedurę, która oblicza kolejne wyrazy ciągu $F_n$, zapisuje
           je w tablicy i korzysta z nich przy obliczaniu następnych wyrazów.
     \item Przeanalizuj ile mnożeń trzeba wykonać, by obliczyć wyrazy od $F_1$ do $F_n$. Czy da

@@ -122,41 +122,60 @@ Narysuj na kartce wygląd tablicy i kopca po każdym wywołaniu procedury przesi
     \begin{center}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[3[10[22][9]][84[14][3]]][17[19][6]]]
+            [5[3[10[22][9]][84, fill=green!50[14][3]]][17[19][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[3[22[10][9]][84[14][3]]][17[19][6]]]
+            [5[3[22, fill=green!50[10, fill=green!50][9]][84[14][3]]][17[19][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[3[22[10][9]][84[14][3]]][19[17][6]]]
+            [5[3[22[10][9]][84[14][3]]][19, fill=green!50[17, fill=green!50][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[84[22[10][9]][3[14][3]]][19[17][6]]]
+            [5[84, fill=green!50[22[10][9]][3, fill=green!50[14][3]]][19[17][6]]]
         \end{forest}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[84[22[10][9]][14[3][3]]][19[17][6]]]
+            [5[84[22[10][9]][14, fill=green!50[3, fill=green!50][3]]][19[17][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [84[5[22[10][9]][14[3][3]]][19[17][6]]]
+            [84, fill=green!50[5, fill=green!50[22[10][9]][14[3][3]]][19[17][6]]]
         \end{forest}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [84[22[5[10][9]][14[3][3]]][19[17][6]]]
+            [84[22, fill=green!50[5, fill=green!50[10][9]][14[3][3]]][19[17][6]]]
         \end{forest}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [84[22[10[5][9]][14[3][3]]][19[17][6]]]
+            [84[22[10, fill=green!50[5, fill=green!50][9]][14[3][3]]][19[17][6]]]
         \end{forest}
     \end{center}
 \end{multicols*}
+
+\subsection*{Zadanie 8}
+Udowodnij, że wysokość kopca $n$-elementowego wynosi $\lfloor\log_2 n\rfloor + 1$.
+\begin{gather*}
+    2^k \leq n \leq 2^{k+1} - 1 \implies k \leq \log_2 n \leq k+1 \\
+\end{gather*}
+
+\subsection*{Zadanie 11}
+Niech $F_n$ oznacza ilość różnych kształtów drzew binarnych o $n$ węzłach. Rysując drzewa,
+łatwo sprawdzić, że $F_0 = 1, F_1 = 1, F_2 = 2, F_3 = 5$, itd. Nie korzystając z internetu:
+\begin{enumerate}[label=(\alph*)]
+    \item Znajdź wzór wyrażający $F_n$ przez $F_0, F_1, F_2, \dots, F_{n-1}$ dla $n = 2, 3, 4$ a potem ogólnie.
+    \item Zaprojektuj (na kartce) procedurę, która oblicza kolejne wyrazy ciągu $F_n$, zapisuje
+          je w tablicy i korzysta z nich przy obliczaniu następnych wyrazów.
+    \item Przeanalizuj ile mnożeń trzeba wykonać, by obliczyć wyrazy od $F_1$ do $F_n$. Czy da
+          się ją zapisać w postaci $O(n^k)$ dla pewnego $k$?
+    \item Jaka byłaby złożoność algorytmu rekurencyjnego, który nie korzysta z wartości
+          zapisanych w tablicy, tylko oblicza je ponownie. Czy da się ją zapisać jako $O(n^k)$?
+\end{enumerate}
 
 \end{document}

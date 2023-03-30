@@ -62,9 +62,9 @@ $f(n)$, które spełnia wszystkie warunki twierdzenia o rekurencji uniwersalnej 
 warunku regularności.
 \begin{gather*}
     af(n/b) \leq cf(n) \text{, } a \geq 1 \text{, } b > 1 \text{, } c \leq 1 \\
-    T(n) = T(n/2) + \sin n \\
-    \sin\left(\frac{n}{2}\right) \leq \sin n \\
-    \text{dla } n = \frac{7\pi}{2} \text{, } \sin\left(\frac{7\pi}{4}\right) \leq \sin \left(\frac{7\pi}{2}\right) \implies -0.7071 \nleq -1
+    T(n) = T(n/2) + \sin \frac{n \pi}{2} + 2 \cdot \sqrt{n} \\
+    \sin\left(\frac{n \pi}{2}\right) \cdot \sqrt{n} \leq c \sin\left(n \pi\right) + 2 \cdot \sqrt{2n} \\
+    (1 + 2) \cdot \sqrt{n} \leq c (0 + 2) \cdot \sqrt{2n}
 \end{gather*}
 
 \subsection*{Zadanie 4}

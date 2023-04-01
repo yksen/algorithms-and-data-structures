@@ -102,7 +102,7 @@ w pierwszym przebiegu \verb|{9,22}| z \verb|{6,19,21}|, \verb|{14}| z \verb|{10,
 
 \pagebreak
 \subsection*{Zadanie 6}
-Zilustruj działanie procedury buildheap dla ciągu \verb+{5,3,17,10,84,19,6,22,9,14,3}+.
+Zilustruj działanie procedury \verb+buildheap+ dla ciągu \verb+{5,3,17,10,84,19,6,22,9,14,3}+.
 Narysuj na kartce wygląd tablicy i kopca po każdym wywołaniu procedury przesiej.
 \begin{multicols*}{2}
     \begin{center}
@@ -163,7 +163,16 @@ Narysuj na kartce wygląd tablicy i kopca po każdym wywołaniu procedury przesi
 \subsection*{Zadanie 8}
 Udowodnij, że wysokość kopca $n$-elementowego wynosi $\lfloor\log_2 n\rfloor + 1$.
 \begin{gather*}
-    2^k \leq n \leq 2^{k+1} - 1 \implies k \leq \log_2 n \leq k+1 \\
+    \text{Maksymalna ilość węzłów w kopcu o wysokości $h$:} \\
+    n(h) = 2^h - 1 \\
+    n(h-1) = 2^{h - 1} - 1 \\
+    \text{Minimalna ilość węzłów w kopcu o wysokości $h$:} \\
+    n(h-1) + 1 = 2^{h - 1} - 1 + 1 = 2^{h - 1} \\
+    \text{Ilość węzłów w kopcu o wysokości $h$:} \\
+    2^{h - 1} \leq n < 2^h \\
+    h-1 \leq \log_2 n < h \\
+    h \leq \log_2 n + 1 < h + 1 \\
+    \lfloor\log_2 n\rfloor + 1
 \end{gather*}
 
 \subsection*{Zadanie 11}
@@ -171,9 +180,9 @@ Niech $F_n$ oznacza ilość różnych kształtów drzew binarnych o $n$ węzłac
 łatwo sprawdzić, że $F_0 = 1, F_1 = 1, F_2 = 2, F_3 = 5$, itd. Nie korzystając z internetu:
 \begin{enumerate}[label=(\alph*)]
     \item Znajdź wzór wyrażający $F_n$ przez $F_0, F_1, F_2, \dots, F_{n-1}$ dla $n = 2, 3, 4$ a potem ogólnie.
-    \begin{gather*}
-        ?
-    \end{gather*}
+          \begin{gather*}
+              ?
+          \end{gather*}
     \item Zaprojektuj (na kartce) procedurę, która oblicza kolejne wyrazy ciągu $F_n$, zapisuje
           je w tablicy i korzysta z nich przy obliczaniu następnych wyrazów.
     \item Przeanalizuj ile mnożeń trzeba wykonać, by obliczyć wyrazy od $F_1$ do $F_n$. Czy da

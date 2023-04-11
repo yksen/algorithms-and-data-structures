@@ -181,14 +181,32 @@ Niech $F_n$ oznacza ilość różnych kształtów drzew binarnych o $n$ węzłac
 \begin{enumerate}[label=(\alph*)]
     \item Znajdź wzór wyrażający $F_n$ przez $F_0, F_1, F_2, \dots, F_{n-1}$ dla $n = 2, 3, 4$ a potem ogólnie.
           \begin{gather*}
-              ?
+              F_0 = 1, F_1 = 1 \\
+              F_2 = 2 = F_0F_1 + F_1F_0 \\
+              F_3 = 5 = F_0F_2 + F_1F_1 + F_2F_0 \\
+              F_4 = 14 = F_0F_3 + F_1F_2 + F_2F_1 + F_3F_0 \\
+              F_n = \sum_{i=1}^{n} F_{i-1}F_{n-i}
           \end{gather*}
     \item Zaprojektuj (na kartce) procedurę, która oblicza kolejne wyrazy ciągu $F_n$, zapisuje
           je w tablicy i korzysta z nich przy obliczaniu następnych wyrazów.
+          \begin{lstlisting}
+                F[0] = 1
+                F[1] = 1
+                for i = 2 to n:
+                    F[i] = 0
+                    for j = 1 to i:
+                        F[i] += F[j-1] * F[i-j]
+          \end{lstlisting}
     \item Przeanalizuj ile mnożeń trzeba wykonać, by obliczyć wyrazy od $F_1$ do $F_n$. Czy da
           się ją zapisać w postaci $O(n^k)$ dla pewnego $k$?
+          \begin{gather*}
+                \text{Ilośc mnożeń: } \sum_{i=1}^{n} i = \frac{n(1+n)}{2} = O(n^2)
+          \end{gather*}
     \item Jaka byłaby złożoność algorytmu rekurencyjnego, który nie korzysta z wartości
           zapisanych w tablicy, tylko oblicza je ponownie. Czy da się ją zapisać jako $O(n^k)$?
+          \begin{gather*}
+                \sum_{k=1}^{n} = \frac{k(1+k)}{2} = \frac{n(n+1)(n+2)}{6} = O(n^3)
+          \end{gather*}
 \end{enumerate}
 
 \end{document}

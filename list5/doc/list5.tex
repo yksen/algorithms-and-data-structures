@@ -20,11 +20,30 @@
 
 \section*{Lista zadań 5}
 
+\subsection*{Zadanie 1}
+Udowodnij, że jeśli dla pewnego ustalonego $q$, takiego że $\frac{1}{2} < q < 1$,
+podczas sortowania szybkiego, procedura partition, na każdym poziomie rekurencji podzieli elementy
+tablicy w stosunku $q : (1 - q)$ to algorytm wykona się w czasie $O(n log n)$. Wskazówka: udowodnij, że głębokość
+rekurencji nie przekroczy - $\log n / \log q$ i zaniedbaj błędy zaokrągleń do wartości całkowitych.
+
 \subsection*{Zadanie 2}
-Ile porównań (zapisz wyniki w notacji O) wykona algorytm \verb+quicksort+ z
+Ile porównań (zapisz wyniki w notacji $O$) wykona algorytm \verb+quicksort+ z
 procedurą \verb+partition+ w wersji Hoare'a, a ile w wersji z procedurę \verb+partition+ w wersji Lomuto dla
 danych: (a) posortowanych rosnąco, (b) posortowanych malejąco, (c) o identycznych kluczach?
 
+\subsection*{Zadanie 3}
+Napisz wzór na numer kubełka, do którego należy wrzucić liczbę $x$ w sortowaniu kubełkowym, jeśli
+kubełków jest $n$, a elementy tablicy mieszczą się przedziale $(a, b)$. Numeracja zaczyna się od $0$.
+
+\subsection*{Zadanie 4}
+Dla jakich danych sortowanie metodą kubełkową ma złożoność $O(n^2)$?
+
+\subsection*{Zadanie 5}
+Jak obliczyć $k$-tą od końca cyfrę w liczby $x$? Jak obliczyć ilość cyfr liczby $x$? Przyjmujemy
+układ dziesiętny. Jak wyniki zmienią się w układzie pozycyjnym gdzie różnych cyfr jest $m$ a ich
+wartości $x$ należą do przedziału $0 \leq x < m$?
+
+\pagebreak
 \subsection*{Zadanie 6}
 Posortuj metodą sortowania pozycyjnego liczby: 101, 345, 103, 333, 432, 132, 543, 651,
 791, 532, 987, 910, 643, 641, 12, 342, 498, 987, 965, 322, 121, 431, 350. W pisemnym
@@ -73,5 +92,31 @@ tablica wyjściowa, za każdym razem, gdy sortowanie ze względu na kolejną cyf
     9: & \left(910, 965, 987, 987\right)
 \end{align*}
 (12, 101, 103, 121, 132, 322, 333, 342, 345, 350, 431, 432, 498, 532, 543, 641, 643, 651, 791, 910, 965, 987, 987)
+
+\subsection*{Zadanie 7}
+Które z procedur sortujących:
+\begin{enumerate}[label=(\alph*)]
+    \item insertionSort (przez wstawianie),
+    \item quickSort (szybkie),
+    \item heapSort (przez kopcowanie),
+    \item mergeSort (przez złączanie),
+    \item countingSort (przez zliczanie)
+    \item radixSort (pozycyjne),
+    \item bucketSort (kubełkowe)
+\end{enumerate}
+są stabilne? W każdym przypadku uzasadnij stabilność lub znajdź konkretny przykład
+danych, dla których algorytm nie zachowa się stabilnie.
+
+\subsection*{Zadanie 8}
+Napisz funkcję void \verb+counting_sort(node* lista, int m);+ sortującą przez zliczanie
+listę linkowaną liczb całkowitych nieujemnych mniejszych od $m$. Procedura nie powinna
+usuwać ani tworzyć nowych węzłów, tylko sprytnie zmieniać pola next wykorzystując
+tylko $O(m)$ dodatkowej pamięci na wskaźniki.
+
+\subsection*{Zadanie 9}
+(algorytm Hoare'a) Korzystając funkcji \verb+int partition(int t[], int n)+ znanej z
+algorytmu sortowania szybkiego napisz funkcję \verb+int kty(int t[], int n)+, której wynikiem
+będzie $k$-ty co do wielkości element początkowo nieposortowanej tablicy \verb+t+. Średnia
+złożoność Twojego algorytmu powinna wynieść $O(n)$.
 
 \end{document}

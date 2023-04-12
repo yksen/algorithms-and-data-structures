@@ -20,4 +20,58 @@
 
 \section*{Lista zadań 5}
 
+\subsection*{Zadanie 2}
+Ile porównań (zapisz wyniki w notacji O) wykona algorytm \verb+quicksort+ z
+procedurą \verb+partition+ w wersji Hoare'a, a ile w wersji z procedurę \verb+partition+ w wersji Lomuto dla
+danych: (a) posortowanych rosnąco, (b) posortowanych malejąco, (c) o identycznych kluczach?
+
+\subsection*{Zadanie 6}
+Posortuj metodą sortowania pozycyjnego liczby: 101, 345, 103, 333, 432, 132, 543, 651,
+791, 532, 987, 910, 643, 641, 12, 342, 498, 987, 965, 322, 121, 431, 350. W pisemnym
+rozwiązaniu pokaż, jak wygląda zawartość kolejek, za każdym razem, gdy tablica
+wyjściowa jest pusta i wszystkie liczby znajdują się w kolejkach, oraz jak wygląda
+tablica wyjściowa, za każdym razem, gdy sortowanie ze względu na kolejną cyfrę jest już zakończone.
+
+\begin{align*}
+    0: & \left(910, 350\right) \\
+    1: & \left(101, 651, 791, 641, 121, 431\right) \\
+    2: & \left(432, 132, 532, 12, 342, 322\right) \\
+    3: & \left(103, 333, 543, 643\right) \\
+    4: & \left(\right) \\
+    5: & \left(345, 965\right) \\
+    6: & \left(\right) \\
+    7: & \left(987, 987\right) \\
+    8: & \left(498\right) \\
+    9: & \left(\right)
+\end{align*}
+(910, 350, 101, 651, 791, 641, 121, 431, 432, 132, 532, 12, 342, 322, 103, 333, 543, 643, 345, 965, 987, 987, 498)
+
+\begin{align*}
+    0: & \left(101, 103\right) \\
+    1: & \left(910\right) \\
+    2: & \left(121, 12, 322\right) \\
+    3: & \left(431, 432, 132, 532, 333\right) \\
+    4: & \left(641, 342, 543, 643, 345\right) \\
+    5: & \left(350, 651\right) \\
+    6: & \left(965\right) \\
+    7: & \left(\right) \\
+    8: & \left(987, 987\right) \\
+    9: & \left(791, 498\right)
+\end{align*}
+(101, 103, 910, 121, 12, 322, 431, 432, 132, 532, 333, 641, 342, 543, 643, 345, 350, 651, 965, 987, 987, 791, 498)
+
+\begin{align*}
+    0: & \left(12\right) \\
+    1: & \left(101, 103, 121, 132\right) \\
+    2: & \left(\right) \\
+    3: & \left(322, 333, 342, 345, 350\right) \\
+    4: & \left(431, 432, 498\right) \\
+    5: & \left(532, 543\right) \\
+    6: & \left(641, 643, 651\right) \\
+    7: & \left(791\right) \\
+    8: & \left(\right) \\
+    9: & \left(910, 965, 987, 987\right)
+\end{align*}
+(12, 101, 103, 121, 132, 322, 333, 342, 345, 350, 431, 432, 498, 532, 543, 641, 643, 651, 791, 910, 965, 987, 987)
+
 \end{document}

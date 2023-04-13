@@ -160,6 +160,14 @@ Narysuj na kartce wygląd tablicy i kopca po każdym wywołaniu procedury przesi
     \end{center}
 \end{multicols*}
 
+\subsection*{Zadanie 7}
+Metodą jak na wykładzie, udowodnij, że procedura \verb+build_heap+ działa w czasie $O(n)$.
+\begin{gather*}
+    2 \left(\frac{n}{4} \cdot 1 + \frac{n}{8} \cdot 2 + \frac{n}{16} \cdot 3 + \frac{n}{32} \cdot 4 + \dots \right) \\
+    \frac{n}{2} \left(\frac{1}{1} + \frac{2}{2} + \frac{3}{4} + \frac{4}{8} + \dots\right) \\
+    \frac{n}{2} \cdot 4 = 2n
+\end{gather*}
+
 \subsection*{Zadanie 8}
 Udowodnij, że wysokość kopca $n$-elementowego wynosi $\lfloor\log_2 n\rfloor + 1$.
 \begin{gather*}

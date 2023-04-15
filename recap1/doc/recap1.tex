@@ -1,0 +1,94 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=3cm]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Przygotowanie do kolokwium}
+Przyjmując, że \verb+t1[] = {1, 2, 3, 4, 5, 6, 7}+ oraz \verb+t2[] = {7, 6, 5, 4, 3, 2, 1}+ i stosując algorytmy
+sortujące ściśle wg procedur z pliku \verb+sorty2020.cc+ i wykonaj polecenia:
+
+\subsection*{Zadanie 1}
+Ile dokładnie porównań (między elementami tablicy) wykona \verb+insertion_sort(t2)+ a ile \verb+insertion_sort(t1)+?
+
+\subsection*{Zadanie 2}
+Ile co najwyżej porównań (między elementami tablic) wykona procedura scalająca \verb+merge+
+dwie tablice $n$-elementowe?
+
+\subsection*{Zadanie 3}
+Jaka jest pesymistyczna złożoność czasowa procedury \verb+merge_sort+? Odpowiedź uzasadnij.
+
+\subsection*{Zadanie 4}
+Ile co najwyżej porównań (między elementami tablicy) wykona procedura \verb+partition+?
+
+\subsection*{Zadanie 5}
+Jak jest średnia a jaka pesymistyczna złożoność \verb+quick_sort+. Odpowiedź uzasadnij.
+
+\subsection*{Zadanie 6}
+Jaka jest złożoność funkcji \verb+buildheap+? Przeprowadź dowód - uzasadnij swoją odpowiedź.
+
+\subsection*{Zadanie 7}
+Ile dodatkowej pamięci wymaga posortowanie tablicy $n$-elementowej za pomocą
+algorytmu: (a) \verb+mergesort+ (b) \verb+quicksort+ (c) \verb+heapsort+ (d) \verb+insertionsort+ (e) \verb+countingsort+
+(f) \verb+bucketsort+ (g) \verb+radixsort+. W punktach (e), (f), (g) zakładamy, że ilość kubełków
+jest $m$, a liczby do posortowania mają nie więcej niż $k$ cyfr.
+
+\subsection*{Zadanie 8}
+Jaka jest średnia a jaka pesymistyczna złożoność czasowa algorytmu: (a) \verb+mergesort+ (b) \verb+quicksort+
+(c) \verb+heapsort+ (d) \verb+insertionsort+ (e) \verb+countingsort+ (f) \verb+bucketsort+ (g)\verb+radixsort+?
+Zakładamy oznaczenia z poprzedniego zadania.
+
+\subsection*{Zadanie 9}
+Udowodnij, że wysokość (ilość poziomów na których występują węzły) kopca $n$-elementowego
+wynosi $\left \lfloor \log_2 n \right \rfloor + 1$.
+
+\subsection*{Zadanie 10}
+Który element tablicy t jest (a) lewym dzieckiem (b) prawym dzieckim (c) ojcem, elementu \verb+t[i]+ w procedurze \verb+heapsort+?
+
+\subsection*{Zadanie 11}
+Czy ciąg \verb+{23, 17, 14, 6, 13, 10, 1, 5, 7, 12}+ jest kopcem?
+
+\subsection*{Zadanie 12}
+Zilustruj działanie procedury buildheap dla ciągu \verb+{5, 3, 17, 10, 84, 19, 6, 22, 9}+.
+Narysuj na kartce wygląd tablicy/kopca po każdym wywołaniu procedury \verb+przesiej+.
+
+\subsection*{Zadanie 13}
+Zasymuluj działanie polifazowego mergesorta dla tablicy \verb+{9, 22, 6, 19, 14, 10, 17, 3, 5}+.
+Na każdym etapie sortowania scala się sąsiadujące listy rosnące.
+
+\subsection*{Zadanie 14}
+Zasymuluj działanie \verb+mergesort(t2)+;
+
+\subsection*{Zadanie 15}
+Zasymuluj działanie \verb+partition(t2, 7)+.
+
+\subsection*{Zadanie 16}
+Zasymuluj działanie \verb+partition(t2, 7)+ w przypadku gdyby piwotem zamiast \verb+t[n/2]+ było \verb+t[0]+.
+
+\subsection*{Zadanie 17}
+Wykaż, że pesymistyczna złożoność \verb+quicksort+ wynosi $O(n^2)$.
+
+\subsection*{Zadanie 18}
+Napisz wzór na numer kubełka, do którego należy wrzucić liczbę $x$ w sortowaniu
+kubełkowym, jeśli kubełków jest $n$, a elementy tablicy mieszczą się przedziale $(a, b)$.
+Numeracja zaczyna się od $0$.
+
+\subsection*{Zadanie 19}
+Jak obliczyć $k$-tą od końca cyfrę w liczby $x$? Jak obliczyć ilość cyfr liczby $x$?
+Przyjmujemy układ dziesiętny. Jak wyniki zmienią się w układzie pozycyjnym o $1000$ cyfr?
+
+\end{document}

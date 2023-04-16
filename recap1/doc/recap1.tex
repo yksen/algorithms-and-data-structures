@@ -10,6 +10,8 @@
 \usepackage[edges]{forest}
 \usepackage{listings}
 \usepackage{multicol}
+\usepackage{varwidth}
+\usepackage{xcolor}
 
 \begin{document}
 
@@ -127,11 +129,15 @@ wynosi $\left \lfloor \log_2 n \right \rfloor + 1$.
 
 \subsection*{Zadanie 10}
 Który element tablicy \verb+t+ jest (a) lewym dzieckiem (b) prawym dzieckim (c) ojcem, elementu \verb+t[i]+ w procedurze \verb+heapsort+?
-\begin{enumerate}[label=(\alph*)]
-    \item \verb+t[2i]+
-    \item \verb|t[2i+1]|
-    \item \verb+t[(i - 1)/2]+
-\end{enumerate}
+\begin{center}
+    \begin{varwidth}{\textwidth}
+        \begin{enumerate}[label=(\alph*)]
+            \item \verb+t[2i]+
+            \item \verb|t[2i+1]|
+            \item \verb+t[(i - 1)/2]+
+        \end{enumerate}
+    \end{varwidth}
+\end{center}
 
 \subsection*{Zadanie 11}
 Czy ciąg \verb+{23, 17, 14, 6, 13, 10, 1, 5, 7, 12}+ jest kopcem?
@@ -215,23 +221,68 @@ Na każdym etapie sortowania scala się sąsiadujące listy rosnące.
 
 \subsection*{Zadanie 14}
 Zasymuluj działanie \verb+mergesort(t2)+.
+\begin{center}
+    \begin{tabular}{c c}
+        \textbf{Rekurencyjny podział} & \textbf{Merge}         \\
+        \hline
+        \verb+{7,6,5,4,3,2,1}+        & \verb+{7|6|5|4|3|2|1}+ \\
+        \verb+{7,6,5|4,3,2,1}+        & \verb+{7|5,6|3,4|1,2}+ \\
+        \verb+{7|6,5|4,3|2,1}+        & \verb+{5,6,7|1,2,3,4}+ \\
+        \verb+{7|6|5|4|3|2|1}+        & \verb+{1,2,3,4,5,6,7}+
+    \end{tabular}
+\end{center}
 
 \subsection*{Zadanie 15}
 Zasymuluj działanie \verb+partition(t2, 7)+.
+\begin{center}
+    \verb+pivot = t2[7 / 2] = t[3] = 4+ \\
+    \begin{tabular}{c c c}
+        \textbf{Tablica}       & \textbf{k} & \textbf{n} \\
+        \hline
+        \verb+{7,6,5,4,3,2,1}+ & -1         & 7          \\
+        \verb+{1,6,5,4,3,2,7}+ & 0          & 6          \\
+        \verb+{1,2,5,4,3,6,7}+ & 1          & 5          \\
+        \verb+{1,2,3,4,5,6,7}+ & 2          & 4          \\
+        \verb+{1,2,3,4,5,6,7}+ & 3          & 3          \\
+    \end{tabular} \\
+    \verb+return 3+
+\end{center}
 
 \subsection*{Zadanie 16}
 Zasymuluj działanie \verb+partition(t2, 7)+ w przypadku gdyby piwotem zamiast \verb+t[n/2]+ było \verb+t[0]+.
+\begin{center}
+    \verb+pivot = t2[0] = 7+ \\
+    \begin{tabular}{c c c}
+        \textbf{Tablica}       & \textbf{k} & \textbf{n} \\
+        \hline
+        \verb+{7,6,5,4,3,2,1}+ & -1         & 7          \\
+        \verb+{1,6,5,4,3,2,7}+ & 0          & 6          \\
+        \verb+{1,6,5,4,3,2,7}+ & 6          & 5          \\
+    \end{tabular} \\
+    \verb+return k+
+\end{center}
 
 \subsection*{Zadanie 17}
 Wykaż, że pesymistyczna złożoność \verb+quicksort+ wynosi $O(n^2)$.
+\begin{gather*}
+    T(n) = T(n-1) + n + 1 \implies \sum_{i=1}^{n} i + 1 = \frac{n(2 + n + 1)}{2} = O(n^2)
+\end{gather*}
 
 \subsection*{Zadanie 18}
 Napisz wzór na numer kubełka, do którego należy wrzucić liczbę $x$ w sortowaniu
 kubełkowym, jeśli kubełków jest $n$, a elementy tablicy mieszczą się przedziale $(a, b)$.
 Numeracja zaczyna się od $0$.
+\begin{gather*}
+    k = \left \lfloor \frac{x - a}{b - a} \cdot n \right \rfloor
+\end{gather*}
 
 \subsection*{Zadanie 19}
 Jak obliczyć $k$-tą od końca cyfrę w liczby $x$? Jak obliczyć ilość cyfr liczby $x$?
 Przyjmujemy układ dziesiętny. Jak wyniki zmienią się w układzie pozycyjnym o $1000$ cyfr?
+\begin{align*}
+    x_k & = \left \lfloor \frac{x}{m^k} \right \rfloor \mod m       & n & = \left \lceil \log_m x \right \rceil      \\
+    x_k & = \left \lfloor \frac{x}{10^k} \right \rfloor \mod 10     & n & = \left \lceil \log_{10} x \right \rceil   \\
+    x_k & = \left \lfloor \frac{x}{1000^k} \right \rfloor \mod 1000 & n & = \left \lceil \log_{1000} x \right \rceil
+\end{align*}
 
 \end{document}

@@ -104,16 +104,35 @@ tablica wyjściowa, za każdym razem, gdy sortowanie ze względu na kolejną cyf
 \end{align*}
 (12, 101, 103, 121, 132, 322, 333, 342, 345, 350, 431, 432, 498, 532, 543, 641, 643, 651, 791, 910, 965, 987, 987)
 
+\pagebreak
 \subsection*{Zadanie 7}
 Które z procedur sortujących:
 \begin{enumerate}[label=(\alph*)]
-    \item insertionSort (przez wstawianie),
-    \item quickSort (szybkie),
-    \item heapSort (przez kopcowanie),
-    \item mergeSort (przez złączanie),
-    \item countingSort (przez zliczanie)
-    \item radixSort (pozycyjne),
-    \item bucketSort (kubełkowe)
+    \item insertionSort (przez wstawianie), \\
+          jest stabilny, gdyż każdy kolejny, zaczynając od początku tablicy, sortowany element jest wstawiany na koniec
+          posortowanej części tablicy, więc w przypadku elementów o tej samej wartości, zachowana jest kolejność
+    \item quickSort (szybkie), \\
+          nie jest stabilny, przykładowo dla tablicy \verb+{2, 1, 1}+ już po pierwszym wywołaniu \verb+partition+
+          tracimy względna kolejność elementów o tej samej wartości, a kolejne wywołanie nie ma już nawet szansy jej
+          przywrócić bo obejmie ono elementy o indeksach większych od $0$
+    \item heapSort (przez kopcowanie), \\
+          nie jest stabilny, przykładowo dla tablicy \verb+{1, 1}+ sama budowa kopca nie dokona żadnych zamian
+          elementów, ale już po pierwszym wyciągnięciu z kopca elementu o największej wartości czyli z indeksu zerowego
+          tablicy tracimy względna kolejność elementów o tej samej wartości, gdyż jedynki zostaną wyjęte z kopca
+          w tej samej kolejności w której były w tablicy ale trafiać będą na jej koniec przez co zamienią się miejscami
+    \item mergeSort (przez złączanie), \\
+          jest stabilny, procedura \verb+merge+ zachowuje względną kolejność elementów o tej samej wartości gdyż w
+          przypadku porównywania dwóch elementów o tej samej wartości, wstawiany jest ten, który jest w tablicy
+          pierwotnej na mniejszym indeksie
+    \item countingSort (przez zliczanie), \\
+          jest stabilny, ponieważ do tablicy wynikowej elementy są wstawiane po kolei z tablicy pierwotnej iterowanej
+          od końca na kolejne dekrementowane indeksy na podstawie liczników
+    \item radixSort (pozycyjne), \\
+          jest stabilny, dzięki temu, że elementy umieszczana są kolejno w kolejkach FIFO z których później są wyciągane
+          do tablicy pierwotnej
+    \item bucketSort (kubełkowe) \\
+          jest stabilny, ponieważ jest on połączeniem sortowania przez zliczanie i sortowania przez wstawianie, które
+          oba są stabilne
 \end{enumerate}
 są stabilne? W każdym przypadku uzasadnij stabilność lub znajdź konkretny przykład
 danych, dla których algorytm nie zachowa się stabilnie.

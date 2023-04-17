@@ -1,0 +1,152 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 5}
+
+\subsection*{Zadanie 1}
+Udowodnij, że jeśli dla pewnego ustalonego $q$, takiego że $\frac{1}{2} < q < 1$,
+podczas sortowania szybkiego, procedura partition, na każdym poziomie rekurencji podzieli elementy
+tablicy w stosunku $q : (1 - q)$ to algorytm wykona się w czasie $O(n log n)$. Wskazówka: udowodnij, że głębokość
+rekurencji nie przekroczy - $\log n / \log q$ i zaniedbaj błędy zaokrągleń do wartości całkowitych.
+
+\subsection*{Zadanie 2}
+Ile porównań (zapisz wyniki w notacji $O$) wykona algorytm \verb+quicksort+ z
+procedurą \verb+partition+ w wersji Hoare'a, a ile w wersji z procedurę \verb+partition+ w wersji Lomuto dla
+danych: (a) posortowanych rosnąco, (b) posortowanych malejąco, (c) o identycznych kluczach?
+
+\subsection*{Zadanie 3}
+Napisz wzór na numer kubełka, do którego należy wrzucić liczbę $x$ w sortowaniu kubełkowym, jeśli
+kubełków jest $n$, a elementy tablicy mieszczą się przedziale $(a, b)$. Numeracja zaczyna się od $0$.
+\begin{gather*}
+    k = \left \lfloor \frac{x - a}{b - a} \cdot n \right \rfloor
+\end{gather*}
+
+\subsection*{Zadanie 4}
+Dla jakich danych sortowanie metodą kubełkową ma złożoność $O(n^2)$?
+\begin{center}
+    Dla danych które wszystkie trafią do pojedynczego kubełka, gdyż wywołany będzie na nich
+    algorytm sortowania przez wstawianie o złożoności $O(n^2)$.
+\end{center}
+
+\subsection*{Zadanie 5}
+Jak obliczyć $k$-tą od końca cyfrę w liczby $x$? Jak obliczyć ilość cyfr liczby $x$? Przyjmujemy
+układ dziesiętny. Jak wyniki zmienią się w układzie pozycyjnym gdzie różnych cyfr jest $m$ a ich
+wartości $x$ należą do przedziału $0 \leq x < m$?
+\begin{align*}
+    x_k & = \left \lfloor \frac{x}{10^k} \right \rfloor \mod 10 & n & = \left \lceil \log_{10} x \right \rceil \\
+    x_k & = \left \lfloor \frac{x}{m^k} \right \rfloor \mod m   & n & = \left \lceil \log_m x \right \rceil
+\end{align*}
+
+\pagebreak
+\subsection*{Zadanie 6}
+Posortuj metodą sortowania pozycyjnego liczby: 101, 345, 103, 333, 432, 132, 543, 651,
+791, 532, 987, 910, 643, 641, 12, 342, 498, 987, 965, 322, 121, 431, 350. W pisemnym
+rozwiązaniu pokaż, jak wygląda zawartość kolejek, za każdym razem, gdy tablica
+wyjściowa jest pusta i wszystkie liczby znajdują się w kolejkach, oraz jak wygląda
+tablica wyjściowa, za każdym razem, gdy sortowanie ze względu na kolejną cyfrę jest już zakończone.
+
+\begin{align*}
+    0: & \left(910, 350\right)                     \\
+    1: & \left(101, 651, 791, 641, 121, 431\right) \\
+    2: & \left(432, 132, 532, 12, 342, 322\right)  \\
+    3: & \left(103, 333, 543, 643\right)           \\
+    4: & \left(\right)                             \\
+    5: & \left(345, 965\right)                     \\
+    6: & \left(\right)                             \\
+    7: & \left(987, 987\right)                     \\
+    8: & \left(498\right)                          \\
+    9: & \left(\right)
+\end{align*}
+(910, 350, 101, 651, 791, 641, 121, 431, 432, 132, 532, 12, 342, 322, 103, 333, 543, 643, 345, 965, 987, 987, 498)
+
+\begin{align*}
+    0: & \left(101, 103\right)                \\
+    1: & \left(910\right)                     \\
+    2: & \left(121, 12, 322\right)            \\
+    3: & \left(431, 432, 132, 532, 333\right) \\
+    4: & \left(641, 342, 543, 643, 345\right) \\
+    5: & \left(350, 651\right)                \\
+    6: & \left(965\right)                     \\
+    7: & \left(\right)                        \\
+    8: & \left(987, 987\right)                \\
+    9: & \left(791, 498\right)
+\end{align*}
+(101, 103, 910, 121, 12, 322, 431, 432, 132, 532, 333, 641, 342, 543, 643, 345, 350, 651, 965, 987, 987, 791, 498)
+
+\begin{align*}
+    0: & \left(12\right)                      \\
+    1: & \left(101, 103, 121, 132\right)      \\
+    2: & \left(\right)                        \\
+    3: & \left(322, 333, 342, 345, 350\right) \\
+    4: & \left(431, 432, 498\right)           \\
+    5: & \left(532, 543\right)                \\
+    6: & \left(641, 643, 651\right)           \\
+    7: & \left(791\right)                     \\
+    8: & \left(\right)                        \\
+    9: & \left(910, 965, 987, 987\right)
+\end{align*}
+(12, 101, 103, 121, 132, 322, 333, 342, 345, 350, 431, 432, 498, 532, 543, 641, 643, 651, 791, 910, 965, 987, 987)
+
+\pagebreak
+\subsection*{Zadanie 7}
+Które z procedur sortujących:
+\begin{enumerate}[label=(\alph*)]
+    \item insertionSort (przez wstawianie), \\
+          jest stabilny, gdyż każdy kolejny, zaczynając od początku tablicy, sortowany element jest wstawiany na koniec
+          posortowanej części tablicy, więc w przypadku elementów o tej samej wartości, zachowana jest kolejność
+    \item quickSort (szybkie), \\
+          nie jest stabilny, przykładowo dla tablicy \verb+{2, 1, 1}+ już po pierwszym wywołaniu \verb+partition+
+          tracimy względna kolejność elementów o tej samej wartości, a kolejne wywołanie nie ma już nawet szansy jej
+          przywrócić bo obejmie ono elementy o indeksach większych od $0$
+    \item heapSort (przez kopcowanie), \\
+          nie jest stabilny, przykładowo dla tablicy \verb+{1, 1}+ sama budowa kopca nie dokona żadnych zamian
+          elementów, ale już po pierwszym wyciągnięciu z kopca elementu o największej wartości czyli z indeksu zerowego
+          tablicy tracimy względna kolejność elementów o tej samej wartości, gdyż jedynki zostaną wyjęte z kopca
+          w tej samej kolejności w której były w tablicy ale trafiać będą na jej koniec przez co zamienią się miejscami
+    \item mergeSort (przez złączanie), \\
+          jest stabilny, procedura \verb+merge+ zachowuje względną kolejność elementów o tej samej wartości gdyż w
+          przypadku porównywania dwóch elementów o tej samej wartości, wstawiany jest ten, który jest w tablicy
+          pierwotnej na mniejszym indeksie
+    \item countingSort (przez zliczanie), \\
+          jest stabilny, ponieważ do tablicy wynikowej elementy są wstawiane po kolei z tablicy pierwotnej iterowanej
+          od końca na kolejne dekrementowane indeksy na podstawie liczników
+    \item radixSort (pozycyjne), \\
+          jest stabilny, dzięki temu, że elementy umieszczana są kolejno w kolejkach FIFO z których później są wyciągane
+          do tablicy pierwotnej
+    \item bucketSort (kubełkowe) \\
+          jest stabilny, ponieważ jest on połączeniem sortowania przez zliczanie i sortowania przez wstawianie, które
+          oba są stabilne
+\end{enumerate}
+są stabilne? W każdym przypadku uzasadnij stabilność lub znajdź konkretny przykład
+danych, dla których algorytm nie zachowa się stabilnie.
+
+\subsection*{Zadanie 8}
+Napisz funkcję void \verb+counting_sort(node* lista, int m);+ sortującą przez zliczanie
+listę linkowaną liczb całkowitych nieujemnych mniejszych od $m$. Procedura nie powinna
+usuwać ani tworzyć nowych węzłów, tylko sprytnie zmieniać pola next wykorzystując
+tylko $O(m)$ dodatkowej pamięci na wskaźniki.
+
+\subsection*{Zadanie 9}
+(algorytm Hoare'a) Korzystając funkcji \verb+int partition(int t[], int n)+ znanej z
+algorytmu sortowania szybkiego napisz funkcję \verb+int kty(int t[], int n)+, której wynikiem
+będzie $k$-ty co do wielkości element początkowo nieposortowanej tablicy \verb+t+. Średnia
+złożoność Twojego algorytmu powinna wynieść $O(n)$.
+
+\end{document}

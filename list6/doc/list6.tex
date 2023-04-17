@@ -1,0 +1,75 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 5}
+
+\subsection*{Zadanie 1}
+Jakie informacje przechowujemy w węźle drzewa czerwono-czarnego?
+Zadeklaruj strukturę \verb+RBTnode+ tak, by dziedziczyła z \verb+BSTnode+. Podaj definicję drzewa czerwono czarnego.
+
+\subsection*{Zadanie 2}
+\begin{enumerate}[label=(\alph*)]
+    \item Jaka może być minimalna, a jaka maksymalna ilość kluczy w drzewie czerwono-czarnym
+          o ustalonej czarnej wysokości równej $h_B$?
+    \item Znajdź maksymalną i minimalną wartość stosunku ilości węzłów czerwonych do
+          czarnych w drzewie czerwono-czarnym.
+\end{enumerate}
+
+\subsection*{Zadanie 3}
+Uzasadnij posługując się rysunkiem i opisem, że operacje wykonywane w trakcie wstawiania
+do drzewa czerwono-czarnego (rotacja i przekolorowanie) nie zmieniają ilości
+czarnych węzłów, na żadnej ścieżce od korzenia do liścia.
+
+\subsection*{Zadanie 4}
+\begin{enumerate}[label=(\alph*)]
+    \item Narysuj poprawne drzewo czerwono-czarne w którym na lewo od korzenia jest $1$
+          węzeł a na prawo $7$ węzłów.
+    \item Czy istnieje poprawne drzewo czerwono-czarne, w którym na lewo od korzenia będzie
+          $100$ razy mniej węzłów niż na prawo od korzenia?
+\end{enumerate}
+
+\subsection*{Zadanie 5}
+W poniższym drzewie czerwono-czarnym:
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [5[3, fill=red[1][4]][11[9, fill=red][, no edge, fill=none]]]
+    \end{forest}
+\end{center}
+\begin{enumerate}[label=-]
+    \item wstaw do niego \verb+10+.
+    \item usuń z wyjściowego drzewa \verb+1+.
+\end{enumerate}
+
+\subsection*{Zadanie 6}
+(3 pkt.) Do pustego drzewa czerwono-czarnego wstaw kolejno $20$ przypadkowych kluczy.
+Następnie usuń je w tej samej kolejności w jakiej wstawiałeś. Przypadkowymi kluczami
+są kolejne litery Twojego nazwiska, imienia i adresu. Zadanie wykonujemy na kartce
+(lub w pliku) i oddajemy prowadzącemu. Zadanie jest obowiązkowe.
+
+\subsection*{Zadanie 7}
+Analizując kod programu \verb+RBT.h+ udowodnij, że w trakcie wstawiania do drzewa czerwono-czarnego
+wykonają się co najwyżej dwie rotacje. Czy tak samo jest w przypadku usuwania?
+
+\subsection*{Zadanie 8}
+Uzasadnij, że rozmiar stosu $(n = 100)$ przyjęty w procedurach \verb+insert+ i \verb+remove+ w pliku
+\verb+RBnpnr.h+ nigdy nie okaże się za mały.
+
+\end{document}

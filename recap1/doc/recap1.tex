@@ -87,7 +87,7 @@ jest $m$, a liczby do posortowania mają nie więcej niż $k$ cyfr.
         \verb+quicksort+     & $O(n)$          \\
         \verb+heapsort+      & $O(1)$          \\
         \verb+insertionsort+ & $O(1)$          \\
-        \verb+countingsort+  & $O(n+m)$        \\
+        \verb+countingsort+  & $O(n+k)$        \\
         \verb+bucketsort+    & $O(n+m)$        \\
         \verb+radixsort+     & $O(n+r)$
     \end{tabular}
@@ -107,7 +107,7 @@ Zakładamy oznaczenia z poprzedniego zadania.
         \verb+insertionsort+ & $O(n^2)$         & $O(n^2)$               \\
         \verb+countingsort+  & $O(n+m)$         & $O(n+m)$               \\
         \verb+bucketsort+    & $O(n+m)$         & $O(n^2)$               \\
-        \verb+radixsort+     & $O(n+r)$         & $O(n+r)$
+        \verb+radixsort+     & $O(nk)$          & $O(nk)$
     \end{tabular}
 \end{center}
 
@@ -140,7 +140,7 @@ Który element tablicy \verb+t+ jest (a) lewym dzieckiem (b) prawym dzieckim (c)
 \end{center}
 
 \subsection*{Zadanie 11}
-Czy ciąg \verb+{23, 17, 14, 6, 13, 10, 1, 5, 7, 12}+ jest kopcem?
+Czy ciąg \verb+{23,17,14,6,13,10,1,5,7,12}+ jest kopcem?
 \begin{center}
     \begin{forest}
         for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=green!50}
@@ -150,61 +150,53 @@ Czy ciąg \verb+{23, 17, 14, 6, 13, 10, 1, 5, 7, 12}+ jest kopcem?
 
 \pagebreak
 \subsection*{Zadanie 12}
-Zilustruj działanie procedury buildheap dla ciągu \verb+{5, 3, 17, 10, 84, 19, 6, 22, 9}+.
+Zilustruj działanie procedury buildheap dla ciągu \verb+{5,3,17,10,84,19,6,22,9}+.
 Narysuj na kartce wygląd tablicy/kopca po każdym wywołaniu procedury \verb+przesiej+.
 \begin{multicols*}{2}
     \begin{center}
-        \verb+{5,3,17,10,84,19,6,22,9,14,3}+ \\[12ex]
-        \verb+{5,3,17,22,84,19,6,10,9,14,3}+ \\
-        \verb+{5,3,17,22,84,19,6,10,9,14,3}+ \\[9ex]
-        \verb+{5,3,19,22,84,17,6,10,9,14,3}+ \\
-        \verb+{5,3,19,22,84,17,6,10,9,14,3}+ \\[9ex]
-        \verb+{5,84,19,22,3,17,6,10,9,14,3}+ \\
-        \verb+{5,84,19,22,14,17,6,10,9,3,3}+ \\
-        \verb+{5,84,19,22,14,17,6,10,9,3,3}+ \\[16ex]
-        \verb+{84,5,19,22,14,17,6,10,9,3,3}+ \\
-        \verb+{84,22,19,5,14,17,6,10,9,3,3}+ \\
-        \verb+{84,22,19,10,14,17,6,5,9,3,3}+ \\
-        \verb+{84,22,19,10,14,17,6,5,9,3,3}+
+        \verb+{5,3,17,10,84,19,6,22,9}+ \\[12ex]
+        \verb+{5,3,17,22,84,19,6,10,9}+ \\[12ex]
+        \verb+{5,3,19,22,84,17,6,10,9}+ \\[12ex]
+        \verb+{5,84,19,22,3,17,6,10,9}+ \\[12ex]
+        \verb+{84,5,19,22,3,17,6,10,9}+ \\[12ex]
+        \verb+{84,22,19,5,3,17,6,10,9}+ \\[12ex]
+        \verb+{84,22,19,10,3,17,6,5,9}+
     \end{center}
     \columnbreak
     \begin{center}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[3[10[22][9]][84, fill=green!50[14][3]]][17[19][6]]]
+            [5[3[10[22][9]][84]][17[19][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[3[22, fill=green!50[10, fill=green!50][9]][84[14][3]]][17[19][6]]]
+            [5[3[22, fill=green!50[10, fill=green!50][9]][84]][17[19][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[3[22[10][9]][84[14][3]]][19, fill=green!50[17, fill=green!50][6]]]
+            [5[3[22[10][9]][84]][19, fill=green!50[17, fill=green!50][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[84, fill=green!50[22[10][9]][3, fill=green!50[14][3]]][19[17][6]]]
-        \end{forest}
-        \begin{forest}
-            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [5[84[22[10][9]][14, fill=green!50[3, fill=green!50][3]]][19[17][6]]]
+            [5[84, fill=green!50[22[10][9]][3, fill=green!50]][19[17][6]]]
         \end{forest}
         \hrule
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [84, fill=green!50[5, fill=green!50[22[10][9]][14[3][3]]][19[17][6]]]
+            [84, fill=green!50[5, fill=green!50[22[10][9]][3]][19[17][6]]]
         \end{forest}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [84[22, fill=green!50[5, fill=green!50[10][9]][14[3][3]]][19[17][6]]]
+            [84[22, fill=green!50[5, fill=green!50[10][9]][3]][19[17][6]]]
         \end{forest}
         \begin{forest}
             for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
-            [84[22[10, fill=green!50[5, fill=green!50][9]][14[3][3]]][19[17][6]]]
+            [84[22[10, fill=green!50[5, fill=green!50][9]][3]][19[17][6]]]
         \end{forest}
+        \hrule
     \end{center}
 \end{multicols*}
 
@@ -212,11 +204,9 @@ Narysuj na kartce wygląd tablicy/kopca po każdym wywołaniu procedury \verb+pr
 Zasymuluj działanie polifazowego mergesorta dla tablicy \verb+{9, 22, 6, 19, 14, 10, 17, 3, 5}+.
 Na każdym etapie sortowania scala się sąsiadujące listy rosnące.
 \begin{center}
-    \verb+{9,22|6,19,21|14|10,17|3,5,60|30|29|1,8|7|6,15|12}+ \\
-    \verb+{6,9,19,21,22|10,14,17|3,5,30,60|1,8,29|6,7,15|12}+ \\
-    \verb+{6,9,10,14,17,19,21,22|1,3,5,8,29,30,60|6,7,12,15}+ \\
-    \verb+{1,3,5,6,8,9,10,14,17,19,21,22,29,30,60|6,7,12,15}+ \\
-    \verb+{1,3,5,6,6,7,8,9,10,12,14,15,17,19,21,22,29,30,60}+
+    \verb+{9,22|6,19,14|10,17|3,5}+ \\
+    \verb+{6,9,14,19,22|3,5,10,17}+ \\
+    \verb+{3,5,6,9,10,14,17,19,22}+
 \end{center}
 
 \subsection*{Zadanie 14}

@@ -23,6 +23,27 @@
 \subsection*{Zadanie 1}
 Jakie informacje przechowujemy w węźle drzewa czerwono-czarnego?
 Zadeklaruj strukturę \verb+RBTnode+ tak, by dziedziczyła z \verb+BSTnode+. Podaj definicję drzewa czerwono czarnego.
+\begin{lstlisting}
+    struct NodeBST
+    {
+        int32_t value;
+        NodeBST* left;
+        NodeBST* right;  
+    };
+
+    struct NodeRBT : public NodeBST
+    {
+        bool isBlack;
+    };
+\end{lstlisting}
+Drzewo czerwono-czarne musi przestrzegać następujące wymagania:
+\begin{enumerate}
+    \item Każdy węzeł jest albo czerwony albo czarny.
+    \item Korzeń jest czarny.
+    \item Każdy liść (również nullptr) jest czarny.
+    \item Czerwony węzeł ma czarne dzieci.
+    \item Każda ścieżka od korzenia do liścia ma tę samą liczbę czarnych węzłów.
+\end{enumerate}
 
 \subsection*{Zadanie 2}
 \begin{enumerate}[label=(\alph*)]

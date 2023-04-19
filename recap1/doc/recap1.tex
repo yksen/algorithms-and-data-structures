@@ -1,0 +1,278 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=3cm]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{varwidth}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Przygotowanie do kolokwium}
+Przyjmując, że \verb+t1[] = {1, 2, 3, 4, 5, 6, 7}+ oraz \verb+t2[] = {7, 6, 5, 4, 3, 2, 1}+ i stosując algorytmy
+sortujące ściśle wg procedur z pliku \verb+sorty2020.cc+ i wykonaj polecenia:
+
+\subsection*{Zadanie 1}
+Ile dokładnie porównań (między elementami tablicy) wykona \verb+insertion_sort(t2)+ a ile \verb+insertion_sort(t1)+?
+\begin{center}
+    \verb|insertion_sort(t1)|: $n-1 = 6$ porównań \\
+    \verb|insertion_sort(t2)|: $n-1 + 15$ inwersji $= 21$ porównań
+\end{center}
+
+\subsection*{Zadanie 2}
+Ile co najwyżej porównań (między elementami tablic) wykona procedura scalająca \verb+merge+
+dwie tablice $n$-elementowe?
+\begin{center}
+    $2n-1$ porównań w przypadku gdy naprzemiennie w obu tablicach występują elementy rosnące
+\end{center}
+
+\subsection*{Zadanie 3}
+Jaka jest pesymistyczna złożoność czasowa procedury \verb+merge_sort+? Odpowiedź uzasadnij.
+\begin{gather*}
+    T(n) = 2T(n/2) + O(n) \\
+    T(n) = O(n \log n)
+\end{gather*}
+
+\subsection*{Zadanie 4}
+Ile co najwyżej porównań (między elementami tablicy) wykona procedura \verb+partition+?
+\begin{gather*}
+    \text{ilość porównań} \leq n+1
+\end{gather*}
+
+\subsection*{Zadanie 5}
+Jaka jest średnia a jaka pesymistyczna złożoność \verb+quick_sort+. Odpowiedź uzasadnij.
+\begin{gather*}
+    \text{Średnia: } T(n) = 2T(n/2) + n = O(n \log n) \\
+    \text{Pesymistyczna: } T(n) = T(n-1) + n + 1 \text{ z sumy ciągu arytmetycznego } O(n^2)
+\end{gather*}
+
+\subsection*{Zadanie 6}
+Jaka jest złożoność funkcji \verb+buildheap+? Przeprowadź dowód - uzasadnij swoją odpowiedź.
+\begin{align*}
+    2 \sum_{i=1}^{h-1} \frac{n}{2^{i+1}} \cdot i                                                 &                                               \\
+    2 (\frac{n}{4} \cdot 1 + \frac{n}{8} \cdot 2 + \frac{n}{16} \cdot 3 + \frac{n}{32} \cdot 4 + & \dots)                                        \\
+    \frac{n}{2} (\frac{1}{1} + \frac{2}{2} + \frac{3}{4} + \frac{4}{8} +                         & \dots)                                        \\
+    \frac{1}{1} +  \frac{1}{2} +  \frac{1}{4} +  \frac{1}{8} +                                   & \dots = \frac{\frac{1}{1}}{1-\frac{1}{2}} = 2 \\
+    \frac{1}{2} +  \frac{1}{4} +  \frac{1}{8} +                                                  & \dots = 1                                     \\
+    \frac{1}{4} +  \frac{1}{8} +                                                                 & \dots = 0.5                                   \\
+    \frac{1}{8} +                                                                                & \dots = 0.25                                  \\
+                                                                                                 & \dots
+\end{align*}
+\begin{gather*}
+    \frac{n}{2} \cdot \frac{2}{1-\frac{1}{2}} = \frac{n}{2} \cdot 4 = 2n = O(n)
+\end{gather*}
+
+\subsection*{Zadanie 7}
+Ile dodatkowej pamięci wymaga posortowanie tablicy $n$-elementowej za pomocą
+algorytmu: (a) \verb+mergesort+ (b) \verb+quicksort+ (c) \verb+heapsort+ (d) \verb+insertionsort+ (e) \verb+countingsort+
+(f) \verb+bucketsort+ (g) \verb+radixsort+. W punktach (e), (f), (g) zakładamy, że ilość kubełków
+jest $m$, a liczby do posortowania mają nie więcej niż $k$ cyfr.
+\begin{center}
+    \begin{tabular}{c c}
+        \textbf{Algorytm}    & \textbf{Pamięć} \\
+        \hline
+        \verb+mergesort+     & $O(n)$          \\
+        \verb+quicksort+     & $O(n)$          \\
+        \verb+heapsort+      & $O(1)$          \\
+        \verb+insertionsort+ & $O(1)$          \\
+        \verb+countingsort+  & $O(n+k)$        \\
+        \verb+bucketsort+    & $O(n+m)$        \\
+        \verb+radixsort+     & $O(n+r)$
+    \end{tabular}
+\end{center}
+
+\subsection*{Zadanie 8}
+Jaka jest średnia a jaka pesymistyczna złożoność czasowa algorytmu: (a) \verb+mergesort+ (b) \verb+quicksort+
+(c) \verb+heapsort+ (d) \verb+insertionsort+ (e) \verb+countingsort+ (f) \verb+bucketsort+ (g) \verb+radixsort+?
+Zakładamy oznaczenia z poprzedniego zadania.
+\begin{center}
+    \begin{tabular}{c c c}
+        \textbf{Algorytm}    & \textbf{Średnia} & \textbf{Pesymistyczna} \\
+        \hline
+        \verb+mergesort+     & $O(n \log n)$    & $O(n \log n)$          \\
+        \verb+quicksort+     & $O(n \log n)$    & $O(n^2)$               \\
+        \verb+heapsort+      & $O(n \log n)$    & $O(n \log n)$          \\
+        \verb+insertionsort+ & $O(n^2)$         & $O(n^2)$               \\
+        \verb+countingsort+  & $O(n+m)$         & $O(n+m)$               \\
+        \verb+bucketsort+    & $O(n+m)$         & $O(n^2)$               \\
+        \verb+radixsort+     & $O(nk)$          & $O(nk)$
+    \end{tabular}
+\end{center}
+
+\subsection*{Zadanie 9}
+Udowodnij, że wysokość (ilość poziomów na których występują węzły) kopca $n$-elementowego
+wynosi $\left \lfloor \log_2 n \right \rfloor + 1$.
+\begin{gather*}
+    \text{Maksymalna ilość węzłów w kopcu o wysokości $h$:} \\
+    n(h) = 2^h - 1 \\
+    n(h-1) = 2^{h - 1} - 1 \\
+    \text{Minimalna ilość węzłów w kopcu o wysokości $h$:} \\
+    n(h-1) + 1 = 2^{h - 1} - 1 + 1 = 2^{h - 1} \\
+    \text{Ilość węzłów w kopcu o wysokości $h$:} \\
+    2^{h - 1} \leq n < 2^h \\
+    h-1 \leq \log_2 n < h \\
+    h \leq \log_2 n + 1 < h + 1 \\
+    \lfloor\log_2 n\rfloor + 1
+\end{gather*}
+
+\subsection*{Zadanie 10}
+Który element tablicy \verb+t+ jest (a) lewym dzieckiem (b) prawym dzieckim (c) ojcem, elementu \verb+t[i]+ w procedurze \verb+heapsort+?
+\begin{center}
+    \begin{varwidth}{\textwidth}
+        \begin{enumerate}[label=(\alph*)]
+            \item \verb+t[2i]+
+            \item \verb|t[2i+1]|
+            \item \verb+t[(i - 1)/2]+
+        \end{enumerate}
+    \end{varwidth}
+\end{center}
+
+\subsection*{Zadanie 11}
+Czy ciąg \verb+{23,17,14,6,13,10,1,5,7,12}+ jest kopcem?
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=green!50}
+        [23[17[6[5][7, fill=red!50]][13[12][, no edge, draw=none, fill=none]]][14[10[, no edge, draw=none, fill=none][, no edge, draw=none, fill=none]][1[, no edge, draw=none, fill=none][, no edge, draw=none, fill=none]]]]
+    \end{forest}
+\end{center}
+
+\pagebreak
+\subsection*{Zadanie 12}
+Zilustruj działanie procedury buildheap dla ciągu \verb+{5,3,17,10,84,19,6,22,9}+.
+Narysuj na kartce wygląd tablicy/kopca po każdym wywołaniu procedury \verb+przesiej+.
+\begin{multicols*}{2}
+    \begin{center}
+        \verb+{5,3,17,10,84,19,6,22,9}+ \\[12ex]
+        \verb+{5,3,17,22,84,19,6,10,9}+ \\[12ex]
+        \verb+{5,3,19,22,84,17,6,10,9}+ \\[12ex]
+        \verb+{5,84,19,22,3,17,6,10,9}+ \\[12ex]
+        \verb+{84,5,19,22,3,17,6,10,9}+ \\[12ex]
+        \verb+{84,22,19,5,3,17,6,10,9}+ \\[12ex]
+        \verb+{84,22,19,10,3,17,6,5,9}+
+    \end{center}
+    \columnbreak
+    \begin{center}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[3[10[22][9]][84]][17[19][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[3[22, fill=green!50[10, fill=green!50][9]][84]][17[19][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[3[22[10][9]][84]][19, fill=green!50[17, fill=green!50][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [5[84, fill=green!50[22[10][9]][3, fill=green!50]][19[17][6]]]
+        \end{forest}
+        \hrule
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [84, fill=green!50[5, fill=green!50[22[10][9]][3]][19[17][6]]]
+        \end{forest}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [84[22, fill=green!50[5, fill=green!50[10][9]][3]][19[17][6]]]
+        \end{forest}
+        \begin{forest}
+            for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, l sep=0mm, l=0mm, anchor=south}
+            [84[22[10, fill=green!50[5, fill=green!50][9]][3]][19[17][6]]]
+        \end{forest}
+        \hrule
+    \end{center}
+\end{multicols*}
+
+\subsection*{Zadanie 13}
+Zasymuluj działanie polifazowego mergesorta dla tablicy \verb+{9, 22, 6, 19, 14, 10, 17, 3, 5}+.
+Na każdym etapie sortowania scala się sąsiadujące listy rosnące.
+\begin{center}
+    \verb+{9,22|6,19,14|10,17|3,5}+ \\
+    \verb+{6,9,14,19,22|3,5,10,17}+ \\
+    \verb+{3,5,6,9,10,14,17,19,22}+
+\end{center}
+
+\subsection*{Zadanie 14}
+Zasymuluj działanie \verb+mergesort(t2)+.
+\begin{center}
+    \begin{tabular}{c c}
+        \textbf{Rekurencyjny podział} & \textbf{Merge}         \\
+        \hline
+        \verb+{7,6,5,4,3,2,1}+        & \verb+{7|6|5|4|3|2|1}+ \\
+        \verb+{7,6,5|4,3,2,1}+        & \verb+{7|5,6|3,4|1,2}+ \\
+        \verb+{7|6,5|4,3|2,1}+        & \verb+{5,6,7|1,2,3,4}+ \\
+        \verb+{7|6|5|4|3|2|1}+        & \verb+{1,2,3,4,5,6,7}+
+    \end{tabular}
+\end{center}
+
+\subsection*{Zadanie 15}
+Zasymuluj działanie \verb+partition(t2, 7)+.
+\begin{center}
+    \verb+pivot = t2[7 / 2] = t[3] = 4+ \\[1ex]
+    \begin{tabular}{c c c}
+        \textbf{Tablica}       & \textbf{k} & \textbf{n} \\
+        \hline
+        \verb+{7,6,5,4,3,2,1}+ & -1         & 7          \\
+        \verb+{1,6,5,4,3,2,7}+ & 0          & 6          \\
+        \verb+{1,2,5,4,3,6,7}+ & 1          & 5          \\
+        \verb+{1,2,3,4,5,6,7}+ & 2          & 4          \\
+        \verb+{1,2,3,4,5,6,7}+ & 3          & 3          \\
+    \end{tabular} \\[1ex]
+    \verb+return 3+
+\end{center}
+
+\subsection*{Zadanie 16}
+Zasymuluj działanie \verb+partition(t2, 7)+ w przypadku gdyby piwotem zamiast \verb+t[n/2]+ było \verb+t[0]+.
+\begin{center}
+    \verb+pivot = t2[0] = 7+ \\[1ex]
+    \begin{tabular}{c c c}
+        \textbf{Tablica}       & \textbf{k} & \textbf{n} \\
+        \hline
+        \verb+{7,6,5,4,3,2,1}+ & -1         & 7          \\
+        \verb+{1,6,5,4,3,2,7}+ & 0          & 6          \\
+        \verb+{1,6,5,4,3,2,7}+ & 6          & 5          \\
+    \end{tabular} \\[1ex]
+    \verb+return 6+
+\end{center}
+
+\subsection*{Zadanie 17}
+Wykaż, że pesymistyczna złożoność \verb+quicksort+ wynosi $O(n^2)$.
+\begin{gather*}
+    T(n) = T(n-1) + n + 1 \implies \sum_{i=1}^{n} i + 1 = \frac{n(2 + n + 1)}{2} = O(n^2)
+\end{gather*}
+
+\subsection*{Zadanie 18}
+Napisz wzór na numer kubełka, do którego należy wrzucić liczbę $x$ w sortowaniu
+kubełkowym, jeśli kubełków jest $n$, a elementy tablicy mieszczą się przedziale $(a, b)$.
+Numeracja zaczyna się od $0$.
+\begin{gather*}
+    k = \left \lfloor \frac{x - a}{b - a} \cdot n \right \rfloor
+\end{gather*}
+
+\subsection*{Zadanie 19}
+Jak obliczyć $k$-tą od końca cyfrę w liczby $x$? Jak obliczyć ilość cyfr liczby $x$?
+Przyjmujemy układ dziesiętny. Jak wyniki zmienią się w układzie pozycyjnym o $1000$ cyfr?
+\begin{align*}
+    x_k & = \left \lfloor \frac{x}{m^k} \right \rfloor \mod m       & n & = \left \lceil \log_m x \right \rceil      \\
+    x_k & = \left \lfloor \frac{x}{10^k} \right \rfloor \mod 10     & n & = \left \lceil \log_{10} x \right \rceil   \\
+    x_k & = \left \lfloor \frac{x}{1000^k} \right \rfloor \mod 1000 & n & = \left \lceil \log_{1000} x \right \rceil
+\end{align*}
+
+\end{document}

@@ -306,8 +306,10 @@ namespace ex8
 
     void removeNth(Node *&root, int32_t value)
     {
+        if (value < 0)
+            return;
+
         Node **currentRoot = &root;
-        std::stack<Node *> stack;
         while (*currentRoot && (*currentRoot)->leftCount != value)
             if (value > (*currentRoot)->leftCount)
             {
@@ -316,7 +318,7 @@ namespace ex8
             }
             else
             {
-                stack.push(*currentRoot);
+                --(*currentRoot)->leftCount;
                 currentRoot = &(*currentRoot)->left;
             }
 
@@ -328,18 +330,12 @@ namespace ex8
             Node **min = &(*currentRoot)->right;
             while ((*min)->left)
             {
-                stack.push(*min);
+                --(*min)->leftCount;
                 min = &(*min)->left;
             }
 
             (*currentRoot)->value = (*min)->value;
             currentRoot = min;
-        }
-
-        while (!stack.empty())
-        {
-            --stack.top()->leftCount;
-            stack.pop();
         }
 
         Node *child = (*currentRoot)->left ? (*currentRoot)->left : (*currentRoot)->right;
@@ -374,6 +370,26 @@ namespace ex8
         EXPECT_EQ(root->left->left->leftCount, 0);
         EXPECT_EQ(root->right->value, 5);
         EXPECT_EQ(root->right->leftCount, 0);
+
+        remove(root, -1);
+        EXPECT_EQ(root->value, 4);
+        EXPECT_EQ(root->leftCount, 2);
+        EXPECT_EQ(root->left->value, 2);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->left->left->value, 0);
+        EXPECT_EQ(root->left->left->leftCount, 0);
+        EXPECT_EQ(root->right->value, 5);
+        EXPECT_EQ(root->right->leftCount, 0);
+
+        root = nullptr;
+        insert(root, 0);
+        insert(root, 3);
+        insert(root, 2);
+
+        remove(root, 1);
+        EXPECT_EQ(root->leftCount, 0);
+        EXPECT_EQ(root->right->leftCount, 1);
+        EXPECT_EQ(root->right->left->leftCount, 0);
     }
 
     TEST(List3_Exercise8, removeNth)
@@ -409,6 +425,42 @@ namespace ex8
         EXPECT_EQ(root->left->value, 2);
         EXPECT_EQ(root->left->leftCount, 1);
         EXPECT_EQ(root->right->value, 5);
+        EXPECT_EQ(root->right->leftCount, 0);
+
+        removeNth(root, 7);
+        EXPECT_EQ(root->value, 4);
+        EXPECT_EQ(root->leftCount, 2);
+        EXPECT_EQ(root->left->value, 2);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->right->value, 5);
+        EXPECT_EQ(root->right->leftCount, 0);
+
+        removeNth(root, -1);
+        EXPECT_EQ(root->value, 4);
+        EXPECT_EQ(root->leftCount, 2);
+        EXPECT_EQ(root->left->value, 2);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->right->value, 5);
+        EXPECT_EQ(root->right->leftCount, 0);
+
+        root = nullptr;
+        insert(root, 5);
+        insert(root, 3);
+        insert(root, 7);
+        insert(root, 2);
+        insert(root, 4);
+        insert(root, 6);
+        insert(root, 8);
+
+        removeNth(root, 5);
+        EXPECT_EQ(root->leftCount, 3);
+        EXPECT_EQ(root->left->leftCount, 1);
+        EXPECT_EQ(root->right->leftCount, 1);
+        EXPECT_EQ(root->right->left->leftCount, 0);
+
+        removeNth(root, 5);
+        EXPECT_EQ(root->leftCount, 3);
+        EXPECT_EQ(root->left->leftCount, 1);
         EXPECT_EQ(root->right->leftCount, 0);
     }
 }

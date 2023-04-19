@@ -1,5 +1,75 @@
 #include <gtest/gtest.h>
 
+namespace ex8
+{
+    struct Node
+    {
+        int32_t value;
+        Node *next;
+        Node(int32_t value, Node *next = nullptr) : value(value), next(next) {}
+        Node(std::vector<int32_t> values) : Node(values[0], values.size() > 1 ? new Node(std::vector<int32_t>(values.begin() + 1, values.end())) : nullptr) {}
+    };
+
+    void countingSort(Node *&head, uint32_t max)
+    {
+        std::vector<Node *> queues(max, nullptr);
+
+        while (head)
+        {
+            Node *node = head;
+            head = head->next;
+            node->next = nullptr;
+
+            Node **queue = &queues[node->value - 1];
+            while (*queue)
+                queue = &(*queue)->next;
+            *queue = node;
+        }
+
+        Node **queue = &head;
+        for (Node *node : queues)
+        {
+            *queue = node;
+            while (*queue)
+                queue = &(*queue)->next;
+        }
+    }
+
+    TEST(List5_Exercise8, countingSort)
+    {
+        Node *head = new Node({1, 2, 3, 3, 2, 1, 2, 1, 3});
+        countingSort(head, 4);
+        for (uint32_t i = 1; i <= 3; ++i)
+            for (size_t j = 0; j < 3; ++j)
+            {
+                ASSERT_NE(head, nullptr);
+                EXPECT_EQ(head->value, i);
+                head = head->next;
+            }
+        EXPECT_EQ(head, nullptr);
+
+        head = new Node({3, 1, 2});
+        countingSort(head, 4);
+        for (uint32_t i = 1; i <= 3; ++i)
+        {
+            ASSERT_NE(head, nullptr);
+            EXPECT_EQ(head->value, i);
+            head = head->next;
+        }
+        EXPECT_EQ(head, nullptr);
+
+        head = new Node({1, 1, 1, 1});
+        countingSort(head, 2);
+        for (uint32_t i = 1; i <= 4; ++i)
+        {
+            ASSERT_NE(head, nullptr);
+            EXPECT_EQ(head->value, 1);
+            head = head->next;
+        }
+        EXPECT_EQ(head, nullptr);
+    }
+}
+
 namespace ex9
 {
     int32_t partition(int32_t t[], int32_t n)

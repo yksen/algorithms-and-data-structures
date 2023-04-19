@@ -48,7 +48,7 @@ danych: (a) posortowanych rosnąco, (b) posortowanych malejąco, (c) o identyczn
 Napisz wzór na numer kubełka, do którego należy wrzucić liczbę $x$ w sortowaniu kubełkowym, jeśli
 kubełków jest $n$, a elementy tablicy mieszczą się przedziale $(a, b)$. Numeracja zaczyna się od $0$.
 \begin{gather*}
-    k = \left \lfloor \frac{x - a}{b - a} \cdot n \right \rfloor
+    k = \left \lfloor \frac{n}{b - a} \cdot x - a \right \rfloor
 \end{gather*}
 
 \subsection*{Zadanie 4}
@@ -117,6 +117,7 @@ tablica wyjściowa, za każdym razem, gdy sortowanie ze względu na kolejną cyf
 \end{align*}
 (12, 101, 103, 121, 132, 322, 333, 342, 345, 350, 431, 432, 498, 532, 543, 641, 643, 651, 791, 910, 965, 987, 987)
 
+\pagebreak
 \subsection*{Zadanie 7}
 Które z procedur sortujących:
 \begin{enumerate}[label=(\alph*)]

@@ -18,11 +18,9 @@ namespace ex8
         {
             Node *node = head;
             head = head->next;
-            node->next = nullptr;
 
-            Node **queue = &queues[node->value - 1];
-            while (*queue)
-                queue = &(*queue)->next;
+            Node **queue = &queues[node->value];
+            node->next = *queue;
             *queue = node;
         }
 
@@ -67,6 +65,12 @@ namespace ex8
             head = head->next;
         }
         EXPECT_EQ(head, nullptr);
+
+        head = new Node({9, 0, 5});
+        countingSort(head, 10);
+        EXPECT_EQ(head->value, 0);
+        EXPECT_EQ(head->next->value, 5);
+        EXPECT_EQ(head->next->next->value, 9);
     }
 }
 
@@ -121,7 +125,7 @@ namespace ex9
         int32_t t4[] = {-1, 0, 1};
         for (int32_t i = 0; i < 3; i++)
             ASSERT_EQ(kth(t4, 3, i), i - 1);
-    
+
         int32_t t5[] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
         for (int32_t i = 0; i < 9; i++)
             ASSERT_EQ(kth(t5, 9, i), 1);

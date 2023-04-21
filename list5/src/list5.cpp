@@ -117,5 +117,13 @@ namespace ex9
         int32_t t3[] = {1, 2, 3, 4, 5, 6, 7, 8, 9};
         for (int32_t i = 0; i < 9; i++)
             ASSERT_EQ(kth(t3, 9, i), i + 1);
+
+        int32_t t4[] = {-1, 0, 1};
+        for (int32_t i = 0; i < 3; i++)
+            ASSERT_EQ(kth(t4, 3, i), i - 1);
+    
+        int32_t t5[] = {1, 1, 1, 1, 1, 1, 1, 1, 1};
+        for (int32_t i = 0; i < 9; i++)
+            ASSERT_EQ(kth(t5, 9, i), 1);
     }
 }

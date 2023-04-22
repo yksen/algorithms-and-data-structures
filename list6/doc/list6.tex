@@ -56,6 +56,23 @@ Drzewo czerwono-czarne musi przestrzegać następujące wymagania:
     \item Znajdź maksymalną i minimalną wartość stosunku ilości węzłów czerwonych do
           czarnych w drzewie czerwono-czarnym.
 \end{enumerate}
+\begin{multicols*}{2}
+    \begin{center}
+        min = $0/1$ \\[1ex]
+        \begin{forest}
+            for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+            []
+        \end{forest}
+    \end{center}
+    \columnbreak
+    \begin{center}
+        max = $2/1$ \\[1ex]
+        \begin{forest}
+            for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+            [[, fill=red][, fill=red]]
+        \end{forest}
+    \end{center}
+\end{multicols*}
 
 \subsection*{Zadanie 3}
 Uzasadnij posługując się rysunkiem i opisem, że operacje wykonywane w trakcie wstawiania

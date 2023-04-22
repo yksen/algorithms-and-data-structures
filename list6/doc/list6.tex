@@ -83,6 +83,12 @@ czarnych węzłów, na żadnej ścieżce od korzenia do liścia.
 \begin{enumerate}[label=(\alph*)]
     \item Narysuj poprawne drzewo czerwono-czarne w którym na lewo od korzenia jest $1$
           węzeł a na prawo $7$ węzłów.
+          \begin{center}
+              \begin{forest}
+                  for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+                  [[][, fill=red[[, fill=red][, fill=red]][[, fill=red][, fill=red]]]]
+              \end{forest}
+          \end{center}
     \item Czy istnieje poprawne drzewo czerwono-czarne, w którym na lewo od korzenia będzie
           $100$ razy mniej węzłów niż na prawo od korzenia?
 \end{enumerate}

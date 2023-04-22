@@ -91,6 +91,22 @@ czarnych węzłów, na żadnej ścieżce od korzenia do liścia.
           \end{center}
     \item Czy istnieje poprawne drzewo czerwono-czarne, w którym na lewo od korzenia będzie
           $100$ razy mniej węzłów niż na prawo od korzenia?
+          \begin{gather*}
+              100 \left(2^{h_B-1}-1\right) < 2^{2(h_B-1)}-1
+          \end{gather*}
+          \begin{center}
+              \begin{tabular}{c c c}
+                  $H_b$ & \textbf{min} & \textbf{max} \\
+                  \hline
+                  $2$   & $0$          & $1$          \\
+                  $3$   & $1$          & $7$          \\
+                  $4$   & $3$          & $31$         \\
+                  $5$   & $7$          & $127$        \\
+                  $6$   & $15$         & $511$        \\
+                  $7$   & $31$         & $2047$       \\
+                  $8$   & $63$         & $8191$       \\
+              \end{tabular}
+          \end{center}
 \end{enumerate}
 
 \subsection*{Zadanie 5}

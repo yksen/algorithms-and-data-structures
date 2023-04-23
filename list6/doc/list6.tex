@@ -118,31 +118,36 @@ czarnych węzłów, na żadnej ścieżce od korzenia do liścia.
           \end{align*}
 \end{enumerate}
 
+\pagebreak
 \subsection*{Zadanie 5}
 W poniższym drzewie czerwono-czarnym:
 \begin{center}
     \begin{forest}
         for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
-        [5[3, fill=red[1][4]][11[9, fill=red][, no edge, fill=none]]]
+        [5[3, fill=red[1][4]][11[9, fill=red][, phantom]]]
     \end{forest}
 \end{center}
 \begin{enumerate}[label=-]
     \item wstaw do niego \verb+10+.
           \begin{center}
               \begin{forest}
-                  for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
-                  [5[3, fill=red[1][4]][11[9, fill=red][10]]]
-              \end{forest}
-              \begin{forest}
-                  for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
-                  [5[3, fill=red[1][4]][11[9, fill=red][10]]]
-              \end{forest}
-              \begin{forest}
-                  for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
-                  [5[3, fill=red[1][4]][11[9, fill=red][10]]]
+                  [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+                  [5[3, fill=red[1][4]][11[9, fill=red[, phantom][10, fill=red]][, phantom]]]
+                  [5[3, fill=red[1][4]][11[10, fill=red[9, fill=red][, phantom]][, phantom]]]
+                  [5[3, fill=red[1][4]][10, fill=red[9, fill=red][11]]]
+                  [5[3, fill=red[1][4]][10[9, fill=red][11, fill=red]]]
+                  ]
               \end{forest}
           \end{center}
     \item usuń z wyjściowego drzewa \verb+1+.
+          \begin{center}
+              \begin{forest}
+                  [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+                  [5[3, fill=red[, phantom][4]][10[9, fill=red][11, fill=red]]]
+                  [5[3[, phantom][4, fill=red]][10[9, fill=red][11, fill=red]]]
+                  ]
+              \end{forest}
+          \end{center}
 \end{enumerate}
 
 \subsection*{Zadanie 6}

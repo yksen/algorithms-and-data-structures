@@ -150,12 +150,142 @@ W poniższym drzewie czerwono-czarnym:
           \end{center}
 \end{enumerate}
 
+\pagebreak
 \subsection*{Zadanie 6}
 (3 pkt.) Do pustego drzewa czerwono-czarnego wstaw kolejno $20$ przypadkowych kluczy.
 Następnie usuń je w tej samej kolejności w jakiej wstawiałeś. Przypadkowymi kluczami
 są kolejne litery Twojego nazwiska, imienia i adresu. Zadanie wykonujemy na kartce
-(lub w pliku) i oddajemy prowadzącemu. Zadanie jest obowiązkowe.
+(lub w pliku) i oddajemy prowadzącemu. Zadanie jest obowiązkowe. \\
+\begin{center}
+    \textbf{Wstawianie} \\[1em]
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[, phantom][, phantom]]
+        [K[A, fill=red][, phantom]]
+        [K[A, fill=red][M, fill=red]]
+        [K[A[, phantom][I, fill=red]][M]]
+        [K[A[, phantom][I, fill=red]][M[L, fill=red][, phantom]]]
+        [K[A[, phantom][I, fill=red]][M[L, fill=red][S, fill=red]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A, fill=red][I, fill=red]][M[L, fill=red][S, fill=red]]]
+        [K[E[A, fill=red][I, fill=red]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        [K[E, fill=red[A][I[E, fill=red][, phantom]]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        [K[E, fill=red[A][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][S[P, fill=red][, phantom]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][P[O, fill=red][S, fill=red]]]]
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L, fill=red][L, fill=red]][P[O, fill=red][S, fill=red]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][L, fill=red]][P, fill=red[O][S[, phantom][S, fill=red]]]]]
+        [K[E[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L, fill=red[L[K, fill=red][, phantom]][L]][P, fill=red[O][S[, phantom][S, fill=red]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L, fill=red[L[K, fill=red][, phantom]][L]][P, fill=red[O][S[, phantom][S, fill=red]]]]]
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L, fill=red[L[K, fill=red][, phantom]][L]][P, fill=red[O][S[S, fill=red][W, fill=red]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O[, phantom][O, fill=red]][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        ]
+    \end{forest}
+\end{center}
 
+\pagebreak
+\begin{center}
+    \textbf{Usuwanie} \\[1em]
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S, fill=red[S][W]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S[S, fill=red][, phantom]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S[S, fill=red][, phantom]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O][S[S, fill=red][, phantom]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O][S]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][P, fill=red[O][S]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][P[, phantom][S, fill=red]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][S]]]
+        [K[E[A][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][S]]]
+        [K[E[A][I[E, fill=red][, phantom]]][M[L[L, fill=red][, phantom]][S]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A][I]][M[L[L, fill=red][, phantom]][S]]]
+        [K[E[A][I]][M[L][S]]]
+        [K[I[A, fill=red][, phantom]][M, fill=red[L][S]]]
+        [K[I[A, fill=red][, phantom]][M[L, fill=red][, phantom]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[I[A, fill=red][, phantom]][M]]
+        [K[A][M]]
+        [K[A, fill=red][, phantom]]
+        [K[, phantom][, phantom]]
+        [n, fill=green[, phantom][, phantom]]
+        ]
+    \end{forest}
+\end{center}
+
+\pagebreak
 \subsection*{Zadanie 7}
 Analizując kod programu \verb+RBT.h+ udowodnij, że w trakcie wstawiania do drzewa czerwono-czarnego
 wykonają się co najwyżej dwie rotacje. Czy tak samo jest w przypadku usuwania?

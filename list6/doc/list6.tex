@@ -289,6 +289,65 @@ są kolejne litery Twojego nazwiska, imienia i adresu. Zadanie wykonujemy na kar
 \subsection*{Zadanie 7}
 Analizując kod programu \verb+RBT.h+ udowodnij, że w trakcie wstawiania do drzewa czerwono-czarnego
 wykonają się co najwyżej dwie rotacje. Czy tak samo jest w przypadku usuwania?
+\begin{multicols}{2}
+    \noindent
+    Bezpośrednio w samej procedurze \verb+insert+ nie ma żadnych rotacji. Rotacje mogą wystąpić dopiero w procedurze
+    \verb+fix_up+, która jest wywoływana jest co najwyżej raz, zaraz po wstawieniu nowego węzła.
+    \begin{lstlisting}
+...
+for (;;)
+    if (x < t->key)
+    {
+        if (t->left)
+            t = t->left;
+        else
+        {
+            t->left = new node(x, t);
+            fix_up(t->left);
+            break;
+        }
+    }
+    else
+    {
+        if (t->right)
+            t = t->right;
+        else
+        {
+            t->right = new node(x, t);
+            fix_up(t->right);
+            break;
+        }
+    }
+...
+    \end{lstlisting}
+    \columnbreak
+    Wiedząc że procedura \verb+fix_up+ wykonuje się co najwyżej jednokrotnie, możemy zatem stwierdzić, że maksymalna
+    liczba rotacji wynosi dwie, co uwidaczniają poniższe fragmenty kodu z procedury \verb+fix_up+.
+    \begin{lstlisting}
+...
+else
+{
+    if (t == p->right)
+        rotate_left(p);
+    rotate_right(pp);
+    return;
+}
+...
+else
+{
+
+    if (t == p->left)
+        rotate_right(p);
+    rotate_left(pp);
+    return;
+}
+...
+    \end{lstlisting}
+\end{multicols}
+\noindent
+W przypadku usuwania, istnieje możliwość wystąpienia więcej niż dwóch rotacji, dlatego że procedura \verb+rem_fix_up+
+wywołana najwyżej raz zawiera pętlę \verb+while+ której ilość iteracji zależna jest od wysokości drzewa, a co za tym
+idzie dla większych wysokości drzewa, ilość możliwych rotacji będzie wzrastać.
 
 \subsection*{Zadanie 8}
 Uzasadnij, że rozmiar stosu $(n = 100)$ przyjęty w procedurach \verb+insert+ i \verb+remove+ w pliku

@@ -225,61 +225,55 @@ są kolejne litery Twojego nazwiska, imienia i adresu. Zadanie wykonujemy na kar
     \textbf{Usuwanie} \\[1em]
     \begin{forest}
         [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
-        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S, fill=red[S][W]]]]]
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O[, phantom][O, fill=red]][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O[, phantom][O, fill=red]][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
         ]
     \end{forest}
 \end{center}
 \begin{center}
     \begin{forest}
         [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S[S, fill=red][, phantom]]]]]
-        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S[S, fill=red][, phantom]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][O, fill=red[L[L][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][, phantom]]][O, fill=red[L[L][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
         ]
     \end{forest}
 \end{center}
 \begin{center}
     \begin{forest}
         [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O][S[S, fill=red][, phantom]]]]]
-        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O][S]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][, phantom]]][P, fill=red[O[L[L, fill=red][, phantom]][O]][S[S[R, fill=red][, phantom]][W]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][, phantom]]][P, fill=red[O[L[L, fill=red][, phantom]][O]][S[R][W]]]]
         ]
     \end{forest}
 \end{center}
 \begin{center}
     \begin{forest}
         [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][P, fill=red[O][S]]]]
-        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][P[, phantom][S, fill=red]]]]
+        [K[E[A[A, fill=red][, phantom]][G]][P, fill=red[O[L[L, fill=red][, phantom]][O]][S[R][W]]]]
+        [K[E[A[A, fill=red][, phantom]][G]][P, fill=red[O[L][O]][S[R][W]]]]
+        [K[A[A][G]][P, fill=red[O[L][O]][S[R][W]]]]
         ]
     \end{forest}
 \end{center}
 \begin{center}
     \begin{forest}
         [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][S]]]
-        [K[E[A][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][, phantom]][S]]]
-        [K[E[A][I[E, fill=red][, phantom]]][M[L[L, fill=red][, phantom]][S]]]
+        [P[K[A[A, fill=red][, phantom]][O, fill=red[L][O]]][S[R][W]]]
+        [P[K[A][O, fill=red[L][O]]][S[R][W]]]
+        [O[K[A][L]][R[O][S[, phantom][W, fill=red]]]]
+        [O[K[A][L]][S[R][W]]]
         ]
     \end{forest}
 \end{center}
 \begin{center}
     \begin{forest}
         [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[E[A][I]][M[L[L, fill=red][, phantom]][S]]]
-        [K[E[A][I]][M[L][S]]]
-        [K[I[A, fill=red][, phantom]][M, fill=red[L][S]]]
-        [K[I[A, fill=red][, phantom]][M[L, fill=red][, phantom]]]
-        ]
-    \end{forest}
-\end{center}
-\begin{center}
-    \begin{forest}
-        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
-        [K[I[A, fill=red][, phantom]][M]]
-        [K[A][M]]
-        [K[A, fill=red][, phantom]]
-        [K[, phantom][, phantom]]
+        [O[K[A, fill=red][, phantom]][S, fill=red[R][W]]]
+        [O[K[A, fill=red][, phantom]][W[R, fill=red][, phantom]]]
+        [O[A][W[R, fill=red][, phantom]]]
+        [R[O][W]]
+        [R[O, fill=red][, phantom]]
+        [O[, phantom][, phantom]]
         [n, fill=green[, phantom][, phantom]]
         ]
     \end{forest}

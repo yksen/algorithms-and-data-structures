@@ -77,7 +77,41 @@ Drzewo czerwono-czarne musi przestrzegać następujące wymagania:
 \subsection*{Zadanie 3}
 Uzasadnij posługując się rysunkiem i opisem, że operacje wykonywane w trakcie wstawiania
 do drzewa czerwono-czarnego (rotacja i przekolorowanie) nie zmieniają ilości
-czarnych węzłów, na żadnej ścieżce od korzenia do liścia.
+czarnych węzłów, na żadnej ścieżce od korzenia do liścia. \\
+
+\noindent
+Operacja przekolorowania nie zmienia ilości czarnych węzłów na żadnej ścieżce od korzenia do liścia, ponieważ
+czarny kolor z węzła położonego bliżej korzenia czy też rodzica zostanie przetransferowany do każdego z jego dzieci
+których ścieżka do korzenia przechodzi przez niego, a więc czarna wysokość nie ulegnie zmianie na żadnej ścieżce. \\
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [B[A, fill=red][C, fill=red]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [B, fill=red[A][C]]
+    \end{forest}
+\end{center}
+\noindent
+W przypadku rotacji których wyróżniamy dwa rodzaje, tylko przy jednej z nich dochodzi do zmiany kolorów węzłów i w tej
+sytuacji węzły które w jej trakcie zmieniają swój poziom w drzewie jednocześnie zamieniają sie kolorami, co efektywnie
+skutkuje rezultatem analogicznym do przekolorowania, czyli czarna wysokość na żadnej ścieżce od korzenia do
+liścia nie ulega zmianie. \\
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [C, fill=red[A[, phantom][B]][, phantom]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [C, fill=red[B[A][, phantom]][, phantom]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [B, fill=red[A[, phantom][, phantom]][C[, phantom][, phantom]]]
+    \end{forest}
+\end{center}
 
 \subsection*{Zadanie 4}
 \begin{enumerate}[label=(\alph*)]

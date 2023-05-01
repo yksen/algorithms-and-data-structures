@@ -8,7 +8,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[margin=0.8in]{geometry}
 \usepackage[edges]{forest}
-\usepackage{listings}
+\usepackage{listings}[language=cpp]
 \usepackage{multicol}
 \usepackage{tikz}
 \usetikzlibrary{shapes}
@@ -24,6 +24,25 @@
 
 \subsection*{Zadanie 1}
 Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa.
+\begin{lstlisting}
+    struct BTree
+    {
+        uint32_t t;
+        bool isLeaf;
+        size_t n;
+        int32_t *keys;
+        BTree **children;
+    };
+\end{lstlisting}
+\begin{enumerate}
+    \item Każdy węzeł posiada $n$ kluczy, przechowywanych w kolejności niemalejącej, a także informację o tym czy jest
+          on liściem.
+    \item Dodatkowo każdy węzeł posiada $n+1$ wskaźników do swoich dzieci.
+    \item Klucze węzła dzielą zbiór kluczy przechowywanych w jego dzieciach na $n+1$ przedziałów.
+    \item Wszystkie liście znajdują się na tym samym poziomie równym wysokości drzewa $h$.
+    \item Każdy węzeł, z wyjątkiem korzenia, posiada co najmniej $t-1$ kluczy.
+    \item Każdy węzeł może posiadać maksymalnie $2t-1$ kluczy.
+\end{enumerate}
 
 \subsection*{Zadanie 2}
 (2 pkt.) Udowodnij, że żadna z poniższych operacji wykonana na drzewie spełniającym wszystkie warunki B-drzewa, nie
@@ -73,12 +92,12 @@ Podano na rysunku B-drzewo o $t=2$:
                 child {node {12 \nodepart{two} 13}}
                 child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
                 child[sibling distance=20mm] {node {20}}
-            }
-        ;\end{tikzpicture}
-        \begin{enumerate}[label=-]
-            \item usuń z tego drzewa 7.
-            \item do drzewa widocznego powyżej dodaj 18.
-        \end{enumerate}
+            };
+    \end{tikzpicture}
+    \begin{enumerate}[label=-]
+        \item usuń z tego drzewa 7.
+        \item do drzewa widocznego powyżej dodaj 18.
+    \end{enumerate}
 \end{center}
 
 \subsection*{Zadanie 6}

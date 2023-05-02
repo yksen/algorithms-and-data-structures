@@ -63,33 +63,30 @@ prowadzi do ich naruszenia.
 W B-drzewie o $t=10$ podaj wzory i wyniki numeryczne określające:
 \begin{enumerate}[label=(\alph*)]
     \item ile kluczy może zawierać korzeń (podaj przedział),
-          \begin{align*}
-              n_{min} & = 1 & \langle 1, & 19 \rangle & n_{max} & = 2t-1 = 19
-          \end{align*}
+          \begin{equation*}
+              n_{minr} = 1 \qquad n_{max} = 2t-1 = 19 \qquad \langle 1, 19 \rangle
+          \end{equation*}
     \item ile dzieci może mieć korzeń (podaj przedział),
-          \begin{align*}
-              n_{min} + 1 & = 2 & \langle 2, & 20 \rangle & n_{max}+1 & = 2t-1+1 = 20
-          \end{align*}
+          \begin{equation*}
+              n_{minr} = 2 \qquad n_{max} = 2t-1+1 = 20 \qquad \{0\} \cup \langle 2, 20 \rangle
+          \end{equation*}
     \item ile kluczy może mieć potomek korzenia (podaj przedział),
-          \begin{align*}
-              n_{min} & = t-1 = 9 & \langle 9, & 19 \rangle & n_{max} & = 2t-1 = 19
-          \end{align*}
+          \begin{equation*}
+              n_{min} = t-1 = 9 \qquad n_{max} = 2t-1 = 19 \qquad \langle 9, 19 \rangle
+          \end{equation*}
     \item ile dzieci może mieć potomek korzenia (podaj przedział),
-          \begin{align*}
-              n_{min} + 1 & = t = 10 & \langle 10, & 20 \rangle & n_{max}+1 & = 2t-1+1 = 20
-          \end{align*}
+          \begin{equation*}
+              n_{min} = t = 10 \qquad n_{max} = 2t-1+1 = 20 \qquad \langle 10, 20 \rangle
+          \end{equation*}
     \item ile maksymalnie węzłów może być na $k$-tym poziomie (przyjmując, że korzeń to poziom $0$)
-          \begin{gather*}
-              n_{max}(k) = (2t)^k \\
-              n_{max}(k) = 20^k
-          \end{gather*}
+          \begin{equation*}
+              n_{max}(k) = (2t)^k \qquad \text{dla } t=10 \implies n_{max}(k) = 20^k
+          \end{equation*}
     \item ile łącznie kluczy może być na $k$-tym poziomie (podaj przedział).
-          \begin{gather*}
-              n_{min}(k) = (2t)^{k-1}(t-1) \\
-              n_{max}(k) = (2t)^k(2t-1) \\
-              \langle (2t)^{k-1}(t-1), (2t)^k(2t-1) \rangle \\
-              \langle 20^{k-1}9, 20^k19 \rangle
-          \end{gather*}
+          \begin{align*}
+              n_{min}(k) = & (2t)^{k-1}(t-1) & \langle (2t)^{k-1}(t-1), & (2t)^k(2t-1) \rangle \\
+              n_{max}(k) = & (2t)^k(2t-1)    & \langle 20^{k-1}9,       & 20^k19 \rangle
+          \end{align*}
 \end{enumerate}
 
 \subsection*{Zadanie 4}

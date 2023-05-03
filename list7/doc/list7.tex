@@ -12,6 +12,10 @@
 \usepackage{multicol}
 \usepackage{tikz}
 \usetikzlibrary{shapes}
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal, rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{level 1}=[sibling distance=60mm]
+\tikzstyle{level 2}=[sibling distance=20mm]
 
 \begin{document}
 
@@ -97,10 +101,6 @@ parametru $t$ (patrz Cormen).
 Podano na rysunku B-drzewo o $t=2$:
 \begin{center}
     \begin{tikzpicture}
-        \tikzstyle{bplus}=[rectangle split, rectangle split horizontal, rectangle split ignore empty parts, draw]
-        \tikzstyle{every node}=[bplus]
-        \tikzstyle{level 1}=[sibling distance=60mm]
-        \tikzstyle{level 2}=[sibling distance=15mm]
         \node {9} [->]
         child {node {7}
                 child {node {6}}
@@ -115,8 +115,62 @@ Podano na rysunku B-drzewo o $t=2$:
     \end{tikzpicture}
     \begin{enumerate}[label=-]
         \item usuń z tego drzewa 7.
+    \end{enumerate}
+    \begin{tikzpicture}
+        \node {9} [->]
+        child {node {8}
+                child {node {6}}
+                child {node {x}}
+            }
+        child {node {11 \nodepart{two} 14 \nodepart{three} 19}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child[sibling distance=20mm] {node {20}}
+            };
+    \end{tikzpicture}\\[1em]
+    \begin{tikzpicture}
+        \node {9} [->]
+        child {node {x}
+                child {node {6 \nodepart{two} 8}}
+            }
+        child {node {11 \nodepart{two} 14 \nodepart{three} 19}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child[sibling distance=20mm] {node {20}}
+            };
+    \end{tikzpicture}\\[1em]
+    \begin{tikzpicture}
+        \node {11} [->]
+        child {node {9}
+                child {node {6 \nodepart{two} 8}}
+                child {node {10}}
+            }
+        child {node {14 \nodepart{two} 19}
+                child {node {12 \nodepart{two} 13}}
+                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child[sibling distance=20mm] {node {20}}
+            };
+    \end{tikzpicture}
+    \begin{enumerate}[label=-]
         \item do drzewa widocznego powyżej dodaj 18.
     \end{enumerate}
+    \begin{tikzpicture}
+        \node {9} [->]
+        child {node {7}
+                child {node {6}}
+                child {node {8}}
+            }
+        child {node {11 \nodepart{two} 14}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+            }
+        child {node {19}
+                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child[sibling distance=20mm] {node {20}}
+            };
+    \end{tikzpicture}
 \end{center}
 
 \subsection*{Zadanie 6}

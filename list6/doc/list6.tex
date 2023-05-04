@@ -1,0 +1,400 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 6}
+
+\subsection*{Zadanie 1}
+Jakie informacje przechowujemy w węźle drzewa czerwono-czarnego?
+Zadeklaruj strukturę \verb+RBTnode+ tak, by dziedziczyła z \verb+BSTnode+. Podaj definicję drzewa czerwono czarnego.
+\begin{lstlisting}
+    struct NodeBST
+    {
+        int32_t value;
+        NodeBST* left;
+        NodeBST* right;  
+    };
+
+    struct NodeRBT : public NodeBST
+    {
+        bool isBlack;
+    };
+\end{lstlisting}
+Drzewo czerwono-czarne musi przestrzegać następujące wymagania:
+\begin{enumerate}
+    \item Każdy węzeł jest albo czerwony albo czarny.
+    \item Korzeń jest czarny.
+    \item Każdy liść jest czarny.
+    \item Czerwony węzeł ma czarnego ojca.
+    \item Każda ścieżka od korzenia do liścia ma tę samą liczbę czarnych węzłów.
+\end{enumerate}
+
+\subsection*{Zadanie 2}
+\begin{enumerate}[label=(\alph*)]
+    \item Jaka może być minimalna, a jaka maksymalna ilość kluczy w drzewie czerwono-czarnym
+          o ustalonej czarnej wysokości równej $h_B$?
+          \begin{gather*}
+              \text{min} = 2^{h_B} - 1 \\
+              \text{max} = 2^{2(h_B)} - 1
+          \end{gather*}
+    \item Znajdź maksymalną i minimalną wartość stosunku ilości węzłów czerwonych do
+          czarnych w drzewie czerwono-czarnym.
+\end{enumerate}
+\begin{multicols*}{2}
+    \begin{center}
+        min = $0/1$ \\[1ex]
+        \begin{forest}
+            for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+            []
+        \end{forest}
+    \end{center}
+    \columnbreak
+    \begin{center}
+        max = $2/1$ \\[1ex]
+        \begin{forest}
+            for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+            [[, fill=red][, fill=red]]
+        \end{forest}
+    \end{center}
+\end{multicols*}
+
+\subsection*{Zadanie 3}
+Uzasadnij posługując się rysunkiem i opisem, że operacje wykonywane w trakcie wstawiania
+do drzewa czerwono-czarnego (rotacja i przekolorowanie) nie zmieniają ilości
+czarnych węzłów, na żadnej ścieżce od korzenia do liścia. \\
+
+\noindent
+Operacja przekolorowania nie zmienia ilości czarnych węzłów na żadnej ścieżce od korzenia do liścia, ponieważ
+czarny kolor z węzła położonego bliżej korzenia czy też rodzica zostanie przetransferowany do każdego z jego dzieci
+których ścieżka do korzenia przechodzi przez niego, a więc czarna wysokość nie ulegnie zmianie na żadnej ścieżce. \\
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [B[A, fill=red][C, fill=red]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [B, fill=red[A][C]]
+    \end{forest}
+\end{center}
+\noindent
+W przypadku rotacji których wyróżniamy dwa rodzaje, tylko przy jednej z nich dochodzi do zmiany kolorów węzłów i w tej
+sytuacji węzły które w jej trakcie zmieniają swój poziom w drzewie jednocześnie zamieniają sie kolorami, co efektywnie
+skutkuje rezultatem analogicznym do przekolorowania, czyli czarna wysokość na żadnej ścieżce od korzenia do
+liścia nie ulega zmianie. \\
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [C, fill=red[A[, phantom][B]][, phantom]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [C, fill=red[B[A][, phantom]][, phantom]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [B, fill=red[A[, phantom][, phantom]][C[, phantom][, phantom]]]
+    \end{forest}
+\end{center}
+
+\subsection*{Zadanie 4}
+\begin{enumerate}[label=(\alph*)]
+    \item Narysuj poprawne drzewo czerwono-czarne w którym na lewo od korzenia jest $1$
+          węzeł a na prawo $7$ węzłów.
+          \begin{center}
+              \begin{forest}
+                  for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+                  [[][, fill=red[[, fill=red][, fill=red]][[, fill=red][, fill=red]]]]
+              \end{forest}
+          \end{center}
+    \item Czy istnieje poprawne drzewo czerwono-czarne, w którym na lewo od korzenia będzie
+          $100$ razy mniej węzłów niż na prawo od korzenia?
+          \begin{gather*}
+              100 \left(2^{h_B-1}-1\right) < 2^{2(h_B-1)}-1
+          \end{gather*}
+          \begin{center}
+              \begin{tabular}{c c c c}
+                  $h_B-1$ & \textbf{min} & $100$ \textbf{min} & \textbf{max} \\
+                  \hline
+                  $1$     & $0$          & $0$                & $0$          \\
+                  $2$     & $1$          & $100$              & $3$          \\
+                  $3$     & $3$          & $300$              & $15$         \\
+                  $4$     & $7$          & $700$              & $63$         \\
+                  $5$     & $15$         & $1500$             & $255$        \\
+                  $6$     & $31$         & $3100$             & $1023$       \\
+                  $7$     & $63$         & $6300$             & $4095$       \\
+                  $8$     & $127$        & $12700$            & $16383$      \\
+              \end{tabular}
+          \end{center}
+          Istnieje takie drzewo czerwono-czarne, w którym na lewo od korzenia jest $100$ razy mniej węzłów niż na prawo.
+          Dla czarnej wysokości $h_B=9$ po lewej stronie minimalnie może być $127$ węzłów, a po prawej $16383$.
+          \begin{align*}
+              100 \left(2^{8-1}-1\right) & < 2^{2(8-1)}-1 \\
+              100 \left(2^{7}-1\right)   & < 2^{2(7)}-1   \\
+              100 \left(127\right)       & < 2^{14}-1     \\
+              12700                      & < 16383
+          \end{align*}
+\end{enumerate}
+
+\pagebreak
+\subsection*{Zadanie 5}
+W poniższym drzewie czerwono-czarnym:
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [5[3, fill=red[1][4]][11[9, fill=red][, phantom]]]
+    \end{forest}
+\end{center}
+\begin{enumerate}[label=-]
+    \item wstaw do niego \verb+10+.
+          \begin{center}
+              \begin{forest}
+                  [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+                  [5[3, fill=red[1][4]][11[9, fill=red[, phantom][10, fill=red]][, phantom]]]
+                  [5[3, fill=red[1][4]][11[10, fill=red[9, fill=red][, phantom]][, phantom]]]
+                  [5[3, fill=red[1][4]][10, fill=red[9, fill=red][11]]]
+                  [5[3, fill=red[1][4]][10[9, fill=red][11, fill=red]]]
+                  ]
+              \end{forest}
+          \end{center}
+    \item usuń z wyjściowego drzewa \verb+1+.
+          \begin{center}
+              \begin{forest}
+                  [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+                  [5[3, fill=red[, phantom][4]][10[9, fill=red][11, fill=red]]]
+                  [5[3[, phantom][4, fill=red]][10[9, fill=red][11, fill=red]]]
+                  ]
+              \end{forest}
+          \end{center}
+\end{enumerate}
+
+\pagebreak
+\subsection*{Zadanie 6}
+(3 pkt.) Do pustego drzewa czerwono-czarnego wstaw kolejno $20$ przypadkowych kluczy.
+Następnie usuń je w tej samej kolejności w jakiej wstawiałeś. Przypadkowymi kluczami
+są kolejne litery Twojego nazwiska, imienia i adresu. Zadanie wykonujemy na kartce
+(lub w pliku) i oddajemy prowadzącemu. Zadanie jest obowiązkowe. \\
+\begin{center}
+    \textbf{Wstawianie} \\[1em]
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[, phantom][, phantom]]
+        [K[A, fill=red][, phantom]]
+        [K[A, fill=red][M, fill=red]]
+        [K[A[, phantom][I, fill=red]][M]]
+        [K[A[, phantom][I, fill=red]][M[L, fill=red][, phantom]]]
+        [K[A[, phantom][I, fill=red]][M[L, fill=red][S, fill=red]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A, fill=red][I, fill=red]][M[L, fill=red][S, fill=red]]]
+        [K[E[A, fill=red][I, fill=red]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        [K[E, fill=red[A][I[E, fill=red][, phantom]]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        [K[E, fill=red[A][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][S]]]
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][S[P, fill=red][, phantom]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[, phantom][L, fill=red]][P[O, fill=red][S, fill=red]]]]
+        [K[E, fill=red[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L, fill=red][L, fill=red]][P[O, fill=red][S, fill=red]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L[L, fill=red][L, fill=red]][P, fill=red[O][S[, phantom][S, fill=red]]]]]
+        [K[E[A[, phantom][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L, fill=red[L[K, fill=red][, phantom]][L]][P, fill=red[O][S[, phantom][S, fill=red]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L, fill=red[L[K, fill=red][, phantom]][L]][P, fill=red[O][S[, phantom][S, fill=red]]]]]
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M[L, fill=red[L[K, fill=red][, phantom]][L]][P, fill=red[O][S[S, fill=red][W, fill=red]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L[K, fill=red][, phantom]][L]][P[O[, phantom][O, fill=red]][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        ]
+    \end{forest}
+\end{center}
+
+\pagebreak
+\begin{center}
+    \textbf{Usuwanie} \\[1em]
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][A, fill=red]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O[, phantom][O, fill=red]][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][M, fill=red[L[L][L]][P[O[, phantom][O, fill=red]][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][I, fill=red]]][O, fill=red[L[L][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][, phantom]]][O, fill=red[L[L][L]][P[O][S, fill=red[S[R, fill=red][, phantom]][W]]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][, phantom]]][P, fill=red[O[L[L, fill=red][, phantom]][O]][S[S[R, fill=red][, phantom]][W]]]]
+        [K[E[A[A, fill=red][, phantom]][G[E, fill=red][, phantom]]][P, fill=red[O[L[L, fill=red][, phantom]][O]][S[R][W]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [K[E[A[A, fill=red][, phantom]][G]][P, fill=red[O[L[L, fill=red][, phantom]][O]][S[R][W]]]]
+        [K[E[A[A, fill=red][, phantom]][G]][P, fill=red[O[L][O]][S[R][W]]]]
+        [K[A[A][G]][P, fill=red[O[L][O]][S[R][W]]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [P[K[A[A, fill=red][, phantom]][O, fill=red[L][O]]][S[R][W]]]
+        [P[K[A][O, fill=red[L][O]]][S[R][W]]]
+        [O[K[A][L]][R[O][S[, phantom][W, fill=red]]]]
+        [O[K[A][L]][S[R][W]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, l sep=0mm, l=0mm, anchor=south, fill=black, text=white},
+        [O[K[A, fill=red][, phantom]][S, fill=red[R][W]]]
+        [O[K[A, fill=red][, phantom]][W[R, fill=red][, phantom]]]
+        [O[A][W[R, fill=red][, phantom]]]
+        [R[O][W]]
+        [R[O, fill=red][, phantom]]
+        [O[, phantom][, phantom]]
+        [n, fill=green[, phantom][, phantom]]
+        ]
+    \end{forest}
+\end{center}
+
+\pagebreak
+\subsection*{Zadanie 7}
+Analizując kod programu \verb+RBT.h+ udowodnij, że w trakcie wstawiania do drzewa czerwono-czarnego
+wykonają się co najwyżej dwie rotacje. Czy tak samo jest w przypadku usuwania?
+\begin{multicols}{2}
+    \noindent
+    Bezpośrednio w samej procedurze \verb+insert+ nie ma żadnych rotacji. Rotacje mogą wystąpić dopiero w procedurze
+    \verb+fix_up+, która jest wywoływana jest co najwyżej raz, zaraz po wstawieniu nowego węzła.
+    \begin{lstlisting}
+...
+for (;;)
+    if (x < t->key)
+    {
+        if (t->left)
+            t = t->left;
+        else
+        {
+            t->left = new node(x, t);
+            fix_up(t->left);
+            break;
+        }
+    }
+    else
+    {
+        if (t->right)
+            t = t->right;
+        else
+        {
+            t->right = new node(x, t);
+            fix_up(t->right);
+            break;
+        }
+    }
+...
+    \end{lstlisting}
+    \columnbreak
+    Wiedząc że procedura \verb+fix_up+ wykonuje się co najwyżej jednokrotnie, możemy zatem stwierdzić, że maksymalna
+    liczba rotacji wynosi dwie, co uwidaczniają poniższe fragmenty kodu z procedury \verb+fix_up+.
+    \begin{lstlisting}
+...
+else
+{
+    if (t == p->right)
+        rotate_left(p);
+    rotate_right(pp);
+    return;
+}
+...
+else
+{
+
+    if (t == p->left)
+        rotate_right(p);
+    rotate_left(pp);
+    return;
+}
+...
+    \end{lstlisting}
+\end{multicols}
+\noindent
+W przypadku usuwania, istnieje możliwość wystąpienia więcej niż dwóch rotacji, dlatego że procedura \verb+rem_fix_up+
+wywołana najwyżej raz zawiera pętlę \verb+while+ której ilość iteracji zależna jest od wysokości drzewa, a co za tym
+idzie dla większych wysokości drzewa, ilość możliwych rotacji będzie wzrastać.
+
+\pagebreak
+\subsection*{Zadanie 8}
+Uzasadnij, że rozmiar stosu $(n = 100)$ przyjęty w procedurach \verb+insert+ i \verb+remove+ w pliku
+\verb+RBnpnr.h+ nigdy nie okaże się za mały. \\
+
+\noindent
+Wiedząc że na stos przyjęty w procedurach procedurach \verb+insert+ i \verb+remove+ trafiają kolejne odwiedzone węzły
+drzewa w trakcie szukania miejsca do wstawienia nowego węzła w przypadku procedury \verb+insert+ oraz dodatkowo
+w trakcie szukania następnika w przypadku procedury \verb+remove+ wiadomo że nie trafi tam więcej węzłów niż wynosi
+wysokość samego drzewa. Przyglądając się ilości węzłów w drzewie o takiej wysokości
+\begin{gather*}
+    n_{min} = 2^{h-1} = n_{max} = 2^{99} - 1 = 633825300114114700748351602687 \\
+    n_{max} = 2^h - 1 = n_{max} = 2^{100} - 1 = 1267650600228229401496703205375
+\end{gather*}
+możemy zauważyć, że stos nigdy nie będzie za mały, ponieważ gdyby nawet przyjąć że każdy węzeł trzyma jeden bit
+informacji, to łączna pamięć tego drzewa wynosząca $7.923 \cdot 10^{28}$ bajtów, lub inaczej $79.23$ ronnabajtów jest
+praktycznie nieosiągalna dla współczesnych komputerów. Dla porównania taka pamięć byłaby w stanie pomieścić
+$8.7 \cdot 10^{11}$ razy szacowany rozmiar deep webu, który wynosi około $91000$ terabajtów, czy też $4.7 \cdot 10^{14}$
+raza szacowany rozmiar widzialnej sieci internetowej, który wynosi około $170$ terabajtów.
+
+\end{document}

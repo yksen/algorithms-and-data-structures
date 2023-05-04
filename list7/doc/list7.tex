@@ -35,7 +35,7 @@ Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa.
         bool isLeaf;
         size_t n;
         int32_t *keys;
-        BTree **children;
+        size_t *offsets;
     };
 \end{lstlisting}
 \begin{enumerate}

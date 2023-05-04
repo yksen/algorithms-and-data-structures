@@ -100,6 +100,12 @@ W B-drzewie o $t=10$ podaj wzory i wyniki numeryczne określające:
 \subsection*{Zadanie 4}
 Jaka jest minimalna, a jaka maksymalna liczba kluczy w B-drzewie mającym $h$ poziomów, przy ustalonej wartości
 parametru $t$ (patrz Cormen).
+\begin{gather*}
+    n_{min}(h) = 1 + \sum_{i=0}^{h-1} (2t)^{i-1}(t-1) = 1 + 2(t-1) \sum_{i=0}^{h-1} t^{i-1} = 1 + 2(t-1)
+    \frac{t^{h-1}}{t-1} = 2t^{h-1} - 1 \\
+    n_{max}(h) = \sum_{i=0}^{h-1} (2t)^i(2t-1) = (2t-1) \sum_{i=0}^{h-1} (2t)^i = (2t-1) \frac{(2t)^h-1}{2t-1} =
+    (2t)^h-1 \\
+\end{gather*}
 
 \subsection*{Zadanie 5}
 Podano na rysunku B-drzewo o $t=2$:

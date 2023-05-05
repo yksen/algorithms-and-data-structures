@@ -184,12 +184,13 @@ Podano na rysunku B-drzewo o $t=2$:
     \end{tikzpicture}
 \end{center}
 
+\pagebreak
 \subsection*{Zadanie 6}
 (2 pkt.) Do pustego B-drzewa o $t=2$ wstaw kolejno $22$ litery swojego imienia i nazwiska oraz adresu. Następnie usuń w
 tej samej kolejności w jakiej były wstawiane.
-\pagebreak
 \tikzstyle{every path}+=[level distance=8mm]
 \begin{center}
+    \textbf{Wstawianie}\\[1em]
     \begin{tikzpicture}
         \node {K} [->];
     \end{tikzpicture}
@@ -451,8 +452,298 @@ tej samej kolejności w jakiej były wstawiane.
             };
     \end{tikzpicture}
 \end{center}
-\pagebreak
 
+\pagebreak
+\tikzstyle{level 1}=[sibling distance=28mm]
+\tikzstyle{level 2}=[sibling distance=11mm]
+\begin{center}
+    \textbf{Usuwanie}\\[1em]
+    \begin{tikzpicture}
+        \node {I \nodepart{two} M} [->]
+        child {node {A \nodepart{two} E}
+                child {node {A}}
+                child {node {A \nodepart{two} C}}
+                child {node {E \nodepart{two} G}}
+            }
+        child {node {L}
+                child {node {K \nodepart{two} L}}
+                child {node {L \nodepart{two} Ł}}
+            }
+        child {node {P \nodepart{two} S}
+                child {node {O \nodepart{two} O}}
+                child {node {R \nodepart{two} S}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {I \nodepart{two} M} [->]
+        child {node {A \nodepart{two} E}
+                child {node {A}}
+                child {node {C}}
+                child {node {E \nodepart{two} G}}
+            }
+        child {node {L}
+                child {node {K \nodepart{two} L}}
+                child {node {L \nodepart{two} Ł}}
+            }
+        child {node {P \nodepart{two} S}
+                child {node {O \nodepart{two} O}}
+                child {node {R \nodepart{two} S}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}
+        \node {I \nodepart{two} O} [->]
+        child {node {A \nodepart{two} E}
+                child {node {A}}
+                child {node {C}}
+                child {node {E \nodepart{two} G}}
+            }
+        child {node {L}
+                child {node {K \nodepart{two} L}}
+                child {node {L \nodepart{two} Ł}}
+            }
+        child {node {P \nodepart{two} S}
+                child {node {O}}
+                child {node {R \nodepart{two} S}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {G \nodepart{two} O} [->]
+        child {node {A \nodepart{two} E}
+                child {node {A}}
+                child {node {C}}
+                child {node {E}}
+            }
+        child {node {L}
+                child {node {K \nodepart{two} L}}
+                child {node {L \nodepart{two} Ł}}
+            }
+        child {node {P \nodepart{two} S}
+                child {node {O}}
+                child {node {R \nodepart{two} S}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=28mm]
+\tikzstyle{level 2}=[sibling distance=9mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {G \nodepart{two} P} [->]
+        child {node {A \nodepart{two} E}
+                child {node {A}}
+                child {node {C}}
+                child {node {E}}
+            }
+        child {node {L \nodepart{two} O}
+                child {node {K \nodepart{two} L}}
+                child {node {Ł}}
+                child {node {O}}
+            }
+        child {node {S}
+                child {node {R \nodepart{two} S}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {G \nodepart{two} O} [->]
+        child {node {A \nodepart{two} E}
+                child {node {A}}
+                child {node {C}}
+                child {node {E}}
+            }
+        child {node {L}
+                child {node {K \nodepart{two} L}}
+                child {node {Ł}}
+            }
+        child {node {P \nodepart{two} S}
+                child {node {O}}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=23mm]
+\tikzstyle{level 2}=[sibling distance=9mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {G \nodepart{two} O} [->]
+        child {node {A}
+                child {node {A}}
+                child {node {C \nodepart{two} E}}
+            }
+        child {node {L}
+                child {node {K \nodepart{two} L}}
+                child {node {Ł}}
+            }
+        child {node {P \nodepart{two} S}
+                child {node {O}}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {G \nodepart{two} P} [->]
+        child {node {A}
+                child {node {A}}
+                child {node {C \nodepart{two} E}}
+            }
+        child {node {L \nodepart{two} O}
+                child {node {K}}
+                child {node {Ł}}
+                child {node {O}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}
+        \node {L \nodepart{two} P} [->]
+        child {node {A \nodepart{two} G}
+                child {node {A}}
+                child {node {C}}
+                child {node {K}}
+            }
+        child {node {O}
+                child {node {Ł}}
+                child {node {O}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {L \nodepart{two} P} [->]
+        child {node {A}
+                child {node {A}}
+                child {node {C \nodepart{two} K}}
+            }
+        child {node {O}
+                child {node {Ł}}
+                child {node {O}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=25mm]
+\tikzstyle{level 2}=[sibling distance=9mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {P} [->]
+        child {node {C \nodepart{two} L \nodepart{three} O}
+                child {node {A}}
+                child {node {K}}
+                child {node {Ł}}
+                child {node {O}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {O} [->]
+        child {node {C \nodepart{two} L}
+                child {node {A}}
+                child {node {K}}
+                child {node {Ł \nodepart{two} O}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {O} [->]
+        child {node {C \nodepart{two} L}
+                child {node {A}}
+                child {node {K}}
+                child {node {Ł}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=20mm]
+\tikzstyle{level 2}=[sibling distance=9mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {O} [->]
+        child {node {C}
+                child {node {A}}
+                child {node {K \nodepart{two} Ł}}
+            }
+        child {node {S}
+                child {node {R}}
+                child {node {W}}
+            };
+    \end{tikzpicture}
+    \quad
+    \tikzstyle{level 1}=[sibling distance=12mm]
+    \begin{tikzpicture}
+        \node {C \nodepart{two} O} [->]
+        child {node {A}}
+        child {node {K \nodepart{two} Ł}}
+        child {node {R \nodepart{two} W}};
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {C \nodepart{two} O} [->]
+        child {node {A}}
+        child {node {Ł}}
+        child {node {R \nodepart{two} W}};
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {O} [->]
+        child {node {C \nodepart{two} Ł}}
+        child {node {R \nodepart{two} W}};
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {O} [->]
+        child {node {C \nodepart{two} Ł}}
+        child {node {R}};
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=12mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {Ł} [->]
+        child {node {C}}
+        child {node {O}};
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {C \nodepart{two} Ł};
+    \end{tikzpicture}
+    \quad
+    \begin{tikzpicture}
+        \node {Ł};
+    \end{tikzpicture}
+\end{center}
+
+\pagebreak
 \subsection*{Zadanie 7}
 Narysuj B-drzewo o $t=3$ zawierające dokładnie $17$ kluczy na trzech poziomach: korzeń, jego dzieci i wnuki. Następnie
 usuń z tego drzewa korzeń.

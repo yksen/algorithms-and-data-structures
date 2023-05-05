@@ -108,6 +108,7 @@ parametru $t$ (patrz Cormen).
     (2t)^h-1 \\
 \end{gather*}
 
+\pagebreak
 \subsection*{Zadanie 5}
 Podano na rysunku B-drzewo o $t=2$:
 \begin{center}
@@ -120,38 +121,13 @@ Podano na rysunku B-drzewo o $t=2$:
         child {node {11 \nodepart{two} 14 \nodepart{three} 19}
                 child {node {10}}
                 child {node {12 \nodepart{two} 13}}
-                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
-                child[sibling distance=20mm] {node {20}}
+                child {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child {node {20}}
             };
     \end{tikzpicture}
     \begin{enumerate}[label=-]
         \item usuń z tego drzewa 7.
     \end{enumerate}
-    \begin{tikzpicture}
-        \node {9} [->]
-        child {node {8}
-                child {node {6}}
-                child {node {x}}
-            }
-        child {node {11 \nodepart{two} 14 \nodepart{three} 19}
-                child {node {10}}
-                child {node {12 \nodepart{two} 13}}
-                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
-                child[sibling distance=20mm] {node {20}}
-            };
-    \end{tikzpicture}\\[1em]
-    \begin{tikzpicture}
-        \node {9} [->]
-        child {node {x}
-                child {node {6 \nodepart{two} 8}}
-            }
-        child {node {11 \nodepart{two} 14 \nodepart{three} 19}
-                child {node {10}}
-                child {node {12 \nodepart{two} 13}}
-                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
-                child[sibling distance=20mm] {node {20}}
-            };
-    \end{tikzpicture}\\[1em]
     \begin{tikzpicture}
         \node {11} [->]
         child {node {9}
@@ -160,26 +136,42 @@ Podano na rysunku B-drzewo o $t=2$:
             }
         child {node {14 \nodepart{two} 19}
                 child {node {12 \nodepart{two} 13}}
-                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
-                child[sibling distance=20mm] {node {20}}
+                child {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child {node {20}}
             };
     \end{tikzpicture}
     \begin{enumerate}[label=-]
         \item do drzewa widocznego powyżej dodaj 18.
     \end{enumerate}
     \begin{tikzpicture}
-        \node {9} [->]
+        \node {9 \nodepart{two} 14} [->]
         child {node {7}
                 child {node {6}}
                 child {node {8}}
             }
-        child {node {11 \nodepart{two} 14}
+        child {node {11}
                 child {node {10}}
                 child {node {12 \nodepart{two} 13}}
             }
         child {node {19}
-                child[sibling distance=25mm] {node {15 \nodepart{two} 16 \nodepart{three} 17}}
-                child[sibling distance=20mm] {node {20}}
+                child {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child {node {20}}
+            };
+    \end{tikzpicture}\\[1em]
+    \begin{tikzpicture}
+        \node {9 \nodepart{two} 14} [->]
+        child {node {7}
+                child {node {6}}
+                child {node {8}}
+            }
+        child {node {11}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+            }
+        child {node {16 \nodepart{two} 19}
+                child {node {15}}
+                child {node {17 \nodepart{two} 18}}
+                child {node {20}}
             };
     \end{tikzpicture}
 \end{center}

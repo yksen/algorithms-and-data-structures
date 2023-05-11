@@ -760,11 +760,21 @@ usuń z tego drzewa korzeń.
 \tikzstyle{level 1}=[sibling distance=20mm]
 \begin{center}
     \begin{tikzpicture}
-        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 10 \nodepart{four} 12 \nodepart{five} 15} [->]
+        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 9 \nodepart{four} 12 \nodepart{five} 15} [->]
         child {node {1 \nodepart{two} 2}}
         child {node {4 \nodepart{two} 5}}
         child {node {7 \nodepart{two} 8}}
-        child {node {11}}
+        child {node {10 \nodepart{two} 11}}
+        child {node {13 \nodepart{two} 14}}
+        child {node {16 \nodepart{two} 17}};
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}
+        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 12 \nodepart{four} 15} [->]
+        child {node {1 \nodepart{two} 2}}
+        child {node {4 \nodepart{two} 5}}
+        child {node {7 \nodepart{two} 8 \nodepart{three} 10 \nodepart{four} 11}}
         child {node {13 \nodepart{two} 14}}
         child {node {16 \nodepart{two} 17}};
     \end{tikzpicture}

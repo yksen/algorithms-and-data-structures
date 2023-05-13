@@ -23,12 +23,24 @@
 
 \subsection*{Zadanie 1}
 \begin{enumerate}[label=(\alph*)]
-	\item  Czym różni się haszowanie łańcuchowe od otwartego?
-	\item Czym różnią się  dwie wersje haszowania otwartego:  haszowanie liniowe i haszowanie podwójne?
-	\item  Dla tablicy z haszowaniem podwójnym o rozmiarze $m=11$ i funkcjach haszujących:
+	\item Czym różni się haszowanie łańcuchowe od otwartego? \\[1ex]
+	      W przypadku haszowania łańcuchowego elementy przechowywane są na liście związanej z danym indeksem tablicy.
+	      Natomiast w haszowaniu otwartym elementy przechowywane są bezpośrednio w tablicy, a w przypadku kolizji
+	      są umieszczane w innych komórkach tablicy.
+	\item Czym różnią się dwie wersje haszowania otwartego: haszowanie liniowe i haszowanie podwójne? \\[1ex]
+	      W przypadku haszowania liniowego, gdy wystąpi kolizja, element jest umieszczany w następnej wolnej komórce
+	      tablicy. Natomiast w przypadku haszowania podwójnego, gdy wystąpi kolizja, element jest umieszczany w komórce
+	      określonej przez drugą funkcję haszującą.
+	\item Dla tablicy z haszowaniem podwójnym o rozmiarze $m=11$ i funkcjach haszujących:
 	      $h_1(x)=x \mathop{\mathrm{mod}} 11$  oraz $h_2(x)= x \mathop{\mathrm{mod}} 10+1$ wyznacz ciąg kontrolny
-	      dla liczby 23.
-	      Jak wyglądałby ten ciąg w przypadku haszowania liniowego?
+	      dla liczby 23. Jak wyglądałby ten ciąg w przypadku haszowania liniowego?
+	      \begin{center}
+		      \begin{tabular}{c | c}
+			      \textbf{haszowanie podwójne}     & \textbf{haszowanie liniowe}      \\
+			      \hline
+			      1, 5, 9, 2, 6, 10, 3, 7, 0, 4, 8 & 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 0
+		      \end{tabular}
+	      \end{center}
 \end{enumerate}
 
 \subsection*{Zadanie 2}

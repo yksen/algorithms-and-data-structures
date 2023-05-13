@@ -1,0 +1,68 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}[language=cpp]
+\usepackage{multicol}
+\usepackage{tikz}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 8}
+
+\subsection*{Zadanie 1}
+\begin{enumerate}[label=(\alph*)]
+	\item  Czym różni się haszowanie łańcuchowe od otwartego?
+	\item Czym różnią się  dwie wersje haszowania otwartego:  haszowanie liniowe i haszowanie podwójne?
+	\item  Dla tablicy z haszowaniem podwójnym o rozmiarze $m=11$ i funkcjach haszujących:
+	      $h_1(x)=x \mathop{\mathrm{mod}} 11$  oraz $h_2(x)= x \mathop{\mathrm{mod}} 10+1$ wyznacz ciąg kontrolny
+	      dla liczby 23.
+	      Jak wyglądałby ten ciąg w przypadku haszowania liniowego?
+\end{enumerate}
+
+\subsection*{Zadanie 2}
+(2pkt) Porównaj jaka będzie łączna liczba kolizji, gdy do tablicy z poprzedniego zadania wstawimy kolejno liczby:
+22, 66, 44, 23, 35,  używając: (a) haszowania liniowego, (b) haszowania dwukrotnego, (c) haszowania łańcuchowego.
+
+\noindent
+Następnie w każdym z wariantów sprawdź, jaka będzie łączna liczba porównań kluczy, gdy w gotowej tablicy wywołamy
+kolejno procedurę FIND (a) dla każdego elementu obecnego w tablicy, (b) dla elementów: 24 i 34, których nie ma w tablicy.
+
+\subsection*{Zadanie 3}
+Narysuj przykładowe kopce dwumianowe o 12, 14, 15 i 16 węzłach. Na rysunku uwzględnij wartości kluczy oraz stopnie
+węzłów. W kopcu 12-elementowym zaznacz dodatkowo strzałki (najlepiej w różnych kolorach) przedstawiające wskaźniki
+na ojca, syna i brata.
+
+\subsection*{Zadanie 4}
+Zilustruj działanie operacji UNION łączącej kopiec dwumianowy o 14 węzłach z kopcem
+dwumianowym o 11 węzłach. Przyjmij dowolne wartości kluczy spełniające warunek kopca.
+
+\subsection*{Zadanie 5}
+Udowodnij, że:
+\begin{enumerate}[label=(\alph*)]
+	\item drzewo dwumianowe rzędu $n$ ma $2^n$ węzłów.
+	\item na $k$-tym poziomie drzewa dwumianowego rzędu $n$ znajduje się dokładnie $n \choose k$ węzłów.
+\end{enumerate}
+
+\subsection*{Zadanie 6}
+Napisz funkcję \verb`int ile_drzew_w_kopcu(int n)` wyliczającą ile jest drzew dwumianowych w kopcu
+dwumianowym zawierającym $n$ kluczy.
+
+\subsection*{Zadanie 7}
+\begin{enumerate}[label=(\alph*)]
+	\item Do pustego kopca dwumianowego wstaw (INSERT) kolejno: 1, 12, 3, 14, 5, 16, 7, 20, 25 13, 8
+	\item Dla otrzymanego kopca dwukrotnie wykonaj operację GETMAX.
+\end{enumerate}
+
+\end{document}

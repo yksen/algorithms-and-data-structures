@@ -45,11 +45,19 @@
 
 \subsection*{Zadanie 2}
 (2pkt) Porównaj jaka będzie łączna liczba kolizji, gdy do tablicy z poprzedniego zadania wstawimy kolejno liczby:
-22, 66, 44, 23, 35,  używając: (a) haszowania liniowego, (b) haszowania dwukrotnego, (c) haszowania łańcuchowego.
-
+22, 66, 44, 23, 35,  używając: (a) haszowania liniowego, (b) haszowania dwukrotnego, (c) haszowania łańcuchowego. \\[1ex]
 \noindent
 Następnie w każdym z wariantów sprawdź, jaka będzie łączna liczba porównań kluczy, gdy w gotowej tablicy wywołamy
 kolejno procedurę FIND (a) dla każdego elementu obecnego w tablicy, (b) dla elementów: 24 i 34, których nie ma w tablicy.
+\begin{center}
+	\begin{tabular}{c|c|c|c}
+		\textbf{Metoda}       & \textbf{Liczba kolizji} & \textbf{Liczba porównań (a)} & \textbf{Liczba porównań (b)} \\
+		\hline
+		haszowanie liniowe    & 7                       & 12                           & 6                            \\
+		haszowanie podwójne   & 2                       & 7                            & 4                            \\
+		haszowanie łańcuchowe & 2                       & 8                            & 2
+	\end{tabular}
+\end{center}
 
 \subsection*{Zadanie 3}
 Narysuj przykładowe kopce dwumianowe o 12, 14, 15 i 16 węzłach. Na rysunku uwzględnij wartości kluczy oraz stopnie

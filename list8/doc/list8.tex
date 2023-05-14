@@ -11,6 +11,7 @@
 \usepackage{listings}[language=cpp]
 \usepackage{multicol}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 
 \begin{document}
 
@@ -59,10 +60,43 @@ kolejno procedurę FIND (a) dla każdego elementu obecnego w tablicy, (b) dla el
 	\end{tabular}
 \end{center}
 
+\pagebreak
 \subsection*{Zadanie 3}
 Narysuj przykładowe kopce dwumianowe o 12, 14, 15 i 16 węzłach. Na rysunku uwzględnij wartości kluczy oraz stopnie
 węzłów. W kopcu 12-elementowym zaznacz dodatkowo strzałki (najlepiej w różnych kolorach) przedstawiające wskaźniki
 na ojca, syna i brata.
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[12, name=1[9[6]][11]]{\draw[-Latex] () to node{} (2);}
+			[10, name=2[8[2[1]][7]][4[3]][5]]
+		]
+	\end{forest}
+	\qquad
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[14, name=1[13]]{\draw[-Latex] () to node{} (2);}
+			[12, name=2[9[6]][11]]{\draw[-Latex] () to node{} (3);}
+			[10, name=3[8[2[1]][7]][4[3]][5]]
+		]
+	\end{forest}
+\end{center}
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[15, name=1]{\draw[-Latex] () to node{} (2);}
+			[14, name=2[13]]{\draw[-Latex] () to node{} (3);}
+			[12, name=3[9[6]][11]]{\draw[-Latex] () to node{} (4);}
+			[10, name=4[8[2[1]][7]][4[3]][5]]
+		]
+	\end{forest}
+	\qquad
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[16[10[8[2[1]][7]][4[3]][5]][12[9[6]][11]][14[13]][15]]
+		]
+	\end{forest}
+\end{center}
 
 \subsection*{Zadanie 4}
 Zilustruj działanie operacji UNION łączącej kopiec dwumianowy o 14 węzłach z kopcem

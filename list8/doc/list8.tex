@@ -68,26 +68,26 @@ na ojca, syna i brata.
 \begin{center}
 	\begin{forest}
 		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
-			[12, name=1[9[6]][11]]{\draw[-Latex] () to node{} (2);}
-			[10, name=2[8[2[1]][7]][4[3]][5]]
+			[12[9[6]][11]]{\draw[-Latex] () to node{} (1);}
+			[10, name=1[8[2[1]][7]][4[3]][5]]
 		]
 	\end{forest}
 	\qquad
 	\begin{forest}
 		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
-			[14, name=1[13]]{\draw[-Latex] () to node{} (2);}
-			[12, name=2[9[6]][11]]{\draw[-Latex] () to node{} (3);}
-			[10, name=3[8[2[1]][7]][4[3]][5]]
+			[14[13]]{\draw[-Latex] () to node{} (1);}
+			[12, name=1[9[6]][11]]{\draw[-Latex] () to node{} (2);}
+			[10, name=2[8[2[1]][7]][4[3]][5]]
 		]
 	\end{forest}
 \end{center}
 \begin{center}
 	\begin{forest}
 		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
-			[15, name=1]{\draw[-Latex] () to node{} (2);}
-			[14, name=2[13]]{\draw[-Latex] () to node{} (3);}
-			[12, name=3[9[6]][11]]{\draw[-Latex] () to node{} (4);}
-			[10, name=4[8[2[1]][7]][4[3]][5]]
+			[15]{\draw[-Latex] () to node{} (1);}
+			[14, name=1[13]]{\draw[-Latex] () to node{} (2);}
+			[12, name=2[9[6]][11]]{\draw[-Latex] () to node{} (3);}
+			[10, name=3[8[2[1]][7]][4[3]][5]]
 		]
 	\end{forest}
 	\qquad
@@ -101,6 +101,65 @@ na ojca, syna i brata.
 \subsection*{Zadanie 4}
 Zilustruj działanie operacji UNION łączącej kopiec dwumianowy o 14 węzłach z kopcem
 dwumianowym o 11 węzłach. Przyjmij dowolne wartości kluczy spełniające warunek kopca.
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[14[13]]{\draw[-Latex] () to node{} (1);}
+			[12, name=1[10[9]][11]]{\draw[-Latex] () to node{} (2);}
+			[8, name=2[4[2[1]][3]][6[5]][7]]
+		]
+	\end{forest}
+	\qquad
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[25]{\draw[-Latex] () to node{} (1);}
+			[24, name=1[23]]{\draw[-Latex] () to node{} (2);}
+			[22, name=2[18[16[15]][17]][20[19]][21]]
+		]
+	\end{forest}
+\end{center}
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[25]{\draw[-Latex] () to node{} (1);}
+			[14, name=1[13]]{\draw[-Latex] () to node{} (2);}
+			[24, name=2[23]]{\draw[-Latex] () to node{} (3);}
+			[12, name=3[10[9]][11]]{\draw[-Latex] () to node{} (4);}
+			[8,  name=4[4[2[1]][3]][6[5]][7]]{\draw[-Latex] () to node{} (5);}
+			[22, name=5[18[16[15]][17]][20[19]][21]]
+		]
+	\end{forest}
+\end{center}
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[25]{\draw[-Latex] () to node{} (1);}
+			[24, name=1[14[13]][23]]{\draw[-Latex] () to node{} (2);}
+			[12, name=2[10[9]][11]]{\draw[-Latex] () to node{} (3);}
+			[8,  name=3[4[2[1]][3]][6[5]][7]]{\draw[-Latex] () to node{} (4);}
+			[22, name=4[18[16[15]][17]][20[19]][21]]
+		]
+	\end{forest}
+\end{center}
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[25]{\draw[-Latex] () to node{} (1);}
+			[24, name=1[12[10[9]][11]][14[13]][23]]{\draw[-Latex] () to node{} (2);}
+			[8,  name=2[4[2[1]][3]][6[5]][7]]{\draw[-Latex] () to node{} (3);}
+			[22, name=3[18[16[15]][17]][20[19]][21]]
+		]
+	\end{forest}
+\end{center}
+\begin{center}
+	\begin{forest}
+		[, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+			[25]{\draw[-Latex] () to node{} (1);}
+			[24, name=1[12[10[9]][11]][14[13]][23]]{\draw[-Latex] () to node{} (2);}
+			[22, name=2[8[4[2[1]][3]][6[5]][7]][18[16[15]][17]][20[19]][21]]
+		]
+	\end{forest}
+\end{center}
 
 \subsection*{Zadanie 5}
 Udowodnij, że:

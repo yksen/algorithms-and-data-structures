@@ -186,8 +186,32 @@ dwumianowym zawierającym $n$ kluczy.
 
 \subsection*{Zadanie 7}
 \begin{enumerate}[label=(\alph*)]
-    \item Do pustego kopca dwumianowego wstaw (INSERT) kolejno: 1, 12, 3, 14, 5, 16, 7, 20, 25 13, 8
+    \item Do pustego kopca dwumianowego wstaw (INSERT) kolejno: 1, 12, 3, 14, 5, 16, 7, 20, 25, 13, 8
+          \begin{center}
+              \begin{forest}
+                  [, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+                      [8]{\draw[-Latex] () to node{} (1);}
+                          [25, name=1[13]]{\draw[-Latex] () to node{} (2);}
+                          [20, name=2[14[12[1]][3]][16[5]][7]]
+                  ]
+              \end{forest}
+          \end{center}
     \item Dla otrzymanego kopca dwukrotnie wykonaj operację GETMAX.
+          \begin{center}
+              \begin{forest}
+                  [, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+                      [13[8]]{\draw[-Latex] () to node{} (1);}
+                          [20, name=1[14[12[1]][3]][16[5]][7]]
+                  ]
+              \end{forest}
+              \qquad
+              \begin{forest}
+                  [, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=-Latex, calign=last},
+                      [7]{\draw[-Latex] () to node{} (1);}
+                      [16, name=1[14[12[1]][3]][13[8]][5]]
+                  ]
+              \end{forest}
+          \end{center}
 \end{enumerate}
 
 \end{document}

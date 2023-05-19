@@ -1,0 +1,102 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{varwidth}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+Dana jest struktura danych będąca węzłem drzewa BST
+\begin{lstlisting}
+    struct node {
+        int key;
+        node* left;
+        node* right;
+        node(int k, node* l, node* r):key(k),left(l),right(r){}
+    };
+\end{lstlisting}
+
+\subsection*{Zadanie 1}
+Zapisz warunki jakie muszą spełniać klucze drzewa BST.
+
+\subsection*{Zadanie 2}
+Napisz procedurę \verb|node* find(node* tree, int x)|, która zwraca wskaźnik na węzeł
+zawierający x, lub NULL, jeśli nie ma takiego węzła.
+
+\subsection*{Zadanie 3}
+Napisz procedurę \verb|void insert(node*& tree, int x)| (dodaje do drzewa tree klucz x).
+
+\subsection*{Zadanie 4}
+Drzewo BST o różnych kluczach można odtworzyć z listy par kluczWezła:kluczOjca. (a) Narysuj
+drzewo BST reprezentowane przez listę par: 1:2, 2:4, 3:2, 4:5, 6:7, 7:9, 8:7, 9:5.
+(b) wypisz jego klucze w porządku: INORDER, (c) PREORDER, (d) POSTORDER
+
+\subsection*{Zadanie 5}
+Napisz procedurę \verb|void wypisz(node *tree, int order=0)|, która wypisuje klucze drzewa tree
+w porządku inorder gdy order=0, preorder gdy order=1, postorder gdy order=2.
+\begin{lstlisting}
+    void wypisz(node *tree, int order = 0) {
+        if (tree == nullptr) return;
+        if (order == 1) std::cout << tree->key;
+        wypisz(tree->left, order);
+        if (order == 0) std::cout << tree->key;
+        wypisz(tree->right, order);
+        if (order == 2) std::cout << tree->key;
+    }
+\end{lstlisting}
+
+\subsection*{Zadanie 6}
+Jakie informacje przechowujemy w węźle drzewa czerwono-czarnego? Podaj definicję drzewa
+czerwono czarnego. Zadeklaruj strukturę RBnode tak, by dziedziczyła z node. Czy można dla niej użyć funkcji napisanych
+w zadaniach 2, 3 i 5?
+
+\subsection*{Zadanie 7}
+Uzasadnij posługując się rysunkiem i opisem, że operacje na drzewie czerwono-czarnym (rotacja i
+przekolorowanie) nie zmieniają ilości czarnych węzłów, na żadnej ścieżce od korzenia do liścia
+
+\subsection*{Zadanie 8}
+W poniższym drzewie czerwono-czarnym (czarne węzły oznaczono nawiasem kwadratowym), usuń 1,
+dodaj do wyściowego 10:
+
+\subsection*{Zadanie 9}
+Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa
+
+\subsection*{Zadanie 10}
+Narysuj B-drzewo o t = 3 zawierające dokładnie 17 kluczy na trzech poziomach: korzeń jego
+dzieci i wnuki. Następnie usuń z tego drzewa korzeń.
+
+\subsection*{Zadanie 11}
+Podano na rysunku B-drzewo o $t=2$:
+
+\subsection*{Zadanie 12}
+W B-drzewie o t = 10:
+\begin{enumerate}[label=(\alph*)]
+    \item ile kluczy może zawierać korzeń (podaj przedział), \\
+          Korzeń zawiera od 1 do 19 kluczy. (max $2t-1$)
+    \item ile dzieci może mieć korzeń (podaj przedział), \\
+          Korzeń może mieć od 2 do 20 dzieci. (min $t$ max $2t$)
+    \item ile kluczy może mieć potomek korzenia (podaj przedział), \\
+          Potomek korzenia może mieć od 9 do 19 kluczy. (min $t-1$ max $2t-1$)
+    \item ile dzieci może mieć potomek korzenia (podaj przedział), \\
+          Potomek korzenia może mieć od 10 do 20 dzieci. (min $t$ max $2t$)
+    \item ile maksymalnie węzłów może być na $k$-tym poziomie (przyjmując, że korzeń to poziom $0$) \\
+          Na k-tym poziomie może być maksymalnie $(2t)^k$ węzłów.
+    \item ile łącznie kluczy może być na $k$-tym poziomie (podaj przedział). \\
+          Nie licząc korzenia dla którego minimum to 1 klicz to na k-tym poziomie może być od $2(t-1)t^{k-1}$ do $(2t-1)(2t)^{k}$ kluczy. (min $(2min)t^{k-1}$ max $(max)t^{k}$
+\end{enumerate}
+
+\end{document}

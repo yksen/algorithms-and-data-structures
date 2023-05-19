@@ -67,6 +67,28 @@ w zadaniach 2, 3 i 5?
 \subsection*{Zadanie 7}
 Uzasadnij posługując się rysunkiem i opisem, że operacje na drzewie czerwono-czarnym (rotacja i
 przekolorowanie) nie zmieniają ilości czarnych węzłów, na żadnej ścieżce od korzenia do liścia
+\begin{multicols}{2}
+    \begin{center}
+        \begin{forest}
+            [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+            [1[a, fill=none, text=black][2, fill=red[b, fill=none, text=black][c, fill=none, text=black]]]
+            [2[1, fill=red[a, fill=none, text=black][b, fill=none, text=black]][c, fill=none, text=black]]
+            ]
+        \end{forest} \\
+        Po wykonaniu rotacji liczba czarnych węzłów na ścieżce nie ulega zmianie, a rotowane węzły wymieniają się
+        piętrami i kolorami.
+    \end{center}
+    \columnbreak
+    \begin{center}
+        \begin{forest}
+            [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=none, text=black},
+            [a[2, fill=black, text=white[1, fill=red, text=white[a][b]][3, fill=red, text=white[d][e]]][, phantom]]
+            [a[2, fill=red, text=white[1, fill=black, text=white[a][b]][3, fill=black, text=white[d][e]]][, phantom]]
+            ]
+        \end{forest} \\
+        Kolory czarne z ścieżek wychodzących zostają wypchnięte do węzła nadrzędnego.
+    \end{center}
+\end{multicols}
 
 \subsection*{Zadanie 8}
 W poniższym drzewie czerwono-czarnym (czarne węzły oznaczono nawiasem kwadratowym), usuń 1,

@@ -132,6 +132,49 @@ Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa
 \subsection*{Zadanie 10}
 Narysuj B-drzewo o t = 3 zawierające dokładnie 17 kluczy na trzech poziomach: korzeń jego
 dzieci i wnuki. Następnie usuń z tego drzewa korzeń.
+\tikzstyle{every picture}+=[baseline=(current bounding box.north)]
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal, rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{every path}+=[level distance=15mm]
+\tikzstyle{level 1}=[sibling distance=60mm]
+\tikzstyle{level 2}=[sibling distance=20mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {9} [->]
+        child {node {3 \nodepart{two} 6}
+                child {node {1 \nodepart{two} 2}}
+                child {node {4 \nodepart{two} 5}}
+                child {node {7 \nodepart{two} 8}}
+            }
+        child {node {12 \nodepart{two} 15}
+                child {node {10 \nodepart{two} 11}}
+                child {node {13 \nodepart{two} 14}}
+                child {node {16 \nodepart{two} 17}}
+            };
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=20mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 9 \nodepart{four} 12 \nodepart{five} 15} [->]
+        child {node {1 \nodepart{two} 2}}
+        child {node {4 \nodepart{two} 5}}
+        child {node {7 \nodepart{two} 8}}
+        child {node {10 \nodepart{two} 11}}
+        child {node {13 \nodepart{two} 14}}
+        child {node {16 \nodepart{two} 17}};
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}
+        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 12 \nodepart{four} 15} [->]
+        child {node {1 \nodepart{two} 2}}
+        child {node {4 \nodepart{two} 5}}
+        child {node {7 \nodepart{two} 8 \nodepart{three} 10 \nodepart{four} 11}}
+        child {node {13 \nodepart{two} 14}}
+        child {node {16 \nodepart{two} 17}};
+    \end{tikzpicture}
+\end{center}
 
 \subsection*{Zadanie 11}
 Podano na rysunku B-drzewo o $t=2$:

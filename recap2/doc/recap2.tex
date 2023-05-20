@@ -26,12 +26,14 @@ Dana jest struktura danych będąca węzłem drzewa BST
         int key;
         node* left;
         node* right;
-        node(int k, node* l, node* r):key(k),left(l),right(r){}
+        node(int k, node* l, node* r) : key(k), left(l), right(r) {}
     };
 \end{lstlisting}
 
 \subsection*{Zadanie 1}
 Zapisz warunki jakie muszą spełniać klucze drzewa BST.
+\noindent
+Klucze w lewym poddrzewie są mniejsze od klucza węzła, natomiast w prawym poddrzewie są większe lub równe.
 
 \subsection*{Zadanie 2}
 Napisz procedurę \verb|node* find(node* tree, int x)|, która zwraca wskaźnik na węzeł

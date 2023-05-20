@@ -49,6 +49,16 @@ zawierający x, lub NULL, jeśli nie ma takiego węzła.
 
 \subsection*{Zadanie 3}
 Napisz procedurę \verb|void insert(node*& tree, int x)| (dodaje do drzewa tree klucz x).
+\begin{lstlisting}
+    void insert(node*& tree, int x) {
+        if (tree == nullptr) {
+            tree = new node(x, nullptr, nullptr);
+            return;
+        }
+        if (tree->key > x) insert(tree->left, x);
+        else insert(tree->right, x);
+    }
+\end{lstlisting}
 
 \subsection*{Zadanie 4}
 Drzewo BST o różnych kluczach można odtworzyć z listy par kluczWezła:kluczOjca. (a) Narysuj

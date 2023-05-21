@@ -10,3 +10,4 @@ target
 !*/
 !*.pdf
 !*.tex
+!*/src/*

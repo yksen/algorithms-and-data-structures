@@ -149,6 +149,29 @@ przekolorowanie) nie zmieniają ilości czarnych węzłów, na żadnej ścieżce
 \subsection*{Zadanie 8}
 W poniższym drzewie czerwono-czarnym (czarne węzły oznaczono nawiasem kwadratowym), usuń 1,
 dodaj do wyściowego 10:
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [5[3, fill=red[1][4]][11[9, fill=red][, phantom]]]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+        [5[3, fill=red[n][4]][11[9, fill=red][, phantom]]]
+        [5[3[, phantom][4, fill=red]][11[9, fill=red][, phantom]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+        [5[3[, phantom][4, fill=red]][11[9, fill=red[, phantom][10, fill=red]][, phantom]]]
+        [5[3[, phantom][4, fill=red]][11[10, fill=red[9, fill=red][, phantom]][, phantom]]]
+        [5[3[, phantom][4, fill=red]][10[9, fill=red][11, fill=red]]]
+        ]
+    \end{forest}
+\end{center}
 
 \subsection*{Zadanie 9}
 Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa

@@ -31,7 +31,7 @@ Dana jest struktura danych będąca węzłem drzewa BST
 \end{lstlisting}
 
 \subsection*{Zadanie 1}
-Zapisz warunki jakie muszą spełniać klucze drzewa BST.
+Zapisz warunki jakie muszą spełniać klucze drzewa BST. \\
 \noindent
 Klucze w lewym poddrzewie są mniejsze od klucza węzła, natomiast w prawym poddrzewie są większe lub równe.
 
@@ -60,6 +60,7 @@ Napisz procedurę \verb|void insert(node*& tree, int x)| (dodaje do drzewa tree 
     }
 \end{lstlisting}
 
+\pagebreak
 \subsection*{Zadanie 4}
 Drzewo BST o różnych kluczach można odtworzyć z listy par kluczWezła:kluczOjca. (a) Narysuj
 drzewo BST reprezentowane przez listę par: 1:2, 2:4, 3:2, 4:5, 6:7, 7:9, 8:7, 9:5.
@@ -95,6 +96,29 @@ w porządku inorder gdy order=0, preorder gdy order=1, postorder gdy order=2.
 Jakie informacje przechowujemy w węźle drzewa czerwono-czarnego? Podaj definicję drzewa
 czerwono czarnego. Zadeklaruj strukturę RBnode tak, by dziedziczyła z node. Czy można dla niej użyć funkcji napisanych
 w zadaniach 2, 3 i 5?
+\begin{lstlisting}
+    struct NodeBST
+    {
+        int32_t value;
+        NodeBST* left;
+        NodeBST* right;  
+    };
+
+    struct NodeRBT : public NodeBST
+    {
+        bool isBlack;
+        NodeRBT* parent;
+    };
+\end{lstlisting}
+Drzewo czerwono-czarne musi przestrzegać następujące wymagania:
+\begin{enumerate}
+    \item Każdy węzeł jest albo czerwony albo czarny.
+    \item Korzeń jest czarny.
+    \item Każdy liść jest czarny.
+    \item Czerwony węzeł ma czarnego ojca.
+    \item Każda ścieżka od korzenia do liścia ma tę samą liczbę czarnych węzłów.
+\end{enumerate}
+Można użyć dla niej funkcji \verb|find| i \verb|wypisz| z zadań 2 i 5, ale nie \verb|insert| z zadania 3.
 
 \subsection*{Zadanie 7}
 Uzasadnij posługując się rysunkiem i opisem, że operacje na drzewie czerwono-czarnym (rotacja i

@@ -1,0 +1,331 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{varwidth}
+\usepackage{xcolor}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+Dana jest struktura danych będąca węzłem drzewa BST
+\begin{lstlisting}
+    struct node {
+        int key;
+        node* left;
+        node* right;
+        node(int k, node* l, node* r) : key(k), left(l), right(r) {}
+    };
+\end{lstlisting}
+
+\subsection*{Zadanie 1}
+Zapisz warunki jakie muszą spełniać klucze drzewa BST. \\
+\noindent
+Klucze w lewym poddrzewie są mniejsze od klucza węzła, natomiast w prawym poddrzewie są większe lub równe.
+
+\subsection*{Zadanie 2}
+Napisz procedurę \verb|node* find(node* tree, int x)|, która zwraca wskaźnik na węzeł
+zawierający x, lub NULL, jeśli nie ma takiego węzła.
+\begin{lstlisting}
+    node* find(node* tree, int x) {
+        if (tree == nullptr) return nullptr;
+        if (tree->key == x) return tree;
+        if (tree->key > x) return find(tree->left, x);
+        return find(tree->right, x);
+    }
+\end{lstlisting}
+
+\subsection*{Zadanie 3}
+Napisz procedurę \verb|void insert(node*& tree, int x)| (dodaje do drzewa tree klucz x).
+\begin{lstlisting}
+    void insert(node*& tree, int x) {
+        if (tree == nullptr) {
+            tree = new node(x, nullptr, nullptr);
+            return;
+        }
+        if (tree->key > x) insert(tree->left, x);
+        else insert(tree->right, x);
+    }
+\end{lstlisting}
+
+\pagebreak
+\subsection*{Zadanie 4}
+Drzewo BST o różnych kluczach można odtworzyć z listy par kluczWezła:kluczOjca. (a) Narysuj
+drzewo BST reprezentowane przez listę par: 1:2, 2:4, 3:2, 4:5, 6:7, 7:9, 8:7, 9:5.
+(b) wypisz jego klucze w porządku: INORDER, (c) PREORDER, (d) POSTORDER
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south},
+        [5[4[2[1][3]][, phantom]][9[7][, phantom]]]
+    \end{forest}
+\end{center}
+\begin{enumerate}[label=(\alph*)]
+    \setcounter{enumi}{1}
+    \item 1234567
+    \item 5421397
+    \item 1324795
+\end{enumerate}
+
+\subsection*{Zadanie 5}
+Napisz procedurę \verb|void wypisz(node *tree, int order=0)|, która wypisuje klucze drzewa tree
+w porządku inorder gdy order=0, preorder gdy order=1, postorder gdy order=2.
+\begin{lstlisting}
+    void wypisz(node *tree, int order = 0) {
+        if (tree == nullptr) return;
+        if (order == 1) std::cout << tree->key;
+        wypisz(tree->left, order);
+        if (order == 0) std::cout << tree->key;
+        wypisz(tree->right, order);
+        if (order == 2) std::cout << tree->key;
+    }
+\end{lstlisting}
+
+\subsection*{Zadanie 6}
+Jakie informacje przechowujemy w węźle drzewa czerwono-czarnego? Podaj definicję drzewa
+czerwono czarnego. Zadeklaruj strukturę RBnode tak, by dziedziczyła z node. Czy można dla niej użyć funkcji napisanych
+w zadaniach 2, 3 i 5?
+\begin{lstlisting}
+    struct NodeBST
+    {
+        int32_t value;
+        NodeBST* left;
+        NodeBST* right;  
+    };
+
+    struct NodeRBT : public NodeBST
+    {
+        bool isBlack;
+        NodeRBT* parent;
+    };
+\end{lstlisting}
+Drzewo czerwono-czarne musi przestrzegać następujące wymagania:
+\begin{enumerate}
+    \item Każdy węzeł jest albo czerwony albo czarny.
+    \item Korzeń jest czarny.
+    \item Każdy liść jest czarny.
+    \item Czerwony węzeł ma czarnego ojca.
+    \item Każda ścieżka od korzenia do liścia ma tę samą liczbę czarnych węzłów.
+\end{enumerate}
+Można użyć dla niej funkcji \verb|find| i \verb|wypisz| z zadań 2 i 5, ale nie \verb|insert| z zadania 3.
+
+\subsection*{Zadanie 7}
+Uzasadnij posługując się rysunkiem i opisem, że operacje na drzewie czerwono-czarnym (rotacja i
+przekolorowanie) nie zmieniają ilości czarnych węzłów, na żadnej ścieżce od korzenia do liścia
+\begin{multicols}{2}
+    \begin{center}
+        \begin{forest}
+            [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+            [1[a, fill=none, text=black][2, fill=red[b, fill=none, text=black][c, fill=none, text=black]]]
+            [2[1, fill=red[a, fill=none, text=black][b, fill=none, text=black]][c, fill=none, text=black]]
+            ]
+        \end{forest} \\
+        Po wykonaniu rotacji liczba czarnych węzłów na ścieżce nie ulega zmianie, a rotowane węzły wymieniają się
+        piętrami i kolorami.
+    \end{center}
+    \columnbreak
+    \begin{center}
+        \begin{forest}
+            [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=none, text=black},
+            [a[2, fill=black, text=white[1, fill=red, text=white[a][b]][3, fill=red, text=white[d][e]]][, phantom]]
+            [a[2, fill=red, text=white[1, fill=black, text=white[a][b]][3, fill=black, text=white[d][e]]][, phantom]]
+            ]
+        \end{forest} \\
+        Kolory czarne z ścieżek wychodzących zostają wypchnięte do węzła nadrzędnego.
+    \end{center}
+\end{multicols}
+
+\subsection*{Zadanie 8}
+W poniższym drzewie czerwono-czarnym (czarne węzły oznaczono nawiasem kwadratowym), usuń 1,
+dodaj do wyściowego 10:
+\begin{center}
+    \begin{forest}
+        for tree={circle, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south, fill=black, text=white},
+        [5[3, fill=red[1][4]][11[9, fill=red][, phantom]]]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+        [5[3, fill=red[n][4]][11[9, fill=red][, phantom]]]
+        [5[3[, phantom][4, fill=red]][11[9, fill=red][, phantom]]]
+        ]
+    \end{forest}
+\end{center}
+\begin{center}
+    \begin{forest}
+        [, phantom, for tree={circle, minimum size=3ex, inner sep=1pt, s sep=5mm, anchor=south, fill=black, text=white},
+        [5[3[, phantom][4, fill=red]][11[9, fill=red[, phantom][10, fill=red]][, phantom]]]
+        [5[3[, phantom][4, fill=red]][11[10, fill=red[9, fill=red][, phantom]][, phantom]]]
+        [5[3[, phantom][4, fill=red]][10[9, fill=red][11, fill=red]]]
+        ]
+    \end{forest}
+\end{center}
+
+\subsection*{Zadanie 9}
+Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa
+\begin{lstlisting}
+    struct BTree
+    {
+        uint32_t t;
+        bool isLeaf;
+        size_t n;
+        int32_t *keys;
+        size_t *offsets;
+    };
+\end{lstlisting}
+\begin{enumerate}
+    \item Każdy węzeł posiada $n$ kluczy, przechowywanych w kolejności niemalejącej, a także informację o tym czy jest
+          on liściem.
+    \item Dodatkowo każdy węzeł posiada $n+1$ wskaźników do swoich dzieci.
+    \item Klucze węzła dzielą zbiór kluczy przechowywanych w jego dzieciach na $n+1$ przedziałów.
+    \item Wszystkie liście znajdują się na tym samym poziomie równym wysokości drzewa $h$.
+    \item Każdy węzeł, z wyjątkiem korzenia, posiada co najmniej $t-1$ kluczy.
+    \item Każdy węzeł może posiadać maksymalnie $2t-1$ kluczy.
+\end{enumerate}
+
+\subsection*{Zadanie 10}
+Narysuj B-drzewo o t = 3 zawierające dokładnie 17 kluczy na trzech poziomach: korzeń jego
+dzieci i wnuki. Następnie usuń z tego drzewa korzeń.
+\tikzstyle{every picture}+=[baseline=(current bounding box.north)]
+\tikzstyle{bplus}=[rectangle split, rectangle split horizontal, rectangle split ignore empty parts, draw]
+\tikzstyle{every node}=[bplus]
+\tikzstyle{every path}+=[level distance=15mm]
+\tikzstyle{level 1}=[sibling distance=60mm]
+\tikzstyle{level 2}=[sibling distance=20mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {9} [->]
+        child {node {3 \nodepart{two} 6}
+                child {node {1 \nodepart{two} 2}}
+                child {node {4 \nodepart{two} 5}}
+                child {node {7 \nodepart{two} 8}}
+            }
+        child {node {12 \nodepart{two} 15}
+                child {node {10 \nodepart{two} 11}}
+                child {node {13 \nodepart{two} 14}}
+                child {node {16 \nodepart{two} 17}}
+            };
+    \end{tikzpicture}
+\end{center}
+\tikzstyle{level 1}=[sibling distance=20mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 9 \nodepart{four} 12 \nodepart{five} 15} [->]
+        child {node {1 \nodepart{two} 2}}
+        child {node {4 \nodepart{two} 5}}
+        child {node {7 \nodepart{two} 8}}
+        child {node {10 \nodepart{two} 11}}
+        child {node {13 \nodepart{two} 14}}
+        child {node {16 \nodepart{two} 17}};
+    \end{tikzpicture}
+\end{center}
+\begin{center}
+    \begin{tikzpicture}
+        \node [rectangle split parts=5] {3 \nodepart{two} 6 \nodepart{three} 12 \nodepart{four} 15} [->]
+        child {node {1 \nodepart{two} 2}}
+        child {node {4 \nodepart{two} 5}}
+        child {node {7 \nodepart{two} 8 \nodepart{three} 10 \nodepart{four} 11}}
+        child {node {13 \nodepart{two} 14}}
+        child {node {16 \nodepart{two} 17}};
+    \end{tikzpicture}
+\end{center}
+
+\subsection*{Zadanie 11}
+Podano na rysunku B-drzewo o $t=2$:
+\tikzstyle{level 1}=[sibling distance=60mm]
+\tikzstyle{level 2}=[sibling distance=20mm]
+\begin{center}
+    \begin{tikzpicture}
+        \node {9} [->]
+        child {node {7}
+                child {node {6}}
+                child {node {8}}
+            }
+        child {node {11 \nodepart{two} 14 \nodepart{three} 19}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+                child {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child {node {20}}
+            };
+    \end{tikzpicture}
+    \begin{enumerate}[label=-]
+        \item usuń z tego drzewa 7.
+    \end{enumerate}
+    \begin{tikzpicture}
+        \node {11} [->]
+        child {node {9}
+                child {node {6 \nodepart{two} 8}}
+                child {node {10}}
+            }
+        child {node {14 \nodepart{two} 19}
+                child {node {12 \nodepart{two} 13}}
+                child {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child {node {20}}
+            };
+    \end{tikzpicture}
+    \begin{enumerate}[label=-]
+        \item do drzewa widocznego powyżej dodaj 18.
+    \end{enumerate}
+    \begin{tikzpicture}
+        \node {9 \nodepart{two} 14} [->]
+        child {node {7}
+                child {node {6}}
+                child {node {8}}
+            }
+        child {node {11}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+            }
+        child {node {19}
+                child {node {15 \nodepart{two} 16 \nodepart{three} 17}}
+                child {node {20}}
+            };
+    \end{tikzpicture}\\[1em]
+    \begin{tikzpicture}
+        \node {9 \nodepart{two} 14} [->]
+        child {node {7}
+                child {node {6}}
+                child {node {8}}
+            }
+        child {node {11}
+                child {node {10}}
+                child {node {12 \nodepart{two} 13}}
+            }
+        child {node {16 \nodepart{two} 19}
+                child {node {15}}
+                child {node {17 \nodepart{two} 18}}
+                child {node {20}}
+            };
+    \end{tikzpicture}
+\end{center}
+
+\subsection*{Zadanie 12}
+W B-drzewie o t = 10:
+\begin{enumerate}[label=(\alph*)]
+    \item ile kluczy może zawierać korzeń (podaj przedział), \\
+          Korzeń zawiera od 1 do 19 kluczy. (max $2t-1$)
+    \item ile dzieci może mieć korzeń (podaj przedział), \\
+          Korzeń może mieć od 2 do 20 dzieci. (min $t$ max $2t$)
+    \item ile kluczy może mieć potomek korzenia (podaj przedział), \\
+          Potomek korzenia może mieć od 9 do 19 kluczy. (min $t-1$ max $2t-1$)
+    \item ile dzieci może mieć potomek korzenia (podaj przedział), \\
+          Potomek korzenia może mieć od 10 do 20 dzieci. (min $t$ max $2t$)
+    \item ile maksymalnie węzłów może być na $k$-tym poziomie (przyjmując, że korzeń to poziom $0$) \\
+          Na k-tym poziomie może być maksymalnie $(2t)^k$ węzłów.
+    \item ile łącznie kluczy może być na $k$-tym poziomie (podaj przedział). \\
+          Nie licząc korzenia dla którego minimum to 1 klicz to na k-tym poziomie może być od $2(t-1)t^{k-1}$ do $(2t-1)(2t)^{k}$ kluczy. (min $(2min)t^{k-1}$ max $(max)t^{k}$
+\end{enumerate}
+
+\end{document}

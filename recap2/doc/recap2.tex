@@ -128,6 +128,25 @@ dodaj do wyściowego 10:
 
 \subsection*{Zadanie 9}
 Jakie informacje przechowujemy w węźle B-drzewa? Podaj definicję B-drzewa
+\begin{lstlisting}
+    struct BTree
+    {
+        uint32_t t;
+        bool isLeaf;
+        size_t n;
+        int32_t *keys;
+        size_t *offsets;
+    };
+\end{lstlisting}
+\begin{enumerate}
+    \item Każdy węzeł posiada $n$ kluczy, przechowywanych w kolejności niemalejącej, a także informację o tym czy jest
+          on liściem.
+    \item Dodatkowo każdy węzeł posiada $n+1$ wskaźników do swoich dzieci.
+    \item Klucze węzła dzielą zbiór kluczy przechowywanych w jego dzieciach na $n+1$ przedziałów.
+    \item Wszystkie liście znajdują się na tym samym poziomie równym wysokości drzewa $h$.
+    \item Każdy węzeł, z wyjątkiem korzenia, posiada co najmniej $t-1$ kluczy.
+    \item Każdy węzeł może posiadać maksymalnie $2t-1$ kluczy.
+\end{enumerate}
 
 \subsection*{Zadanie 10}
 Narysuj B-drzewo o t = 3 zawierające dokładnie 17 kluczy na trzech poziomach: korzeń jego

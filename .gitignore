@@ -11,3 +11,4 @@ target
 !*.pdf
 !*.tex
 !*/src/*
+!*/CMakeLists.txt

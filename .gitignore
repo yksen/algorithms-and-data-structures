@@ -6,6 +6,7 @@
 build
 target
 
-*/doc/*
-!*/doc/*.pdf
-!*/doc/*.tex
+*
+!*/
+!*.pdf
+!*.tex

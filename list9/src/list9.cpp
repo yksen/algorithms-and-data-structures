@@ -17,9 +17,7 @@ namespace reference1
     }
 
     Punkt A[] = {{0, 0}, {1, 0}, {2, 1}, {2, 2}, {1.5, 3}, {0.5, 3}, {0, 2.5}, {-1, 1}};
-
     const int n = sizeof(A) / sizeof(A[0]);
-
     int W[n][n] = {0};
 
     double BestLen(int a, int b)
@@ -36,7 +34,6 @@ namespace reference1
 
         for (int c = a + 1; c < b; c++)
         {
-
             double koszt = BestLen(a, c) + BestLen(c, b);
             if (a + 1 < c)
                 koszt += dist(A[a], A[c]);
@@ -83,25 +80,56 @@ namespace reference2
 
 namespace ex2
 {
-    const size_t n = 7;
-    const int32_t w[n + 1] = {1, 100, 1, 100, 4, 5, 6, 7};
+    using reference1::Punkt, reference1::dist;
+    Punkt A[] = {{0, 0}, {1, 0}, {2, 1}, {2, 2}, {1.5, 3}, {0.5, 3}, {0, 2.5}, {-1, 1}};
+
+    double shortestLength(size_t a, size_t b)
+    {
+        const size_t n = sizeof(A) / sizeof(A[0]);
+        double length[n][n] = {0};
+        for (size_t i = 3; i <= b - a; ++i)
+            for (size_t j = a; j <= b - i; ++j)
+            {
+                size_t k = j + i;
+                for (size_t l = j + 1; l < k; ++l)
+                {
+                    double currentLength = length[j][l] + length[l][k];
+                    if (j + 1 < l)
+                        currentLength += dist(A[j], A[l]);
+                    if (l + 1 < k)
+                        currentLength += dist(A[l], A[k]);
+                    if (currentLength < length[j][k] || length[j][k] == 0)
+                        length[j][k] = currentLength;
+                }
+            }
+        return length[a][b];
+    }
+
+    const int32_t w[] = {1, 100, 1, 100, 4, 5, 6, 7};
 
     uint32_t minimumCost(size_t a, size_t b)
     {
+        const size_t n = sizeof(w) / sizeof(w[0]) - 1;
         uint32_t cost[n][n] = {0};
-        for (size_t i = 1; i < n; ++i)
-            for (size_t j = 0; j < n - i; ++j)
+        for (size_t range = 1; range < n; ++range)
+            for (size_t first = 0; first < n - range; ++first)
             {
-                size_t k = j + i;
-                cost[j][k] = std::numeric_limits<uint32_t>::max();
-                for (size_t l = j; l < k; ++l)
+                size_t last = first + range;
+                for (size_t middle = first; middle < last; ++middle)
                 {
-                    uint32_t c = cost[j][l] + cost[l + 1][k] + w[j] * w[l + 1] * w[k + 1];
-                    if (c < cost[j][k])
-                        cost[j][k] = c;
+                    uint32_t currentCost =
+                        cost[first][middle] + cost[middle + 1][last] + w[first] * w[middle + 1] * w[last + 1];
+                    if (currentCost < cost[first][last] || cost[first][last] == 0)
+                        cost[first][last] = currentCost;
                 }
             }
         return cost[a][b];
+    }
+
+    TEST(List9_Exercise2, shortestLength)
+    {
+        using namespace reference1;
+        EXPECT_EQ(shortestLength(0, n - 1), BestLen(0, n - 1));
     }
 
     TEST(List9_Exercise2, minimumCost)

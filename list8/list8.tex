@@ -164,9 +164,20 @@ dwumianowym o 11 węzłach. Przyjmij dowolne wartości kluczy spełniające waru
 \subsection*{Zadanie 5}
 Udowodnij, że:
 \begin{enumerate}[label=(\alph*)]
-    \item drzewo dwumianowe rzędu $n$ ma $2^n$ węzłów. \\[1ex]
-          W trywalnym przypadku drzewa dwumianowego zawierającego sam korzeń, mamy $n = 0$ i $2^0 = 1$ węzłów. 
+    \item drzewo dwumianowe rzędu $n$ ma $2^n$ węzłów.
+          \begin{gather*}
+              B_{k-1} + B_{k-1} = B_k \\
+              2^{k-1} + 2^{k-1} = 2 \cdot 2^{k-1} = 2^k
+          \end{gather*}
     \item na $k$-tym poziomie drzewa dwumianowego rzędu $n$ znajduje się dokładnie $n \choose k$ węzłów.
+          \begin{gather*}
+              N(k,i) \implies \text{ilość węzłów w drzewie rzędu k na poziomie i} \\
+              N(0,0) \implies {0 \choose 0} = 1 \\
+              N(k+1,i) = N(k,i) + N(k,i-1)  \\
+              {k+1 \choose i} = {k \choose i} + {k \choose i-1} = \\
+              = \frac{k!}{i!(k-i)!} + \frac{k!}{(i-1)!(k-i+1)!} = \frac{k!(k-i+1)}{i!(k-i+1)!} + \frac{k!i}{i!(k-i+1)!} = \\
+              \frac{k!(k-i+1+i)}{i!(k-i+1)!} = \frac{(k+1)!}{i!(k+1-i)!} = {k+1 \choose i}
+          \end{gather*}
 \end{enumerate}
 
 \subsection*{Zadanie 6}
@@ -209,7 +220,7 @@ dwumianowym zawierającym $n$ kluczy.
               \begin{forest}
                   [, phantom, for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=5mm, edge=Latex-, calign=last},
                       [7]{\draw[-Latex] () to node{} (1);}
-                      [16, name=1[14[12[1]][3]][13[8]][5]]
+                          [16, name=1[14[12[1]][3]][13[8]][5]]
                   ]
               \end{forest}
           \end{center}

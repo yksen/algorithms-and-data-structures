@@ -138,3 +138,54 @@ namespace ex2
         EXPECT_EQ(minimumCost(0, n - 1), KosztMin(0, n - 1));
     }
 }
+
+namespace ex6
+{
+    std::pair<std::vector<int32_t>, std::vector<int32_t>> cutRod(const std::vector<uint32_t> &prices, int32_t cost)
+    {
+        const size_t n = prices.size();
+        std::vector<int32_t> maxRevenue(n, 0);
+        std::vector<int32_t> shortestBit(n, 0);
+        for (size_t i = 1; i < n; ++i)
+        {
+            int32_t currentMaxRevenue = std::numeric_limits<int32_t>::min();
+            for (size_t j = 1; j <= i; ++j)
+            {
+                int32_t currentRevenue = prices[j] + maxRevenue[i - j] - cost;
+                if (currentRevenue > currentMaxRevenue)
+                {
+                    currentMaxRevenue = currentRevenue;
+                    shortestBit[i] = j;
+                }
+            }
+            maxRevenue[i] = currentMaxRevenue;
+        }
+        return {maxRevenue, shortestBit};
+    }
+
+    void printCutRodSolution(const std::vector<uint32_t> &prices, int32_t cost)
+    {
+        auto [maxRevenue, shortestBit] = cutRod(prices, cost);
+        size_t n = prices.size() - 1;
+        std::cout << "Max revenue: " << maxRevenue[n] << ", rod lengths: ";
+        while (n > 0)
+        {
+            std::cout << shortestBit[n] << " ";
+            n -= shortestBit[n];
+        }
+        std::cout << std::endl;
+    }
+
+    TEST(List9_Exercise6, cutRod)
+    {
+        std::vector<uint32_t> prices = {0, 1, 5, 8, 9, 10, 17, 17, 20, 24, 30};
+        printCutRodSolution(prices, 0);
+        auto [maxRevenue, shortestBit] = cutRod(prices, 0);
+        EXPECT_EQ(maxRevenue, std::vector<int32_t>({0, 1, 5, 8, 10, 13, 17, 18, 22, 25, 30}));
+        EXPECT_EQ(shortestBit, std::vector<int32_t>({0, 1, 2, 3, 2, 2, 6, 1, 2, 3, 10}));
+
+        printCutRodSolution(prices, 1);
+        printCutRodSolution(prices, 2);
+        printCutRodSolution(prices, 3);
+    }
+}

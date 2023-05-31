@@ -1,0 +1,81 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=0.8in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+\usepackage{multicol}
+\usepackage{tikz}
+\usetikzlibrary{arrows.meta, matrix}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 10}
+
+\subsection*{Zadanie 1}
+Zastosuj strukturę \verb|UnionFind3| (znajdziesz ją pliku \verb|UnionFind3.cc| w materiałach do wykładu 10)
+do sprawdzenia czy w tablicy \verb|bool t[n][n]| istnieje ścieżka zawierająca same
+jedynki (true): (a) od pola \verb|t[0][0]| do \verb|t[n-1][n-1]| (b) od pierwszego do ostatniego
+wiersza (tzn. jakaś komórka z pierwszego wiersza jest połączona ścieżką z jakąś komórką
+z ostatniego wiersza). Za ścieżkę uważamy ciąg pól tablicy, które stykają się krawędzią
+(różną się o 1 numerem kolumny albo wiersza).
+
+\subsection*{Zadanie 2}
+(a) Zastosuj strukturę \verb|UnionFind| do sprawdzenia ile wysp jedynek zawiera tablica
+\verb|bool t[n][n]|. Za wyspę uważamy zbiór jedynek taki, że z każdej do każdej można
+przejść ścieżką zawierającą same jedynki poruszając się tylko w poziomie i pionie.
+(b) ten sam problem rozwiąż za pomocą zmodyfikowanego algorytmu DFS.
+
+\subsection*{Zadanie 3}
+(3 pkt) Dla podanego w formacie macierzy sąsiedztwa grafu zasymuluj na kartce działanie
+każdego z algorytmów: (a) DSF z wierzchołka A, (b) BSF z wierzchołka A, (c) MST
+Kruskal, (d) MST Prim z wierzchołka A, (e) Dijsktra z wierzchołka A, (f) Dijsktra z
+wierzchołka D.
+\begin{center}$
+        \begin{pmatrix}
+              & A & B & C & D & E & F \\
+            A &   & 4 &   &   & 1 & 2 \\
+            B & 4 &   & 2 &   & 2 &   \\
+            C &   & 2 &   & 8 &   &   \\
+            D &   &   & 8 &   & 3 & 6 \\
+            E & 1 & 2 &   & 3 &   & 7 \\
+            F & 2 &   &   & 6 & 7 &
+        \end{pmatrix}$
+\end{center}
+Na kartce powinien znajdować się rysunek grafu, z zaznaczonym wynikiem działania algorytmu
+oraz wypunktowane kolejne kroki algorytmu np. sortuję krawędzie; sprawdzam
+krawędź AB ale A i B są już w jednym zbiorze; sprawdzam sąsiada B ale jest już czarny;
+sprawdzam krawędź AB, wykonuję \verb|union(A,B)| i dodaję AB do drzewa; \verb|Q.getmin()|
+daje wierzchołek $C$; sprawdzam że $key(C) > key(B) + |BC|$ i robię \verb|decrease_key(C,7)|
+
+\subsection*{Zadanie 4}
+(2 pkt) Napisz program, który czyta z pliku graf w następującym formacie:
+(a) Pierwsza linia zawiera liczbę wierzchołków \verb|n| oraz liczbę krawędzi \verb|e|.
+(b) w następnych \verb|e| liniach są po trzy liczby zadające krawędź: numer wierzchołka
+startowego, numer wierzchołka docelowego, oraz długość krawędzi. Wierzchołki są numerowane liczbami od 1 do \verb|n|. \\[1em]
+Na podstawie pliku tworzony jest graf w reprezentacji list sąsiedztwa. \\[1em]
+Po wczytaniu grafu, program drukuje:
+(a) macierz sąsiedztwa,
+(b) minimalne drzewo rozpinające (algorytm Kruskala lub Prima)
+(c) drzewo najkrótszych ścieżek z wierzchołka o numerze 1 (algorytm Dijkstry): dla
+każdego wierzchołka (z wyjątkiem 1) drukowany jest drugi koniec krawędzi, jej długość
+oraz odległość całkowita od wierzchołka 1. \\[1em]
+Format wydruku drzew w punktach (b) i (c) jest taki sam jak dla grafu wejściowego. \\[1em]
+Za punkt wyjścia możesz użyć program \verb|graph2.cc| zamieszczony w materiałach do wykładu 11.
+
+\subsection*{Zadanie 5}
+(2 pkt) Napisz program, który (np. metodą prób i błędów, przeszukując “szachownicę” w
+głąb) znajduje drogę konika szachowego po szachownicy o podanych wymiarach, taką
+że każde pole jest odwiedzone dokładnie raz. Wypróbuj program dla kwadratowych szachownic o boku od 5 do 20.
+
+\end{document}

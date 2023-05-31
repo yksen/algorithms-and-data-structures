@@ -50,7 +50,10 @@ namespace ref1
 
 namespace ex1
 {
-    bool doesPathExist(bool *t, size_t n)
+    typedef std::vector<std::vector<bool>> Grid;
+    typedef std::pair<int32_t, int32_t> Point;
+
+    void printGrid(bool *t, size_t n)
     {
         for (size_t i = 0; i < n; ++i)
         {
@@ -60,22 +63,55 @@ namespace ex1
             }
             std::cout << std::endl;
         }
+    }
 
-        return true;
+    bool doesPathExist(Grid t, Point start, Point end)
+    {
+        const size_t n = t.size();
+        ref1::UnionFind3 uf(n * n);
+        const int32_t dx[] = {-1, 1, 0, 0};
+        const int32_t dy[] = {0, 0, -1, 1};
+
+        for (size_t i = 0; i < n; ++i)
+            for (size_t j = 0; j < n; ++j)
+                for (size_t k = 0; k < 4; ++k)
+                {
+                    size_t x = i + dx[k];
+                    size_t y = j + dy[k];
+                    if (x < n && y < n && t[i][j] && t[x][y])
+                        uf.Union(i * n + j, x * n + y);
+                }
+
+        return uf.Find(start.first * n + start.second) == uf.Find(end.first * n + end.second);
     }
 
     TEST(List10_Exercise1, FirstToLastCell)
     {
-        const size_t n = 3;
-        bool t[n][n] = {
+        Grid t = {
             {1, 0, 1},
             {1, 1, 1},
             {0, 0, 1},
         };
-        std::cout << doesPathExist((bool *)t, n) << std::endl;
+        EXPECT_TRUE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 1}));
+        EXPECT_FALSE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 2}));
+
+        t = {
+            {1, 0, 0},
+            {1, 0, 1},
+            {0, 0, 1},
+        };
+        EXPECT_FALSE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 1}));
     }
 
     TEST(List10_Exercise1, FirstToLastRow)
     {
+        Grid t = {
+            {1, 0, 1},
+            {1, 1, 1},
+            {0, 1, 0},
+        };
+        EXPECT_TRUE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 2}));
+        EXPECT_TRUE(doesPathExist(t, {0, 2}, {t.size() - 1, t.size() - 2}));
+        EXPECT_FALSE(doesPathExist(t, {0, 1}, {t.size() - 1, t.size() - 2}));
     }
 }

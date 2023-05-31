@@ -12,6 +12,9 @@
 \usepackage{multicol}
 \usepackage{tikz}
 \usetikzlibrary{arrows.meta, matrix}
+\tikzset{
+    v/.style={draw, circle, node distance={20mm}, thick}, 
+    e/.style={midway, sloped, above}}
 
 \begin{document}
 
@@ -57,6 +60,43 @@ oraz wypunktowane kolejne kroki algorytmu np. sortuję krawędzie; sprawdzam
 krawędź AB ale A i B są już w jednym zbiorze; sprawdzam sąsiada B ale jest już czarny;
 sprawdzam krawędź AB, wykonuję \verb|union(A,B)| i dodaję AB do drzewa; \verb|Q.getmin()|
 daje wierzchołek $C$; sprawdzam że $key(C) > key(B) + |BC|$ i robię \verb|decrease_key(C,7)|
+\begin{center}
+    \begin{tikzpicture}
+        \node[v] (E) {E};
+        \node[v] (A)[below left of=E] {A};
+        \node[v] (B)[below right of=E] {B};
+        \node[v] (F)[above left of=E] {F};
+        \node[v] (D)[above right of=E] {D};
+        \node[v] (C)[below right of=D] {C};
+        \draw (A) -- node[e] {4} (B);
+        \draw (A) -- node[e] {1} (E);
+        \draw (A) -- node[e] {2} (F);
+        \draw (B) -- node[e] {2} (C);
+        \draw (B) -- node[e] {2} (E);
+        \draw (C) -- node[e] {8} (D);
+        \draw (D) -- node[e] {3} (E);
+        \draw (D) -- node[e] {6} (F);
+        \draw (E) -- node[e] {7} (F);
+    \end{tikzpicture}
+\end{center}
+\begin{enumerate}[label=(\alph*)]
+    \item
+          \begin{center}
+              \begin{tikzpicture}
+                  \node[v] (E) {E};
+                  \node[v] (A)[below left of=E] {A};
+                  \node[v] (B)[below right of=E] {B};
+                  \node[v] (F)[above left of=E] {F};
+                  \node[v] (D)[above right of=E] {D};
+                  \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {2} (F);
+                  \draw (B) -- node[e] {2} (C);
+                  \draw (B) -- node[e] {2} (E);
+                  \draw (C) -- node[e] {8} (D);
+                  \draw (D) -- node[e] {6} (F);
+              \end{tikzpicture}
+          \end{center}
+\end{enumerate}
 
 \subsection*{Zadanie 4}
 (2 pkt) Napisz program, który czyta z pliku graf w następującym formacie:

@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(algorithms-and-data-structures LANGUAGES CXX)
 
-set(CMAKE_CXX_STANDARD 14)
+set(CMAKE_CXX_STANDARD 17)
 add_compile_options(-Wall -Wextra -Wpedantic -Werror)
 
 include(FetchContent)
@@ -21,3 +21,4 @@ add_subdirectory(list3)
 add_subdirectory(list4)
 add_subdirectory(list5)
 add_subdirectory(list6)
+add_subdirectory(list9)

@@ -79,8 +79,9 @@ daje wierzchołek $C$; sprawdzam że $key(C) > key(B) + |BC|$ i robię \verb|dec
         \draw (E) -- node[e] {7} (F);
     \end{tikzpicture}
 \end{center}
+\pagebreak
 \begin{enumerate}[label=(\alph*)]
-    \item
+    \item DFS z wierzchołka A
           \begin{center}
               \begin{tikzpicture}
                   \node[v] (E) {E};
@@ -89,11 +90,95 @@ daje wierzchołek $C$; sprawdzam że $key(C) > key(B) + |BC|$ i robię \verb|dec
                   \node[v] (F)[above left of=E] {F};
                   \node[v] (D)[above right of=E] {D};
                   \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {4} (B);
+                  \draw (B) -- node[e] {2} (C);
+                  \draw (C) -- node[e] {8} (D);
+                  \draw (D) -- node[e] {3} (E);
+                  \draw (E) -- node[e] {7} (F);
+              \end{tikzpicture}
+          \end{center}
+    \item BFS z wierzchołka A
+          \begin{center}
+              \begin{tikzpicture}
+                  \node[v] (E) {E};
+                  \node[v] (A)[below left of=E] {A};
+                  \node[v] (B)[below right of=E] {B};
+                  \node[v] (F)[above left of=E] {F};
+                  \node[v] (D)[above right of=E] {D};
+                  \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {4} (B);
+                  \draw (A) -- node[e] {1} (E);
+                  \draw (A) -- node[e] {2} (F);
+                  \draw (B) -- node[e] {2} (C);
+                  \draw (D) -- node[e] {3} (E);
+              \end{tikzpicture}
+          \end{center}
+    \item MST Kruskal \\[1ex]
+          Sortowanie krawędzi według wag i następnie dodawanie ich do drzewa jeśli nie tworzą cyklu.
+          \begin{center}
+              \begin{tikzpicture}
+                  \node[v] (E) {E};
+                  \node[v] (A)[below left of=E] {A};
+                  \node[v] (B)[below right of=E] {B};
+                  \node[v] (F)[above left of=E] {F};
+                  \node[v] (D)[above right of=E] {D};
+                  \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {1} (E);
                   \draw (A) -- node[e] {2} (F);
                   \draw (B) -- node[e] {2} (C);
                   \draw (B) -- node[e] {2} (E);
-                  \draw (C) -- node[e] {8} (D);
+                  \draw (D) -- node[e] {3} (E);
+              \end{tikzpicture}
+          \end{center}
+    \item MST Prim z wierzchołka A \\[1ex]
+          Inicjujemy tablicę odległości od grafu wartościami $\infty$, nastpęnie dla sąsiednich wierzchołków
+          aktualizujemy odległości. Wybieramy wierzchołek o najmniejszej odległości, dodajemy go do grafu i powtarzamy.
+          \begin{center}
+              \begin{tikzpicture}
+                  \node[v] (E) {E};
+                  \node[v] (A)[below left of=E] {A};
+                  \node[v] (B)[below right of=E] {B};
+                  \node[v] (F)[above left of=E] {F};
+                  \node[v] (D)[above right of=E] {D};
+                  \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {1} (E);
+                  \draw (A) -- node[e] {2} (F);
+                  \draw (B) -- node[e] {2} (C);
+                  \draw (B) -- node[e] {2} (E);
                   \draw (D) -- node[e] {6} (F);
+              \end{tikzpicture}
+          \end{center}
+          \pagebreak
+    \item Dijsktra z wierzchołka A
+          \begin{center}
+              \begin{tikzpicture}
+                  \node[v] (E) {E};
+                  \node[v] (A)[below left of=E] {A};
+                  \node[v] (B)[below right of=E] {B};
+                  \node[v] (F)[above left of=E] {F};
+                  \node[v] (D)[above right of=E] {D};
+                  \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {1} (E);
+                  \draw (A) -- node[e] {2} (F);
+                  \draw (B) -- node[e] {2} (C);
+                  \draw (B) -- node[e] {2} (E);
+                  \draw (D) -- node[e] {3} (E);
+              \end{tikzpicture}
+          \end{center}
+    \item Dijsktra z wierzchołka D
+          \begin{center}
+              \begin{tikzpicture}
+                  \node[v] (E) {E};
+                  \node[v] (A)[below left of=E] {A};
+                  \node[v] (B)[below right of=E] {B};
+                  \node[v] (F)[above left of=E] {F};
+                  \node[v] (D)[above right of=E] {D};
+                  \node[v] (C)[below right of=D] {C};
+                  \draw (A) -- node[e] {1} (E);
+                  \draw (A) -- node[e] {2} (F);
+                  \draw (B) -- node[e] {2} (C);
+                  \draw (B) -- node[e] {2} (E);
+                  \draw (D) -- node[e] {3} (E);
               \end{tikzpicture}
           \end{center}
 \end{enumerate}

@@ -13,6 +13,7 @@
 \usepackage{varwidth}
 \usepackage{xcolor}
 \usepackage{tikz}
+\usetikzlibrary{arrows.meta}
 \tikzset{
     v/.style={draw, circle, node distance={20mm}, thick}, 
     e/.style={midway, sloped, above}}
@@ -138,8 +139,7 @@ wierzchołka.
 
 
 \subsection*{Zadanie 7}
-(3 pkt) Zasymuluj działanie algorytmu Dijksty startując z wierchołka 3. Zapisz kroki algo-
-rytmu podając w każdym kroku:
+(3 pkt) Zasymuluj działanie algorytmu Dijkstry startując z wierchołka 3. Zapisz kroki algorytmu podając w każdym kroku:
 \begin{itemize}
     \item numer odwiedzanego wierzchołka
     \item wykonane w tym kroku operacje \verb|decrease_key| i odpowiednie zmiany w tablicy poprzedników (\verb|prev|)
@@ -158,5 +158,28 @@ Algorytm zilustruj grafem, w którym:
     \item strzałkami przerywanymi oznaczone będą krawędzie, które w trakcie algorytmu wskazywały
           na poprzednika, jednak nie należą do drzewa wynikowego.
 \end{itemize}
+\begin{center}
+    \tikzset{v/.append style={node distance=30mm}}
+    \begin{tikzpicture}
+        \node[v, label=(5)] (1) {1};
+        \node[v, label=(2)] (2) [right of=1] {2};
+        \node[v, label=(1)] (3) [right of=2] {3};
+        \node[v, label=-90:(4)] (4) [below of=3] {4};
+        \node[v, label=-45:(3)] (5) [below of=2] {5};
+        \node[v, label=180:(6)] (6) [left of=5] {6};
+        \node[v, label=-90:(7)] (7) [below of=6] {7};
+        \draw[-Latex] (2) -- node[e] {1} (3);
+        \draw[Latex-] (1) -- node[e] {2} (6);
+        \draw[-Latex] (4) -- node[e] {3} (5);
+        \draw[dashed, Latex-] (6) -- node[e] {4} (7);
+        \draw[Latex-] (5) -- node[e] {5} (7);
+        \draw[Latex-] (2) -- node[e] {7} (5);
+        \draw[-Latex] (1) -- node[e] {8} (2);
+        \draw[dashed, Latex-] (5) -- node[e] {12} (6);
+        \draw[dashed, Latex-] (3) -- node[e] {15} (4);
+        \draw[dashed, Latex-] (2) -- node[e] {20} (6);
+    \end{tikzpicture}
+\end{center}
+
 
 \end{document}

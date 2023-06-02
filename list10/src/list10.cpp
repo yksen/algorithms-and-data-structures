@@ -646,3 +646,65 @@ namespace ex4
         std::cout << std::endl;
     }
 }
+
+namespace ex5
+{
+    typedef std::vector<std::vector<uint32_t>> Chessboard;
+
+    int32_t dx[] = {1, 1, -1, -1, 2, 2, -2, -2};
+    int32_t dy[] = {2, -2, 2, -2, 1, -1, 1, -1};
+
+    bool found = false;
+
+    void depthFirstSearch(Chessboard &visited, Point p, uint32_t step)
+    {
+        if (found)
+            return;
+
+        visited[p.first][p.second] = step;
+
+        const size_t n = visited.size();
+        size_t newSteps = 0;
+
+        for (size_t i = 0; i < 8; ++i)
+        {
+            size_t x = p.first + dx[i];
+            size_t y = p.second + dy[i];
+            if (x < n && y < n && !visited[x][y])
+            {
+                ++newSteps;
+                depthFirstSearch(visited, {x, y}, step + 1);
+            }
+        }
+
+        if (newSteps == 0)
+            visited[p.first][p.second] = step;
+
+        if (newSteps == 0 && step == n * n)
+        {
+            found = true;
+            for (size_t i = 0; i < n; ++i)
+            {
+                for (size_t j = 0; j < n; ++j)
+                    std::cout << std::setw(3) << visited[i][j];
+                std::cout << std::endl;
+            }
+            std::cout << std::endl;
+        }
+
+        visited[p.first][p.second] = 0;
+    }
+
+    void traverseChessboard(size_t n)
+    {
+        found = false;
+        Chessboard visited(n, std::vector<uint32_t>(n, 0));
+        depthFirstSearch(visited, {0, 0}, 1);
+    }
+
+    TEST(List10_Exercise5, traverseChessboard)
+    {
+        for (size_t i = 5; i < 8; ++i)
+            traverseChessboard(i);
+    }
+}

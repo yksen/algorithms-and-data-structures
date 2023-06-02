@@ -10,6 +10,7 @@
 \usepackage[edges]{forest}
 \usepackage{listings}
 \usepackage{multicol}
+\usepackage{multirow}
 \usepackage{varwidth}
 \usepackage{xcolor}
 \usepackage{tikz}
@@ -115,6 +116,7 @@ wierzchołka.
     \item liniami ciągłymi oznacz krawędzie należące do drzewa wynikowego,
     \item przy każdej krawędzi w nawiasie okrągłym podaj kolejność w jakiej była ona rozpatrywana.
 \end{itemize}
+\tikzset{v/.append style={node distance=30mm}}
 \begin{center}
     \begin{tikzpicture}
         \node[v] (1) {1};
@@ -130,10 +132,10 @@ wierzchołka.
         \draw (6) -- node[e] {4} node[e, below] {(4)} (7);
         \draw (5) -- node[e] {5} node[e, below] {(5)} (7);
         \draw (2) -- node[e] {7} node[e, below] {(6)} (5);
-        \draw[dashed] (1) -- node[e] {8} (2);
-        \draw[dashed] (5) -- node[e] {12} (6);
-        \draw[dashed] (3) -- node[e] {15} (4);
-        \draw[dashed] (2) -- node[e] {20} (6);
+        \draw[dashed] (1) -- node[e] {8} node[e, below] {(7)} (2);
+        \draw[dashed] (5) -- node[e] {12} node[e, below] {(8)} (6);
+        \draw[dashed] (3) -- node[e] {15} node[e, below] {(9)} (4);
+        \draw[dashed] (2) -- node[e] {20} node[e, below] {(10)} (6);
     \end{tikzpicture}
 \end{center}
 
@@ -145,11 +147,48 @@ wierzchołka.
     \item wykonane w tym kroku operacje \verb|decrease_key| i odpowiednie zmiany w tablicy poprzedników (\verb|prev|)
     \item wypisując jaka jest zawartość kolejki priorytetowej po wykonaniu kroku
 \end{itemize}
+\begin{center}
+    \begin{tabular}{*{5}{|c}|}
+        \hline
+        \textbf{Wierzchołek} & \multicolumn{3}{|c|}{\textbf{Operacje}} & \textbf{Kolejka}                                                                            \\
+        \hline
+        -                    & \verb|decrease_key(3, 0)|               & \verb|prev[3] = 3|         &                            & 3, 1, 2, 4, 5, 6, 7               \\
+        \hline
+        \multirow{2}{*}{3}   & \verb|decrease_key(2, 1)|               & \verb|decrease_key(4, 15)| &                            & \multirow{2}{*}{2, 4, 1, 5, 6, 7} \\
+                             & \verb|prev[2] = 3|                      & \verb|prev[4] = 3|         &                            &                                   \\
+        \hline
+        \multirow{2}{*}{2}   & \verb|decrease_key(1, 9)|               & \verb|decrease_key(5, 8)|  &                            & \multirow{2}{*}{5, 1, 4, 6, 7}    \\
+                             & \verb|prev[1] = 2|                      & \verb|prev[5] = 2|         &                            &                                   \\
+        \hline
+        \multirow{2}{*}{5}   & \verb|decrease_key(4, 11)|              & \verb|decrease_key(6, 20)| & \verb|decrease_key(7, 13)| & \multirow{2}{*}{1, 4, 7, 6}       \\
+                             & \verb|prev[4] = 5|                      & \verb|prev[6] = 5|         & \verb|prev[7] = 5|         &                                   \\
+        \hline
+        1                    & \verb|decrease_key(6, 11)|              & \verb|prev[6] = 1|         &                            & 4, 6, 7                           \\
+        \hline
+        4                    &                                         &                            &                            & 6, 7                              \\
+        \hline
+        6                    &                                         &                            &                            & 7                                 \\
+        \hline
+        7                    &                                         &                            &                            & -                                 \\
+        \hline
+    \end{tabular}
+\end{center}
 Na końcu algorytmu dla każdego wierzchołka zapisz:
 \begin{itemize}
     \item odległość od wierzchołka startowego
     \item numer wierzchołka będącego poprzednikiem
 \end{itemize}
+\begin{center}
+    \begin{tabular}{*{8}{|c}|}
+        \hline
+        \textbf{Wierzchołek} & 1 & 2 & 3 & 4  & 5 & 6  & 7  \\
+        \hline
+        \textbf{Odległość}   & 9 & 1 & 0 & 11 & 8 & 11 & 13 \\
+        \hline
+        \textbf{Poprzednik}  & 2 & 3 & 3 & 5  & 2 & 1  & 5  \\
+        \hline
+    \end{tabular}
+\end{center}
 Algorytm zilustruj grafem, w którym:
 \begin{itemize}
     \item przy każdym wierzchołku będzie podany w nawiasie okrągłym numer kroku algorytmu,
@@ -159,25 +198,24 @@ Algorytm zilustruj grafem, w którym:
           na poprzednika, jednak nie należą do drzewa wynikowego.
 \end{itemize}
 \begin{center}
-    \tikzset{v/.append style={node distance=30mm}}
     \begin{tikzpicture}
-        \node[v, label=(5)] (1) {1};
+        \node[v, label=(4)] (1) {1};
         \node[v, label=(2)] (2) [right of=1] {2};
         \node[v, label=(1)] (3) [right of=2] {3};
-        \node[v, label=-90:(4)] (4) [below of=3] {4};
+        \node[v, label=0:(5)] (4) [below of=3] {4};
         \node[v, label=-45:(3)] (5) [below of=2] {5};
         \node[v, label=180:(6)] (6) [left of=5] {6};
         \node[v, label=-90:(7)] (7) [below of=6] {7};
         \draw[-Latex] (2) -- node[e] {1} (3);
         \draw[Latex-] (1) -- node[e] {2} (6);
         \draw[-Latex] (4) -- node[e] {3} (5);
-        \draw[dashed, Latex-] (6) -- node[e] {4} (7);
+        \draw[dashed] (6) -- node[e] {4} (7);
         \draw[Latex-] (5) -- node[e] {5} (7);
         \draw[Latex-] (2) -- node[e] {7} (5);
         \draw[-Latex] (1) -- node[e] {8} (2);
         \draw[dashed, Latex-] (5) -- node[e] {12} (6);
         \draw[dashed, Latex-] (3) -- node[e] {15} (4);
-        \draw[dashed, Latex-] (2) -- node[e] {20} (6);
+        \draw[dashed] (2) -- node[e] {20} (6);
     \end{tikzpicture}
 \end{center}
 

@@ -3,7 +3,6 @@
 #include <gtest/gtest.h>
 #include <queue>
 #include <stack>
-#include <unordered_set>
 
 namespace ref1
 {
@@ -51,151 +50,6 @@ namespace ref1
             }
         }
     };
-}
-
-typedef std::vector<std::vector<bool>> Grid;
-typedef std::pair<int32_t, int32_t> Point;
-const int32_t dx[] = {-1, 1, 0, 0};
-const int32_t dy[] = {0, 0, -1, 1};
-
-namespace ex1
-{
-    bool doesPathExist(Grid t, Point start, Point end)
-    {
-        const size_t n = t.size();
-        ref1::UnionFind3 uf(n * n);
-
-        for (size_t i = 0; i < n; ++i)
-            for (size_t j = 0; j < n; ++j)
-                for (size_t k = 0; k < 4; ++k)
-                {
-                    size_t x = i + dx[k];
-                    size_t y = j + dy[k];
-                    if (x < n && y < n && t[i][j] && t[x][y])
-                        uf.Union(i * n + j, x * n + y);
-                }
-
-        return uf.Find(start.first * n + start.second) == uf.Find(end.first * n + end.second);
-    }
-
-    TEST(List10_Exercise1, FirstToLastCell)
-    {
-        Grid t = {
-            {1, 0, 1},
-            {1, 1, 1},
-            {0, 0, 1},
-        };
-        EXPECT_TRUE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 1}));
-        EXPECT_FALSE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 2}));
-
-        t = {
-            {1, 0, 0},
-            {1, 0, 1},
-            {0, 0, 1},
-        };
-        EXPECT_FALSE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 1}));
-    }
-
-    TEST(List10_Exercise1, FirstToLastRow)
-    {
-        Grid t = {
-            {1, 0, 1},
-            {1, 1, 1},
-            {0, 1, 0},
-        };
-        EXPECT_TRUE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 2}));
-        EXPECT_TRUE(doesPathExist(t, {0, 2}, {t.size() - 1, t.size() - 2}));
-        EXPECT_FALSE(doesPathExist(t, {0, 1}, {t.size() - 1, t.size() - 2}));
-    }
-}
-
-namespace ex2
-{
-    size_t getIslandsCount(Grid t)
-    {
-        const size_t n = t.size();
-        ref1::UnionFind3 uf(n * n);
-
-        for (size_t i = 0; i < n; ++i)
-            for (size_t j = 0; j < n; ++j)
-                for (size_t k = 0; k < 4; ++k)
-                {
-                    size_t x = i + dx[k];
-                    size_t y = j + dy[k];
-                    if (x < n && y < n && t[i][j] && t[x][y])
-                        uf.Union(i * n + j, x * n + y);
-                }
-
-        std::unordered_set<int32_t> islands;
-        for (size_t i = 0; i < n; ++i)
-            for (size_t j = 0; j < n; ++j)
-                if (t[i][j])
-                    islands.insert(uf.Find(i * n + j));
-
-        return islands.size();
-    }
-
-    size_t getIslandsCountDFS(Grid t)
-    {
-        const size_t n = t.size();
-        Grid visited(n, std::vector<bool>(n, false));
-
-        size_t islands = 0;
-        for (size_t i = 0; i < n; ++i)
-            for (size_t j = 0; j < n; ++j)
-                if (!visited[i][j] && t[i][j])
-                {
-                    ++islands;
-                    std::stack<Point> toVisit;
-                    toVisit.push({i, j});
-                    while (!toVisit.empty())
-                    {
-                        Point p = toVisit.top();
-                        toVisit.pop();
-                        if (visited[p.first][p.second])
-                            continue;
-                        visited[p.first][p.second] = true;
-                        for (size_t k = 0; k < 4; ++k)
-                        {
-                            size_t x = p.first + dx[k];
-                            size_t y = p.second + dy[k];
-                            if (x < n && y < n && t[x][y])
-                                toVisit.push({x, y});
-                        }
-                    }
-                }
-
-        return islands;
-    }
-
-    TEST(List10_Exercise2, IslandsCount)
-    {
-        Grid t = {
-            {1, 1, 0, 1, 0},
-            {1, 1, 0, 1, 0},
-            {0, 0, 1, 0, 0},
-            {1, 1, 0, 1, 1},
-            {0, 0, 0, 1, 1},
-        };
-        EXPECT_EQ(getIslandsCount(t), 5);
-        EXPECT_EQ(getIslandsCountDFS(t), 5);
-
-        t = {
-            {1, 0, 1},
-            {0, 1, 0},
-            {1, 0, 1},
-        };
-        EXPECT_EQ(getIslandsCount(t), 5);
-        EXPECT_EQ(getIslandsCountDFS(t), 5);
-
-        t = {
-            {1, 1, 1},
-            {1, 1, 0},
-            {1, 0, 1},
-        };
-        EXPECT_EQ(getIslandsCount(t), 2);
-        EXPECT_EQ(getIslandsCountDFS(t), 2);
-    }
 }
 
 namespace ref4
@@ -609,6 +463,151 @@ namespace ref4
     }
 }
 
+typedef std::vector<std::vector<bool>> Grid;
+typedef std::pair<int32_t, int32_t> Point;
+const int32_t dx[] = {1, 0, 0, -1};
+const int32_t dy[] = {0, 1, -1, 0};
+
+namespace ex1
+{
+    bool doesPathExist(Grid t, Point start, Point end)
+    {
+        const size_t n = t.size();
+        ref1::UnionFind3 uf(n * n);
+
+        for (size_t i = 0; i < n; ++i)
+            for (size_t j = 0; j < n; ++j)
+                for (size_t k = 0; k < 4; ++k)
+                {
+                    size_t x = i + dx[k];
+                    size_t y = j + dy[k];
+                    if (x < n && y < n && t[i][j] && t[x][y])
+                        uf.Union(i * n + j, x * n + y);
+                }
+
+        return uf.Find(start.first * n + start.second) == uf.Find(end.first * n + end.second);
+    }
+
+    TEST(List10_Exercise1, FirstToLastCell)
+    {
+        Grid t = {
+            {1, 0, 1},
+            {1, 1, 1},
+            {0, 0, 1},
+        };
+        EXPECT_TRUE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 1}));
+        EXPECT_FALSE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 2}));
+
+        t = {
+            {1, 0, 0},
+            {1, 0, 1},
+            {0, 0, 1},
+        };
+        EXPECT_FALSE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 1}));
+    }
+
+    TEST(List10_Exercise1, FirstToLastRow)
+    {
+        Grid t = {
+            {1, 0, 1},
+            {1, 1, 1},
+            {0, 1, 0},
+        };
+        EXPECT_TRUE(doesPathExist(t, {0, 0}, {t.size() - 1, t.size() - 2}));
+        EXPECT_TRUE(doesPathExist(t, {0, 2}, {t.size() - 1, t.size() - 2}));
+        EXPECT_FALSE(doesPathExist(t, {0, 1}, {t.size() - 1, t.size() - 2}));
+    }
+}
+
+namespace ex2
+{
+    size_t getIslandsCount(Grid t)
+    {
+        const size_t n = t.size();
+        ref4::UnionFind uf(n * n);
+
+        int32_t islandsCount = 0;
+
+        for (size_t i = 0; i < n; ++i)
+            for (size_t j = 0; j < n; ++j)
+            {
+                if (t[i][j])
+                    ++islandsCount;
+                for (size_t k = 0; k < 2; ++k)
+                {
+                    size_t x = i + dx[k];
+                    size_t y = j + dy[k];
+                    if (x < n && y < n && t[i][j] && t[x][y])
+                        islandsCount -= uf.Union(i * n + j, x * n + y);
+                }
+            }
+
+        return islandsCount;
+    }
+
+    size_t getIslandsCountDFS(Grid t)
+    {
+        const size_t n = t.size();
+        Grid visited(n, std::vector<bool>(n, false));
+
+        size_t islands = 0;
+        for (size_t i = 0; i < n; ++i)
+            for (size_t j = 0; j < n; ++j)
+                if (!visited[i][j] && t[i][j])
+                {
+                    ++islands;
+                    std::stack<Point> toVisit;
+                    toVisit.push({i, j});
+                    while (!toVisit.empty())
+                    {
+                        Point p = toVisit.top();
+                        toVisit.pop();
+                        if (visited[p.first][p.second])
+                            continue;
+                        visited[p.first][p.second] = true;
+                        for (size_t k = 0; k < 4; ++k)
+                        {
+                            size_t x = p.first + dx[k];
+                            size_t y = p.second + dy[k];
+                            if (x < n && y < n && t[x][y])
+                                toVisit.push({x, y});
+                        }
+                    }
+                }
+
+        return islands;
+    }
+
+    TEST(List10_Exercise2, IslandsCount)
+    {
+        Grid t = {
+            {1, 1, 0, 1, 0},
+            {1, 1, 0, 1, 0},
+            {0, 0, 1, 0, 0},
+            {1, 1, 0, 1, 1},
+            {0, 0, 0, 1, 1},
+        };
+        EXPECT_EQ(getIslandsCount(t), 5);
+        EXPECT_EQ(getIslandsCountDFS(t), 5);
+
+        t = {
+            {1, 0, 1},
+            {0, 1, 0},
+            {1, 0, 1},
+        };
+        EXPECT_EQ(getIslandsCount(t), 5);
+        EXPECT_EQ(getIslandsCountDFS(t), 5);
+
+        t = {
+            {1, 1, 1},
+            {1, 1, 0},
+            {1, 0, 1},
+        };
+        EXPECT_EQ(getIslandsCount(t), 2);
+        EXPECT_EQ(getIslandsCountDFS(t), 2);
+    }
+}
+
 namespace ex4
 {
     using namespace ref4;
@@ -631,6 +630,9 @@ namespace ex4
     TEST(List10_Exercise4, Placeholder)
     {
         std::ifstream file("/mnt/c/Users/Kamil/Desktop/algorithms-and-data-structures/list10/src/graf");
+        if (!file.is_open())
+            return;
+
         Graph g = constructFromFilestream(file);
         g.printAdjacencyMatrix();
         std::cout << std::endl;
@@ -642,5 +644,67 @@ namespace ex4
         Dijkstra d(g);
         d.findShortestPathsFrom(0).showPrevious();
         std::cout << std::endl;
+    }
+}
+
+namespace ex5
+{
+    typedef std::vector<std::vector<uint32_t>> Chessboard;
+
+    int32_t dx[] = {1, 1, -1, -1, 2, 2, -2, -2};
+    int32_t dy[] = {2, -2, 2, -2, 1, -1, 1, -1};
+
+    bool found = false;
+
+    void depthFirstSearch(Chessboard &visited, Point p, uint32_t step)
+    {
+        if (found)
+            return;
+
+        visited[p.first][p.second] = step;
+
+        const size_t n = visited.size();
+        size_t newSteps = 0;
+
+        for (size_t i = 0; i < 8; ++i)
+        {
+            size_t x = p.first + dx[i];
+            size_t y = p.second + dy[i];
+            if (x < n && y < n && !visited[x][y])
+            {
+                ++newSteps;
+                depthFirstSearch(visited, {x, y}, step + 1);
+            }
+        }
+
+        if (newSteps == 0)
+            visited[p.first][p.second] = step;
+
+        if (newSteps == 0 && step == n * n)
+        {
+            found = true;
+            for (size_t i = 0; i < n; ++i)
+            {
+                for (size_t j = 0; j < n; ++j)
+                    std::cout << std::setw(3) << visited[i][j];
+                std::cout << std::endl;
+            }
+            std::cout << std::endl;
+        }
+
+        visited[p.first][p.second] = 0;
+    }
+
+    void traverseChessboard(size_t n)
+    {
+        found = false;
+        Chessboard visited(n, std::vector<uint32_t>(n, 0));
+        depthFirstSearch(visited, {0, 0}, 1);
+    }
+
+    TEST(List10_Exercise5, traverseChessboard)
+    {
+        for (size_t i = 5; i < 8; ++i)
+            traverseChessboard(i);
     }
 }

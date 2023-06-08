@@ -1,0 +1,177 @@
+\documentclass{article}
+
+\usepackage{amsmath}
+\usepackage{enumitem}
+\usepackage[polish]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=1.5in]{geometry}
+\usepackage[edges]{forest}
+\usepackage{listings}
+
+\begin{document}
+
+\title{Algorytmy i struktury danych}
+\author{}
+\date{}
+\maketitle
+
+\section*{Lista zadań 2}
+
+\subsection*{Zadanie 1}
+Ile trzeba porównań, by znaleźć element $x$ w nieuporządkowanej tablicy \verb|t| o rozmiarze
+$n$. Oblicz wartość średnią i wariancję zakładając, że element $x$ może znajdować się z
+jednakowym prawdopodobieństwem, pod dowolnym indeksem tablicy.
+\begin{gather*}
+    E(X) = \sum_{i=1}^{n} x_ip_i = \sum_{i=1}^{n} i \cdot \frac{1}{n} = \frac{\left(\frac{1}{n}+\frac{n}{n}\right)n}{2} = \frac{n+1}{2} \\
+    Var(X) = E(X^2) - E(X)^2 = \sum_{i=1}^{n} i^2 \frac{1}{n} - \left(\frac{n+1}{2}\right)^2 =    \frac{2n^2+3n+1}{6} - \frac{n^2+2n+1}{4} \\
+    = \frac{4n^2+6n+2}{12} - \frac{3n^2+6n+3}{12} = \frac{n^2-1}{12}
+\end{gather*}
+
+\subsection*{Zadanie 2}
+Bisekcja. Ile trzeba porównań, by znaleźć element $x$ w posortowanej tablicy \verb|t| o rozmiarze
+$n$. Podaj minimalną wartość gwarantującą sukces i strategię, jak to zrobić. Postaraj się
+podać wzór ogólny, który pozwoli wyliczyć dokładną wartość dla dowolnego $n$. Sprawdź go dla $n = 1, \dots, 20$.
+\begin{enumerate}
+    \item Oblicz środek przedziału.
+    \item Jeżeli wartość w środku przedziału jest większa od $x$, to środek staje się lewym końcem przedziału.
+    \item W przeciwnym wypadku środek staje się prawym końcem przedziału.
+\end{enumerate}
+\begin{gather*}
+    n=1 \implies  1 \\
+    n=2 \implies  2 \\
+    n=4 \implies  3 \\
+    n=8 \implies  4 \\
+    n=16 \implies 5 \\
+    n=20 \implies 6 \\
+    \lceil \log_2n \rceil + 1
+\end{gather*}
+
+\pagebreak
+\subsection*{Zadanie 3}
+Rozważ trzy wersje znajdowania maksimum w tablicy \verb|int maks(int t[], int n)|.
+Ile porównań między elementami tablicy n-elementowej wykonuje każda z wersji? Ile
+pamięci wymaga każda z tych wersji? Uwzględnij fakt, że głębokość rekurencji ma wpływ
+na zużycie pamięci, ponieważ powstaje wiele kopii zmiennych lokalnych. Która wersja
+jest więc najlepsza?
+\begin{enumerate}[label=(\alph*)]
+    \item iteracyjna: \verb|{int x = a[--n]; while(n--) if(t[n] > x) x = t[n]; return x;}|
+          \begin{center}
+              $n-1$ porównań i 3 zmienne lokalne
+          \end{center}
+    \item rekurencyjnie oblicza maksimum $n-1$ elementów i porównuje z ostatnim elementem
+          \begin{center}
+              $n-1$ porównań i $3n$ zmiennych lokalnych
+          \end{center}
+    \item dzieli tablicę na dwie części, rekurencyjnie znajduje ich maksima i wybiera większe z nich.
+          \begin{center}
+              $f(n) = 2(f(n/2)) + 1 = n-1$ porównań i $f(n) = f(\lceil n/2 \rceil) = O(\log_2 n)$ złożoność pamięciowa
+          \end{center}
+\end{enumerate}
+
+\subsection*{Zadanie 4}
+Jakie drzewo powstanie po wstawieniu do pustego drzewa BST liczb od 1 do $n$ w kolejności rosnącej?
+Jaka potem będzie głębokość drzewa? Ile porównań kluczy wykonano w
+trakcie tworzenia tego drzewa? Jaka jest złożoność w tego procesu w notacji $O$?
+\smallskip \\
+Uwaga: Element wstawiamy na pierwsze napotkane puste miejsce zaczynając od korzenia.
+Jeśli miejsce jest zajęte, to gdy element jest mniejszy od klucza w węźle, idziemy
+do lewego poddrzewa, a gdy większy lub równy -- do prawego poddrzewa.
+
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1 [, no edge, draw=none][2]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1 [, no edge, draw=none][2 [, no edge, draw=none][3]]]
+    \end{forest}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [1 [, no edge, draw=none][2 [, no edge, draw=none][3 [, no edge, draw=none][4]]]]
+    \end{forest}
+\end{center}
+\begin{align*}
+    \text{Głębokość drzewa: } & n                                                       \\
+    \text{Ilość porównań: }   & \sum_{i=1}^{n} i-1 = \frac{n(n-1)}{2} = \frac{n^2-n}{2} \\
+    \text{Złożoność: }        & \frac{n^2-n}{2} = O(n^2)
+\end{align*}
+
+\subsection*{Zadanie 5}
+Implementacja usuwania węzła X z drzewa binarnego działa wg następującego schematu:
+\begin{enumerate}[label=(\alph*)]
+    \item jeśli X nie ma dzieci, to go usuwamy a wskaźnik na X zmieniamy na \verb|NULL|.
+    \item jeśli X ma jedno dziecko Y, to usuwamy X, a wskaźnik na X zastępujemy wskaźnikiem na Y.
+    \item jeśli X ma dwoje dzieci, to znajdujemy najmniejszy element Y w jego prawym poddrzewie, dane i klucz z węzła Y kopiujemy do X i usuwamy Y.
+\end{enumerate}
+Uzasadnij, dlaczego postępowanie wg punktu (c) nie psuje prawidłowego rosnącego
+porządku kluczy wypisywanych w porządku inorder i dlaczego Y ma co najwyżej jedno
+dziecko, więc do jego usunięcia można zastosować punkt (a) lub (b).
+\medskip \\
+Zastąpienie węzła X mającego dwoje dzieci polegające na znalezieniu najmniejszego elementu w prawym poddrzewie X
+nie psuje porządku \verb|inorder|, ponieważ najmniejszy element prawego poddrzewa jest idealnym kandydatem na jego miejsce,
+dzięki temu że jest większy od wszystkich elementów w lewym poddrzewie X, a mniejszy od wszystkich elementów w prawym poddrzewie X.
+\begin{center}
+    \begin{forest}
+        for tree={circle, draw, minimum size=3ex, inner sep=1pt, s sep=7mm, anchor=south}
+        [2[1][4[3][5]]]
+    \end{forest}
+\end{center}
+Do usunięcia węzła Y możemy zastosować punkt (a) lub (b), ponieważ Y ma co najwyżej jedno dziecko, ponieważ
+jeśli Y ma dwoje dzieci, to jego lewe dziecko było by mniejsze od Y, co oznacza że Y nie jest najmniejszym elementem.
+
+\subsection*{Zadanie 6}
+Uzasadnij, że w każdym drzewie BST zawsze ponad połowa wskaźników (pól \verb|left| i \verb|right|) jest równa \verb|NULL|.
+\medskip \\
+Na każdy węzeł drzewa BST przypadają dwa wskaźniki, \verb|left| i \verb|right|, które wskazują na lewe i prawe poddrzewo.
+Drzewo składające się z samego korzenia ma $2$ wskaźniki równe \verb|NULL|.
+Każde dodanie węzła zwiększy łączną liczbę węzłów o $2$ i zmniejszy liczbę węzłów równych \verb|NULL| o $1$.
+\begin{align*}
+    \text{Liczba węzłów: }                  & n   \\
+    \text{Liczba wskaźników: }              & 2n  \\
+    \text{Liczba wskaźników równych NULL: } & n+1
+\end{align*}
+\begin{align*}
+    n+1 & > \frac{2n}{2} \\
+    n+1 & > n
+\end{align*}
+
+\subsection*{Zadanie 7}
+Ile maksymalnie węzłów może mieć drzewo BST o głębokości $h$? Wylicz dokładną wartość,
+przyjmując, że głębokość oznacza ilość poziomów, na których występują węzły (sam
+korzeń: $h = 1$, korzeń i dzieci: $h = 2$ \dots ). Skorzystaj z wzoru na sumę ciągu geometrycznego.
+Wywnioskuj, jaka jest najmniejsza, a jaka największa głębokość drzewa binarnego o $n$ węzłach?
+\begin{align*}
+    \text{Maksymalna ilość węzłów: } & \frac{a_1(1-q^n)}{1-q} = \frac{1(1-2^h)}{1-2} = 2^h-1 \\
+    \text{Najmniejsza głębokość: }   & 1 + \lfloor \log_2(n) \rfloor                         \\
+    \text{Największa głębokość: }    & n
+\end{align*}
+
+\subsection*{Zadanie 8}
+Przeanalizuj operacje \verb|find, insert, remove| zawarte w pliku \verb|tree-2023-recursive.cc|.
+Jak ich pesymistyczna złożoność czasowa $T(h)$ zależy od głębokości drzewa $h$?
+\begin{align*}
+    \text{find: } T(h)   & = O(h) \\
+    \text{insert: } T(h) & = O(h) \\
+    \text{remove: } T(h) & = O(h)
+\end{align*}
+
+\subsection*{Zadanie 9}
+W pliku \verb|tree-2023-recursive.cc| znajdziesz funkcję \verb|int height(node *t)|, która
+wyliczy głębokość (ilość poziomów na jakich występują węzły) drzewa BST. Jak zależy czas
+wykonania tej funkcji od ilości $n$ węzłów drzewa i/lub jego głębokości $h$? To samo zadanie
+wykonaj też dla funkcji \verb|int count(node *t)|.
+\begin{center}
+    \begin{tabular}{c|c|c|c}
+               & worst      & average                   & best              \\
+        \hline
+        $T(n)$ & $O(n)$     & $\Theta(n)$               & $\Omega(n)$       \\
+        $T(h)$ & $O(2^h-1)$ & $\Theta(2^h-1 - 2^{h-2})$ & $\Omega(2^{h-1})$ \\
+    \end{tabular}
+\end{center}
+\end{document}

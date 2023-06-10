@@ -28,6 +28,12 @@ binarne, które nie jest regularne, nie może odpowiadać optymalnemu kodowi pre
 
 \subsection*{Zadanie 2}
 Czy kody Huffmana są wyznaczone jednoznacznie dla każdego tekstu? Dlaczego?
+\noindent \\[1em]
+Tak, dla tego samego algorytmu algorytm Huffmana wyznaczy te same kody dla tego samego tekstu.
+Podczas tworzenia drzewa Huffmana, węzły są sortowane po częstości występowania znaku i następnie
+drzewa o najmniejszej częstości są scalane w jedno drzewo. Jeśli istnieją dwa drzewa o tej samej
+częstości, to węzły są sortowane po kolejności występowania znaku w alfabecie. W związku z tym
+algorytm Huffmana zawsze wyznaczy te same kody dla tego samego tekstu.
 
 \subsection*{Zadanie 3}
 Dla podanego tekstu ”bababacacadaaasadaca”.

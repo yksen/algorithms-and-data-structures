@@ -47,6 +47,48 @@ Dla podanego tekstu ”bababacacadaaasadaca”.
 \begin{enumerate}[label=(\alph*)]
     \item Zasymuluj działanie algorytmu generującego kody Huffmana, narysuj otrzymane
           drzewo kodów, wypisz kody poszczególnych znaków, oraz zakodowany tekst.
+          \begin{multicols}{2}
+              \begin{center}
+                  \begin{forest}
+                      [, phantom, for tree={draw, minimum size=2em, inner sep=1pt, s sep=1.5em},
+                          [a: 11][b: 3][c: 3][d: 2][s: 1]
+                      ]
+                  \end{forest} \\[1em]
+                  \begin{forest}
+                      [, phantom, for tree={draw, minimum size=2em, inner sep=1pt, s sep=1.5em},
+                          [a: 11][b: 3][c: 3][3[s: 1][d: 2]]
+                      ]
+                  \end{forest} \\[1em]
+                  \begin{forest}
+                      [, phantom, for tree={draw, minimum size=2em, inner sep=1pt, s sep=1.5em},
+                          [a: 11][6[b: 3][c: 3]][3[s: 1][d: 2]]
+                      ]
+                  \end{forest} \\[1em]
+                  \begin{forest}
+                      [, phantom, for tree={draw, minimum size=2em, inner sep=1pt, s sep=1.5em},
+                          [a: 11][9[3[s: 1][d: 2]][6[b: 3][c: 3]]]
+                      ]
+                  \end{forest} \\[1em]
+                  \begin{forest}
+                      [, phantom, for tree={draw, minimum size=2em, inner sep=1pt, s sep=1.5em},
+                          [20[9[3[s: 1][d: 2]][6[b: 3][c: 3]]][a: 11]]
+                      ]
+                  \end{forest}
+              \end{center}
+          \end{multicols}
+          \begin{center}
+              \begin{tabular}{|c|c|c|c|c|}
+                  \hline
+                  a & b   & c   & d   & s   \\
+                  \hline
+                  1 & 010 & 011 & 001 & 000 \\
+                  \hline
+              \end{tabular} \\[1em]
+              \begin{lstlisting}
+            b   a b   a b   a c   a c   a d   a a a s   a d   a c   a
+            010 1 010 1 010 1 011 1 011 1 001 1 1 1 000 1 001 1 011 1
+              \end{lstlisting}
+          \end{center}
     \item Oblicz, o ile bitów otrzymana reprezentacja tekstu będzie krótsza od reprezentacji
           otrzymanej za pomocą kodów o stałej długości.
     \item Mając dane drzewo kodów i zakodowany tekst wykonaj dekodowanie (zaznaczaj w

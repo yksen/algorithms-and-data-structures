@@ -114,6 +114,33 @@ Dla podanego tekstu ”bababacacadaaasadaca”.
 Jaki jest optymalny kod Huffmana, dla zbioru częstości opartego na początkowych n = 8
 liczbach Fibonacciego: a:1, b:1, c:2, d:3, e:5, f:8, h:21?
 Uogólnij odpowiedź na przypadek dowolnego n.
+\begin{multicols}{2}
+    \begin{center}
+        \begin{forest}
+            [, phantom, for tree={draw, minimum size=2em, inner sep=1pt, s sep=1.5em},
+                [54[h: 21][33[g: 13][20[f: 8][12[e: 5][7[d: 3][4[c: 2][2[a: 1][b: 1]]]]]]]]
+            ]
+        \end{forest}
+    \end{center}
+    \begin{center}
+        \begin{tabular}{c|c}
+            Litera & Kod     \\
+            \hline
+            a      & 1111110 \\
+            b      & 1111111 \\
+            c      & 111110  \\
+            d      & 11110   \\
+            e      & 1110    \\
+            f      & 110     \\
+            g      & 10      \\
+            h      & 0
+        \end{tabular} \\[1em]
+    \end{center}
+    \begin{itemize}
+        \item Pierwsze dwa znaki mają długość $n-1$ bitów jedynkowych, z czego pierwszy kończy się zerem.
+        \item Długość kodu każdego kolejnego znaku jest krótsza o 1 bit od poprzedniego i ostatni bit jest zerem.
+    \end{itemize}
+\end{multicols}
 
 \subsection*{Zadanie 5}
 Jaki jest optymalny kod Huffmana, dla zbioru częstości opartego na liczbach: a:11, b:12,

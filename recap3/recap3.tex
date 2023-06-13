@@ -99,7 +99,7 @@ rosnąco wg numeru wierzchołka. Ta kolejność powinna być stosowana w symulac
 \subsection*{Zadanie 4}
 Zapisz kolejność odwiedzania wierzchołków przez algorytm DFS startujący z wierzchołka 5.
 \begin{center}
-    5, 2, 1, 6, 7, 4, 3
+    5, 2, 1, 6, 7, 3, 4
 \end{center}
 
 \subsection*{Zadanie 5}
@@ -139,7 +139,6 @@ wierzchołka.
     \end{tikzpicture}
 \end{center}
 
-
 \subsection*{Zadanie 7}
 (3 pkt) Zasymuluj działanie algorytmu Dijkstry startując z wierchołka 3. Zapisz kroki algorytmu podając w każdym kroku:
 \begin{itemize}
@@ -157,8 +156,8 @@ wierzchołka.
         \multirow{2}{*}{3}   & \verb|decrease_key(2, 1)|               & \verb|decrease_key(4, 15)| &                            & \multirow{2}{*}{2, 4, 1, 5, 6, 7} \\
                              & \verb|prev[2] = 3|                      & \verb|prev[4] = 3|         &                            &                                   \\
         \hline
-        \multirow{2}{*}{2}   & \verb|decrease_key(1, 9)|               & \verb|decrease_key(5, 8)|  &                            & \multirow{2}{*}{5, 1, 4, 6, 7}    \\
-                             & \verb|prev[1] = 2|                      & \verb|prev[5] = 2|         &                            &                                   \\
+        \multirow{2}{*}{2}   & \verb|decrease_key(1, 9)|               & \verb|decrease_key(5, 8)|  & \verb|decrease_key(6, 21)| & \multirow{2}{*}{5, 1, 4, 6, 7}    \\
+                             & \verb|prev[1] = 2|                      & \verb|prev[5] = 2|         & \verb|prev[6] = 2|         &                                   \\
         \hline
         \multirow{2}{*}{5}   & \verb|decrease_key(4, 11)|              & \verb|decrease_key(6, 20)| & \verb|decrease_key(7, 13)| & \multirow{2}{*}{1, 4, 7, 6}       \\
                              & \verb|prev[4] = 5|                      & \verb|prev[6] = 5|         & \verb|prev[7] = 5|         &                                   \\
@@ -215,7 +214,7 @@ Algorytm zilustruj grafem, w którym:
         \draw[-Latex] (1) -- node[e] {8} (2);
         \draw[dashed, Latex-] (5) -- node[e] {12} (6);
         \draw[dashed, Latex-] (3) -- node[e] {15} (4);
-        \draw[dashed] (2) -- node[e] {20} (6);
+        \draw[dashed, Latex-] (2) -- node[e] {20} (6);
     \end{tikzpicture}
 \end{center}
 

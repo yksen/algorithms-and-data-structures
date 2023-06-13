@@ -91,10 +91,23 @@ Dla podanego tekstu ”bababacacadaaasadaca”.
           \end{center}
     \item Oblicz, o ile bitów otrzymana reprezentacja tekstu będzie krótsza od reprezentacji
           otrzymanej za pomocą kodów o stałej długości.
+          \begin{gather*}
+              \text{Kody o stałej długości: } 20 \cdot 3 = 60 \\
+              \text{Kody Huffmana: } 11 \cdot 1 + 3 \cdot 3 + 3 \cdot 3 + 2 \cdot 3 + 1 \cdot 3 = 38 \\
+              60 - 38 = 22
+          \end{gather*}
     \item Mając dane drzewo kodów i zakodowany tekst wykonaj dekodowanie (zaznaczaj w
           ciągu bitów kreską gdzie kończą się kody poszczególnych znaków).
+          \begin{lstlisting}
+            010 1 010 1 010 1 011 1 011 1 001 1 1 1 000 1 001 1 011 1
+            b   a b   a b   a c   a c   a d   a a a s   a d   a c   a
+          \end{lstlisting}
     \item Zobacz, jak deszyfrowany tekst zmieni się, gdy zmienisz pierwszy bit zaszyfrowanej
           wersji na przeciwny.
+          \begin{lstlisting}
+            1 1 010 1 010 1 010 1 1 1 011 1 001 1 1 1 000 1 001 1 011 1
+            a a b   a b   a b   a a a c   a d   a a a s   a d   a c   a
+          \end{lstlisting}
 \end{enumerate}
 
 \subsection*{Zadanie 4}
